@@ -1,0 +1,91 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AJNetworking (3.2.0):
+    - AFNetworking
+    - MJExtension
+    - SPTPersistentCache
+  - FLAnimatedImage (1.0.12)
+  - JCore (1.2.0)
+  - JPush (3.0.9):
+    - JCore (~> 1.2.0)
+  - LBLaunchImageAd (1.0.6):
+    - SDWebImage (~> 4.0.0)
+    - SDWebImage/GIF
+  - MBProgressHUD (0.9.2)
+  - MJExtension (3.0.15.1)
+  - MJRefresh (3.1.15.3)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - SDWebImage/GIF (4.0.0):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
+  - SPTPersistentCache (1.1.0)
+  - UITableView-NXEmptyView (0.1.7)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - AJNetworking
+  - JPush
+  - LBLaunchImageAd (~> 1.0.6)
+  - MBProgressHUD (~> 0.9.1)
+  - MJRefresh
+  - SDCycleScrollView (~> 1.75)
+  - SDWebImage (~> 4.0)
+  - UITableView-NXEmptyView (~> 0.1.7)
+  - YYKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - AJNetworking
+    - FLAnimatedImage
+    - JCore
+    - JPush
+    - LBLaunchImageAd
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
+    - SDCycleScrollView
+    - SDWebImage
+    - SPTPersistentCache
+    - UITableView-NXEmptyView
+    - YYKit
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AJNetworking: 6591d31bf7f894e8efa06c02b9f08be448879f93
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  JCore: b52e3dd73625eec70afd1244bb9c41038aa06087
+  JPush: 48041e8c5ad2ef9b48709eb0888af9640b36e9b0
+  LBLaunchImageAd: bed4f3fd6c639bf69ec28be296f415494f5034e2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SPTPersistentCache: df36ea46762d7cf026502bbb86a8b79d0080dff4
+  UITableView-NXEmptyView: 0bc404cfd9c201af518a63240ac4ac4dad2c69c2
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: eea92a4d3039e01fab797d1389c1366d6788b72d
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,1 @@
+../../../AJNetworking/AJNetworking/Classes/Model/AJResponseBeanBase.h

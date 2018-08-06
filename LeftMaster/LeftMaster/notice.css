@@ -1,0 +1,14 @@
+html,
+body {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 5px;
+    font-family: helvetica;
+    background: #fff;
+    font-size: 18px;
+    overflow-x: hidden
+}
+
+img{
+    width:100%;
+}

@@ -1,0 +1,1 @@
+../../../AJNetworking/AJNetworking/Classes/Model/AJRequestBeanDownloadTaskBase.h

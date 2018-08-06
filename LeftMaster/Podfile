@@ -1,0 +1,33 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'LeftMaster' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for LeftMaster
+
+  inhibit_all_warnings!
+
+  pod 'AJNetworking'
+  pod 'YYKit'
+  pod 'UITableView-NXEmptyView', '~> 0.1.7'
+  pod 'MBProgressHUD', '~> 0.9.1'
+  #pod 'WRNavigationBar','~>1.2.0’
+  pod 'MJRefresh’
+  pod 'SDWebImage', '~> 4.0'
+  pod 'SDCycleScrollView','~> 1.75'
+  pod 'JPush'
+  pod 'LBLaunchImageAd','~> 1.0.6'
+
+  target 'LeftMasterTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'LeftMasterUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
