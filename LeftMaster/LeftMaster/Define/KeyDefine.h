@@ -30,5 +30,6 @@
 #define USER_DEFAULTS @"user_defaults"
 
 
+#define HOME_SEARCH_HISTORY @"HOME_SEARCH_HISTORY"  //首页搜索历史
 
 #endif /* KeyDefine_h */

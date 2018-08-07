@@ -28,6 +28,7 @@
 #import "AppUser.h"
 #import "CommonDelegate.h"
 #import "NetworkManager.h"
+#import "EmptyView.h"
 
 
 // 引入JPush功能所需头文件

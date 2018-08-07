@@ -19,13 +19,13 @@
 #import "RequestBeanCarouseList.h"
 #import "ViewSearchWithHome.h"
 #import "VCModifyPassword.h"
-#import "VCSearchGoodsList.h"
 #import "RequestBeanQueryCartNum.h"
 #import "HMScannerController.h"
 #import "RequestBeanNewGoods.h"
 #import "VCGoods.h"
 #import "RequestBeanVision.h"
 #import "LaunchAdsManager.h"
+#import "VCSearchList.h"
 
 @interface VCHome ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SectionHeaderHomeDelegate,UIScrollViewDelegate,
         UIAlertViewDelegate,CommonDelegate>
@@ -73,9 +73,18 @@
 }
 
 - (void)getVision{
+    __weak typeof(self)weakSelf = self;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf delayMethod];
+    });
+}
+
+- (void)delayMethod{
+    
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-//    NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
+    //    NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
     NSLog(@"版本:%@",app_Version);
     
     RequestBeanVision *request = [[RequestBeanVision alloc]init];
@@ -90,6 +99,7 @@
             if(result){
                 
                 weakself.downUrl = [response.data jk_stringForKey:@"APP_LINK_PATH"];
+                
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"发现版本 %@",[response.data jk_stringForKey:@"APP_VER"]] message:[response.data jk_stringForKey:@"APP_DESC"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往下载", nil];
                 alert.tag = 102;
                 [alert show];
@@ -355,7 +365,7 @@
         // 展现扫描控制器
         [self showDetailViewController:scanner sender:nil];
     }else{
-        VCSearchGoodsList *vc = [[VCSearchGoodsList alloc]init];
+        VCSearchList *vc = [[VCSearchList alloc]init];
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:FALSE completion:^{
             
         }];

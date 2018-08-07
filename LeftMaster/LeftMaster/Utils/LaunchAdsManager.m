@@ -152,6 +152,7 @@
         [_window removeAllSubviews];
         _window = nil;
         if(_actionBlock){
+            NSLog(@"执行");
             _actionBlock();
         }
     }];

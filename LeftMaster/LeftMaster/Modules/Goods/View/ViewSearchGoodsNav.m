@@ -47,7 +47,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGRect r = self.vSearchBg.frame;
-    r.size.width = DEVICEWIDTH - 25 - 45;
+    r.size.width = self.width;
     r.size.height = self.height - 10;
     r.origin.x = 0;
     r.origin.y = (self.height - r.size.height)/2.0;

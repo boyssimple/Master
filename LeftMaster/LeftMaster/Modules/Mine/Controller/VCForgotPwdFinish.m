@@ -52,6 +52,11 @@
         [Utils showToast:@"密码不能少于6位" with:self.view withTime:0.8];
         return;
     }
+    
+    if(newPwd.length > 10){
+        [Utils showToast:@"密码不能大于10位" with:self.view withTime:0.8];
+        return;
+    }
     if(confirmPwd.length == 0){
         [Utils showToast:@"请输入确认密码" with:self.view withTime:0.8];
         return;
@@ -140,7 +145,7 @@
 - (UITextField*)tfNewPwd{
     if(!_tfNewPwd){
         _tfNewPwd = [[UITextField alloc]initWithFrame:CGRectMake(self.lbNewPwd.right, 0, DEVICEWIDTH - self.lbNewPwd.right - 10*RATIO_WIDHT320, 35*RATIO_WIDHT320)];
-        _tfNewPwd.placeholder = @"输入新密码";
+        _tfNewPwd.placeholder = @"请输入6-10位密码";
         _tfNewPwd.textColor = RGB3(153);
         _tfNewPwd.secureTextEntry = YES;
         _tfNewPwd.font = [UIFont systemFontOfSize:14*RATIO_WIDHT320];

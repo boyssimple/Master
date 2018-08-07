@@ -16,7 +16,7 @@
 #import "VCGoodsList.h"
 #import "RequestBeanQueryCartNum.h"
 #import "VCSingleCart.h"
-#import "VCSearchGoodsList.h"
+#import "VCSearchList.h"
 #import "VCGoods.h"
 
 @interface VCCategory ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,
@@ -233,7 +233,7 @@
         VCSingleCart *vc = [[VCSingleCart alloc]init];
         [self.navigationController pushViewController:vc animated:TRUE];
     }else{
-        VCSearchGoodsList *vc = [[VCSearchGoodsList alloc]init];
+        VCSearchList *vc = [[VCSearchList alloc]init];
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:FALSE completion:^{
             
         }];

@@ -32,6 +32,10 @@
 		1C4CC2AA207332C7007C24FB /* VCCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CC2A9207332C7007C24FB /* VCCategory.m */; };
 		1C5F25B12088BC3C005EAF87 /* WindowGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5F25B02088BC3C005EAF87 /* WindowGuide.m */; };
 		1C5F25B42088BC51005EAF87 /* CollCellGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5F25B32088BC50005EAF87 /* CollCellGuide.m */; };
+		1C6C05252119C10A00EA79EB /* VCSearchList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05232119C10900EA79EB /* VCSearchList.m */; };
+		1C6C052A2119C12800EA79EB /* SearchHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05262119C12700EA79EB /* SearchHistoryCell.m */; };
+		1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05272119C12700EA79EB /* HeaderSearchHistory.m */; };
+		1C6C052E2119C55C00EA79EB /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C052D2119C55C00EA79EB /* EmptyView.m */; };
 		1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */; };
 		1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EBE207DBCE700054AE1 /* RequestBeanGoodsDetail.m */; };
 		1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EC2207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m */; };
@@ -171,7 +175,6 @@
 		1CFC7AD2208E05CF005F18AB /* VCModifyPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7AD1208E05CF005F18AB /* VCModifyPassword.m */; };
 		1CFC7AD5208E087D005F18AB /* VCProxyCustmer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7AD4208E087D005F18AB /* VCProxyCustmer.m */; };
 		1CFC7AD8208E0921005F18AB /* ViewSearchProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7AD7208E0921005F18AB /* ViewSearchProxy.m */; };
-		1CFC7ADB208E1518005F18AB /* VCSearchGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7ADA208E1518005F18AB /* VCSearchGoodsList.m */; };
 		1CFC7ADE208E18AB005F18AB /* ViewSearchGoodsNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7ADD208E18AB005F18AB /* ViewSearchGoodsNav.m */; };
 		1CFC7AE1208E1EDC005F18AB /* CellSearchGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7AE0208E1EDC005F18AB /* CellSearchGoodsList.m */; };
 		1CFC7AE4208E2B9D005F18AB /* ViewISBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC7AE3208E2B9D005F18AB /* ViewISBill.m */; };
@@ -265,6 +268,14 @@
 		1C5F25B02088BC3C005EAF87 /* WindowGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowGuide.m; sourceTree = "<group>"; };
 		1C5F25B22088BC50005EAF87 /* CollCellGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollCellGuide.h; sourceTree = "<group>"; };
 		1C5F25B32088BC50005EAF87 /* CollCellGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollCellGuide.m; sourceTree = "<group>"; };
+		1C6C05232119C10900EA79EB /* VCSearchList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCSearchList.m; sourceTree = "<group>"; };
+		1C6C05242119C10900EA79EB /* VCSearchList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCSearchList.h; sourceTree = "<group>"; };
+		1C6C05262119C12700EA79EB /* SearchHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryCell.m; sourceTree = "<group>"; };
+		1C6C05272119C12700EA79EB /* HeaderSearchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderSearchHistory.m; sourceTree = "<group>"; };
+		1C6C05282119C12700EA79EB /* HeaderSearchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderSearchHistory.h; sourceTree = "<group>"; };
+		1C6C05292119C12800EA79EB /* SearchHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistoryCell.h; sourceTree = "<group>"; };
+		1C6C052C2119C55C00EA79EB /* EmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
+		1C6C052D2119C55C00EA79EB /* EmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
 		1C766F6D208390D300C7B913 /* CommonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
 		1C780EB6207DAC1200054AE1 /* RequestBeanGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGoodsList.h; sourceTree = "<group>"; };
 		1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGoodsList.m; sourceTree = "<group>"; };
@@ -542,8 +553,6 @@
 		1CFC7AD4208E087D005F18AB /* VCProxyCustmer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCProxyCustmer.m; sourceTree = "<group>"; };
 		1CFC7AD6208E0921005F18AB /* ViewSearchProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewSearchProxy.h; sourceTree = "<group>"; };
 		1CFC7AD7208E0921005F18AB /* ViewSearchProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewSearchProxy.m; sourceTree = "<group>"; };
-		1CFC7AD9208E1518005F18AB /* VCSearchGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCSearchGoodsList.h; sourceTree = "<group>"; };
-		1CFC7ADA208E1518005F18AB /* VCSearchGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCSearchGoodsList.m; sourceTree = "<group>"; };
 		1CFC7ADC208E18AB005F18AB /* ViewSearchGoodsNav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewSearchGoodsNav.h; sourceTree = "<group>"; };
 		1CFC7ADD208E18AB005F18AB /* ViewSearchGoodsNav.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewSearchGoodsNav.m; sourceTree = "<group>"; };
 		1CFC7ADF208E1EDC005F18AB /* CellSearchGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellSearchGoodsList.h; sourceTree = "<group>"; };
@@ -886,6 +895,8 @@
 				1C4CC27F207252BB007C24FB /* KeyDefine.h */,
 				1C4CC27A207250AC007C24FB /* PrefixHeader.pch */,
 				1C4CC27B207250BA007C24FB /* NetUrl.h */,
+				1C6C052C2119C55C00EA79EB /* EmptyView.h */,
+				1C6C052D2119C55C00EA79EB /* EmptyView.m */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -929,6 +940,8 @@
 				1CFC7AD1208E05CF005F18AB /* VCModifyPassword.m */,
 				1CFC7AD3208E087D005F18AB /* VCProxyCustmer.h */,
 				1CFC7AD4208E087D005F18AB /* VCProxyCustmer.m */,
+				1C6C05242119C10900EA79EB /* VCSearchList.h */,
+				1C6C05232119C10900EA79EB /* VCSearchList.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -957,6 +970,10 @@
 		1CD84881206F7C7100CC9BE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1C6C05292119C12800EA79EB /* SearchHistoryCell.h */,
+				1C6C05262119C12700EA79EB /* SearchHistoryCell.m */,
+				1C6C05282119C12700EA79EB /* HeaderSearchHistory.h */,
+				1C6C05272119C12700EA79EB /* HeaderSearchHistory.m */,
 				1C4CC28C207266D5007C24FB /* SectionHeaderHome.h */,
 				1C4CC28D207266D5007C24FB /* SectionHeaderHome.m */,
 				1C4CC29220726D4D007C24FB /* CellCategoryHome.h */,
@@ -1237,8 +1254,6 @@
 				1CFC7ABD208C80DD005F18AB /* VCGoodsList.m */,
 				1C4CC27720724F50007C24FB /* VCGoods.h */,
 				1C4CC27820724F50007C24FB /* VCGoods.m */,
-				1CFC7AD9208E1518005F18AB /* VCSearchGoodsList.h */,
-				1CFC7ADA208E1518005F18AB /* VCSearchGoodsList.m */,
 				1CF3C92020A1E21B0036BD6D /* VCSingleCart.h */,
 				1CF3C92120A1E21B0036BD6D /* VCSingleCart.m */,
 			);
@@ -1546,11 +1561,13 @@
 				1CBF5BC0207A46AE00284EA1 /* ViewHeaderMine.m in Sources */,
 				1CBF5BE7207CE23B00284EA1 /* CellProxy.m in Sources */,
 				1CBF1DED2091135C0090BD96 /* RequestBeanAddOrder.m in Sources */,
+				1C6C052A2119C12800EA79EB /* SearchHistoryCell.m in Sources */,
 				1CFA388720F61D16005DED5B /* ViewTabOrder.m in Sources */,
 				1C8A2E21207707720076238D /* CellCart.m in Sources */,
 				1C88D0E620AB15B700865DE2 /* MJPhotoToolbar.m in Sources */,
 				1CFA38A820F62F95005DED5B /* RequestBeanConfirmBill.m in Sources */,
 				1CBF1DC0208FACA40090BD96 /* RequestBeanDelCart.m in Sources */,
+				1C6C052E2119C55C00EA79EB /* EmptyView.m in Sources */,
 				1CBF5BB12078789400284EA1 /* VCWriteOrder.m in Sources */,
 				1C780ED0207E02D500054AE1 /* RequestBeanNotice.m in Sources */,
 				1C8A2E27207865D40076238D /* CellCategory.m in Sources */,
@@ -1571,7 +1588,6 @@
 				1C8A2E3F207875BD0076238D /* HMScanner.m in Sources */,
 				1CFC7ABB208C7796005F18AB /* ViewSearchWithHome.m in Sources */,
 				1CBF1DE7209109010090BD96 /* ViewOrderCheckAccount.m in Sources */,
-				1CFC7ADB208E1518005F18AB /* VCSearchGoodsList.m in Sources */,
 				1CF3C91F20A1D17C0036BD6D /* RequestBeanNewGoods.m in Sources */,
 				1CFC7AEA208E3242005F18AB /* VCUnSend.m in Sources */,
 				1CBF5BB420787A1600284EA1 /* ViewGoodsList.m in Sources */,
@@ -1622,6 +1638,7 @@
 				1CFFF5F220A9EB4300A52675 /* CustConfirmView.m in Sources */,
 				1C88D0E220AB15B700865DE2 /* MJPhotoLoadingView.m in Sources */,
 				1C4C155D2088CCA200BA8F3C /* RequestBeanAddCart.m in Sources */,
+				1C6C05252119C10A00EA79EB /* VCSearchList.m in Sources */,
 				1C88D0E320AB15B700865DE2 /* MBProgressHUD+Add.m in Sources */,
 				1C8A2E3E207875BD0076238D /* HMScannerViewController.m in Sources */,
 				1CBF5BDE207A793100284EA1 /* VCNoticeDetail.m in Sources */,
@@ -1661,6 +1678,7 @@
 				1C8A2E42207875BD0076238D /* HMScannerController.m in Sources */,
 				1C4CC2A720732E57007C24FB /* VCTopGoods.m in Sources */,
 				1CFC7AF9208E508D005F18AB /* RequestBeanConfirmOrder.m in Sources */,
+				1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */,
 				1C88D0E520AB15B700865DE2 /* MJPhoto.m in Sources */,
 				1CFA836820B321150075AE06 /* VCInvoiceDetail.m in Sources */,
 				1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */,
