@@ -9,6 +9,7 @@
 #import "ViewTabOrder.h"
 @interface ViewTabOrder()
 @property (nonatomic, strong) UIButton *btnUnConfirm;
+@property (nonatomic, strong) UIButton *btnUnPay;
 @property (nonatomic, strong) UIButton *btnUnAudi;
 @property (nonatomic, strong) UIButton *btnUnSend;
 @property (nonatomic, strong) UIButton *btnUnReceive;
@@ -25,7 +26,7 @@
         self.backgroundColor = [UIColor whiteColor];
         
         CGFloat m = 10*RATIO_WIDHT320;
-        CGFloat w = (DEVICEWIDTH - m*6)/5.0;
+        CGFloat w = (DEVICEWIDTH - m*7)/6.0;
         
         _btnUnConfirm = [[UIButton alloc]initWithFrame:CGRectMake(m, 0, w, self.height)];
         [_btnUnConfirm setTitle:@"待确定" forState:UIControlStateNormal];
@@ -35,12 +36,20 @@
         _btnUnConfirm.tag = 100;
         [self addSubview:_btnUnConfirm];
         
-        _btnUnAudi = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnConfirm.right+m, 0, w, self.height)];
+        _btnUnPay = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnConfirm.right+m, 0, w, self.height)];
+        [_btnUnPay setTitle:@"待付款" forState:UIControlStateNormal];
+        [_btnUnPay setTitleColor:RGB3(153) forState:UIControlStateNormal];
+        _btnUnPay.titleLabel.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
+        [_btnUnPay addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+        _btnUnPay.tag = 101;
+        [self addSubview:_btnUnPay];
+        
+        _btnUnAudi = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnPay.right+m, 0, w, self.height)];
         [_btnUnAudi setTitle:@"待审核" forState:UIControlStateNormal];
         [_btnUnAudi setTitleColor:RGB3(153) forState:UIControlStateNormal];
         _btnUnAudi.titleLabel.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
         [_btnUnAudi addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        _btnUnAudi.tag = 101;
+        _btnUnAudi.tag = 102;
         [self addSubview:_btnUnAudi];
         
         _btnUnSend = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnAudi.right+m, 0, w, self.height)];
@@ -48,7 +57,7 @@
         [_btnUnSend setTitleColor:RGB3(153) forState:UIControlStateNormal];
         _btnUnSend.titleLabel.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
         [_btnUnSend addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        _btnUnSend.tag = 102;
+        _btnUnSend.tag = 103;
         [self addSubview:_btnUnSend];
         
         _btnUnReceive = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnSend.right+m, 0, w, self.height)];
@@ -56,7 +65,7 @@
         [_btnUnReceive setTitleColor:RGB3(153) forState:UIControlStateNormal];
         _btnUnReceive.titleLabel.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
         [_btnUnReceive addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        _btnUnReceive.tag = 103;
+        _btnUnReceive.tag = 104;
         [self addSubview:_btnUnReceive];
         
         _btnAll = [[UIButton alloc]initWithFrame:CGRectMake(_btnUnReceive.right+m, 0, w, self.height)];
@@ -64,7 +73,7 @@
         [_btnAll setTitleColor:RGB3(153) forState:UIControlStateNormal];
         _btnAll.titleLabel.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
         [_btnAll addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        _btnAll.tag = 104;
+        _btnAll.tag = 105;
         [self addSubview:_btnAll];
         
         _vBottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, self.height - 0.5, DEVICEWIDTH, 0.5)];

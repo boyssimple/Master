@@ -79,7 +79,7 @@
 
 - (NSArray*)vcList{
     if (!_vcList) {
-        _vcList = @[@"VCUnConfirm",@"VCUnVerify",@"VCUnSend",@"VCUnReceive",@"VCOrderContaier"];
+        _vcList = @[@"VCUnConfirm",@"VCUnPay",@"VCUnVerify",@"VCUnSend",@"VCUnReceive",@"VCOrderContaier"];
     }
     return _vcList;
 }

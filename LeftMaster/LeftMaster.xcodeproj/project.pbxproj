@@ -36,6 +36,7 @@
 		1C6C052A2119C12800EA79EB /* SearchHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05262119C12700EA79EB /* SearchHistoryCell.m */; };
 		1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05272119C12700EA79EB /* HeaderSearchHistory.m */; };
 		1C6C052E2119C55C00EA79EB /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C052D2119C55C00EA79EB /* EmptyView.m */; };
+		1C6C05312119DF5200EA79EB /* VCUnPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05302119DF5200EA79EB /* VCUnPay.m */; };
 		1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */; };
 		1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EBE207DBCE700054AE1 /* RequestBeanGoodsDetail.m */; };
 		1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EC2207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m */; };
@@ -276,6 +277,10 @@
 		1C6C05292119C12800EA79EB /* SearchHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistoryCell.h; sourceTree = "<group>"; };
 		1C6C052C2119C55C00EA79EB /* EmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
 		1C6C052D2119C55C00EA79EB /* EmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		1C6C052F2119DF5200EA79EB /* VCUnPay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCUnPay.h; sourceTree = "<group>"; };
+		1C6C05302119DF5200EA79EB /* VCUnPay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUnPay.m; sourceTree = "<group>"; };
+		1C6C05322119E27D00EA79EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		1C6C05332119E27D00EA79EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1C766F6D208390D300C7B913 /* CommonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
 		1C780EB6207DAC1200054AE1 /* RequestBeanGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGoodsList.h; sourceTree = "<group>"; };
 		1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGoodsList.m; sourceTree = "<group>"; };
@@ -1043,6 +1048,8 @@
 				1CBF5BFB207CF70800284EA1 /* VCOrderGoodsList.m */,
 				1C780EDA207E0E9200054AE1 /* VCOrderContaier.h */,
 				1C780EDB207E0E9200054AE1 /* VCOrderContaier.m */,
+				1C6C052F2119DF5200EA79EB /* VCUnPay.h */,
+				1C6C05302119DF5200EA79EB /* VCUnPay.m */,
 				1CFC7AF4208E44FA005F18AB /* VCUnConfirm.h */,
 				1CFC7AF5208E44FA005F18AB /* VCUnConfirm.m */,
 				1CFC7AE5208E320C005F18AB /* VCUnVerify.h */,
@@ -1628,6 +1635,7 @@
 				1CBF5BBD207883F500284EA1 /* ViewTotalBottomWriteOrder.m in Sources */,
 				1CFA387620F61A28005DED5B /* VCAccountContainer.m in Sources */,
 				1CBF1DDE209101240090BD96 /* CellEditGoodList.m in Sources */,
+				1C6C05312119DF5200EA79EB /* VCUnPay.m in Sources */,
 				1CFC7AD8208E0921005F18AB /* ViewSearchProxy.m in Sources */,
 				1CBF5BFF207CF86500284EA1 /* CellOrderGoodsList.m in Sources */,
 				1CFC00C52087124B00A8E344 /* NetworkManager.m in Sources */,
@@ -1732,6 +1740,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1CD84835206F7ADA00CC9BE9 /* Base */,
+				1C6C05322119E27D00EA79EB /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1740,6 +1749,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1CD8483A206F7ADA00CC9BE9 /* Base */,
+				1C6C05332119E27D00EA79EB /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1751,6 +1761,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1806,6 +1817,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
