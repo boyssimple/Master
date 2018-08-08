@@ -15,7 +15,6 @@
 #import "Global.h"
 #import "KeyDefine.h"
 #import "NetUrl.h"
-#import <YYKit.h>
 #import <AJNetworking.h>
 #import <UIImageView+WebCache.h>
 #import "VCBase.h"
@@ -29,7 +28,8 @@
 #import "CommonDelegate.h"
 #import "NetworkManager.h"
 #import "EmptyView.h"
-
+#import "UIView+Frame.h"
+#import "UIGestureRecognizer+YYAdd.h"
 
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"

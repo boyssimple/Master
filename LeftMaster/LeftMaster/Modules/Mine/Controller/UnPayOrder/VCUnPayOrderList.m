@@ -51,6 +51,7 @@
     NSInteger index = scrollView.contentOffset.x / DEVICEWIDTH;
     VCOrderContaier *vc = (VCOrderContaier*)[self.childViewControllers objectAtIndex:index];
 //    self.tabOrder.curIndex = index;
+    [_vTab selectedItemIndex:index animated:TRUE];
     if ([vc isViewLoaded]) {
         return;
     }
@@ -62,11 +63,6 @@
     [self scrollViewDidEndScrollingAnimation:scrollView];
 }
 
-#pragma mark - ViewTabOrderDelegate
-- (void)clickTab:(NSInteger)index{
-    CGPoint point = CGPointMake(index*DEVICEWIDTH, self.mainScroll.contentOffset.y);
-    [self.mainScroll setContentOffset:point animated:TRUE];
-}
 
 - (UIScrollView*)mainScroll{
     if (!_mainScroll) {
@@ -79,6 +75,10 @@
     return _mainScroll;
 }
 
+- (void)pagescrollMenuViewItemOnClick:(UILabel *)label index:(NSInteger)index{
+    CGPoint point = CGPointMake(index*DEVICEWIDTH, self.mainScroll.contentOffset.y);
+    [self.mainScroll setContentOffset:point animated:TRUE];
+}
 
 - (NSArray*)vcList{
     if (!_vcList) {
@@ -93,7 +93,7 @@
         YNPageConfigration *config = [YNPageConfigration defaultConfig];
         
         config.showBottomLine = YES;
-        config.bottomLineBgColor = APP_COLOR;
+        config.bottomLineBgColor = APP_Gray_COLOR;
         config.bottomLineHeight = 1;
         config.scrollMenu = NO;
         config.aligmentModeCenter = NO;
@@ -102,7 +102,7 @@
         config.itemFont = [UIFont systemFontOfSize:14*RATIO_WIDHT750];
         config.selectedItemColor = APP_COLOR;
         config.normalItemColor = APP_BLACK_COLOR;
-        NSArray *datas = @[@"全部",@"面包烘焙",@"奶茶果汗"];
+        NSArray *datas = @[@"应付款",@"处理中",@"已支付"];
         
         _vTab = [YNPageScrollMenuView pagescrollMenuViewWithFrame:CGRectMake(0, NAV_STATUS_HEIGHT, DEVICEWIDTH, TabHeight) titles:datas configration:config delegate:self currentIndex:0];
     }

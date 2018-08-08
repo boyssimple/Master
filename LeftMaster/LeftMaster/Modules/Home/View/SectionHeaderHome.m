@@ -85,7 +85,7 @@
     r.origin.x = self.width - r.size.width - 10*RATIO_WIDHT320;
     self.btnArrow.frame = r;
     
-    [self.btnArrow setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btnArrow.imageView.size.width, 0, self.btnArrow.imageView.size.width)];
+    [self.btnArrow setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btnArrow.imageView.width, 0, self.btnArrow.imageView.width)];
     [self.btnArrow setImageEdgeInsets:UIEdgeInsetsMake(0, size.width, 0, -size.width)];
     
     r = self.vLine.frame;

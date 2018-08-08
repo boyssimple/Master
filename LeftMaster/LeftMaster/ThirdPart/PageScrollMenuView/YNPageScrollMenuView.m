@@ -126,7 +126,6 @@
         label.frame = CGRectMake(itemX, itemY, [self.itemsWidthArraM[idx] floatValue], itemH);
     }];
     
-    CGRect r =  [[self.itemsArrayM lastObject] frame];
     CGFloat scrollSizeWidht = self.configration.itemLeftAndRightMargin + CGRectGetMaxX([[self.itemsArrayM lastObject] frame]);
     if (scrollSizeWidht < self.scrollView.yn_width) {//不超出宽度
         itemX = 0;

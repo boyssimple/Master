@@ -38,9 +38,6 @@ PODS:
     - SDWebImage/Core
   - SPTPersistentCache (1.1.0)
   - UITableView-NXEmptyView (0.1.7)
-  - YYKit (1.0.9):
-    - YYKit/no-arc (= 1.0.9)
-  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - AJNetworking
@@ -51,7 +48,6 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.75)
   - SDWebImage (~> 4.0)
   - UITableView-NXEmptyView (~> 0.1.7)
-  - YYKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -68,7 +64,6 @@ SPEC REPOS:
     - SDWebImage
     - SPTPersistentCache
     - UITableView-NXEmptyView
-    - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -84,8 +79,7 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SPTPersistentCache: df36ea46762d7cf026502bbb86a8b79d0080dff4
   UITableView-NXEmptyView: 0bc404cfd9c201af518a63240ac4ac4dad2c69c2
-  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: eea92a4d3039e01fab797d1389c1366d6788b72d
+PODFILE CHECKSUM: 4b1529b3acebcc906be8bf1f25f1f910f7655095
 
 COCOAPODS: 1.5.3

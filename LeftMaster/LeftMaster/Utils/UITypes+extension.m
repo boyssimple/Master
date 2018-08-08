@@ -74,6 +74,12 @@
     return nil;
 }
 
+- (void)removeAllSubviews{
+    NSArray *subs = [self subviews];
+    for (UIView *v in subs) {
+        [v removeFromSuperview];
+    }
+}
 @end
 
 @implementation UIImageView(extension)

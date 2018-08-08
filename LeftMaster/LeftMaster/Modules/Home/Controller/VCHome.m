@@ -43,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[LaunchAdsManager shareManager] setupLaunchAd:^{
+        NSLog(@"检查版本");
         [self getVision];
     }];
     

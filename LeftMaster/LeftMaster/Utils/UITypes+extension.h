@@ -22,6 +22,7 @@
 - (void)updateData;
 + (CGFloat)calHeight;
 -(UINavigationController *) navigationController;
+- (void)removeAllSubviews;
 @end
 
 @interface UIImageView (extension)
