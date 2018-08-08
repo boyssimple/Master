@@ -37,6 +37,26 @@
     [self observeNotification:REFRESH_MINE_INFO];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadOrderNum];
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+//    self.navigationController.navigationBar.titleTextAttributes = dict;
+//    self.navigationController.navigationBar.translucent = TRUE;
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
+//    self.navigationController.navigationBar.titleTextAttributes = dict;
+//    self.navigationController.navigationBar.translucent = FALSE;
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:nil];
+}
+
+
 - (void)loadData{
     [self loadOrderNum];
     [self.header updateData];
@@ -80,15 +100,13 @@
     [self presentViewController:self.pickerController animated:TRUE completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [self loadOrderNum];
-}
 
 - (void)loadOrderNum{
     [self loadData:0];
     [self loadData:1];
     [self loadData:2];
     [self loadData:3];
+    [self loadData:4];
 }
 
 - (void)loadData:(NSInteger)type{
@@ -153,7 +171,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10.f;
+    return 8.f*RATIO_WIDHT320;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

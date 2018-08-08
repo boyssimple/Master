@@ -37,6 +37,15 @@
 		1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05272119C12700EA79EB /* HeaderSearchHistory.m */; };
 		1C6C052E2119C55C00EA79EB /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C052D2119C55C00EA79EB /* EmptyView.m */; };
 		1C6C05312119DF5200EA79EB /* VCUnPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C05302119DF5200EA79EB /* VCUnPay.m */; };
+		1C6C0536211B11B600EA79EB /* ViewHeaderBossInfoMine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0535211B11B600EA79EB /* ViewHeaderBossInfoMine.m */; };
+		1C6C0539211B23D900EA79EB /* VCUnPayOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0538211B23D900EA79EB /* VCUnPayOrderList.m */; };
+		1C6C053D211B249700EA79EB /* VCUnPayOrderContaier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C053C211B249700EA79EB /* VCUnPayOrderContaier.m */; };
+		1C6C0540211B24B000EA79EB /* VCHandlingOrderContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C053F211B24B000EA79EB /* VCHandlingOrderContainer.m */; };
+		1C6C0543211B24C500EA79EB /* VCPayOrderContaier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0542211B24C500EA79EB /* VCPayOrderContaier.m */; };
+		1C6C054D211B259400EA79EB /* UIView+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0545211B259300EA79EB /* UIView+YNPageExtend.m */; };
+		1C6C054E211B259400EA79EB /* YNPageConfigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0547211B259300EA79EB /* YNPageConfigration.m */; };
+		1C6C054F211B259400EA79EB /* YNPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0548211B259300EA79EB /* YNPageScrollView.m */; };
+		1C6C0550211B259400EA79EB /* YNPageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C054A211B259300EA79EB /* YNPageScrollMenuView.m */; };
 		1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */; };
 		1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EBE207DBCE700054AE1 /* RequestBeanGoodsDetail.m */; };
 		1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EC2207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m */; };
@@ -281,6 +290,24 @@
 		1C6C05302119DF5200EA79EB /* VCUnPay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUnPay.m; sourceTree = "<group>"; };
 		1C6C05322119E27D00EA79EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1C6C05332119E27D00EA79EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		1C6C0534211B11B500EA79EB /* ViewHeaderBossInfoMine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewHeaderBossInfoMine.h; sourceTree = "<group>"; };
+		1C6C0535211B11B600EA79EB /* ViewHeaderBossInfoMine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewHeaderBossInfoMine.m; sourceTree = "<group>"; };
+		1C6C0537211B23D900EA79EB /* VCUnPayOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCUnPayOrderList.h; sourceTree = "<group>"; };
+		1C6C0538211B23D900EA79EB /* VCUnPayOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUnPayOrderList.m; sourceTree = "<group>"; };
+		1C6C053B211B249700EA79EB /* VCUnPayOrderContaier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCUnPayOrderContaier.h; sourceTree = "<group>"; };
+		1C6C053C211B249700EA79EB /* VCUnPayOrderContaier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUnPayOrderContaier.m; sourceTree = "<group>"; };
+		1C6C053E211B24B000EA79EB /* VCHandlingOrderContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCHandlingOrderContainer.h; sourceTree = "<group>"; };
+		1C6C053F211B24B000EA79EB /* VCHandlingOrderContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCHandlingOrderContainer.m; sourceTree = "<group>"; };
+		1C6C0541211B24C500EA79EB /* VCPayOrderContaier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCPayOrderContaier.h; sourceTree = "<group>"; };
+		1C6C0542211B24C500EA79EB /* VCPayOrderContaier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCPayOrderContaier.m; sourceTree = "<group>"; };
+		1C6C0545211B259300EA79EB /* UIView+YNPageExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNPageExtend.m"; sourceTree = "<group>"; };
+		1C6C0546211B259300EA79EB /* YNPageScrollMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageScrollMenuView.h; sourceTree = "<group>"; };
+		1C6C0547211B259300EA79EB /* YNPageConfigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageConfigration.m; sourceTree = "<group>"; };
+		1C6C0548211B259300EA79EB /* YNPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageScrollView.m; sourceTree = "<group>"; };
+		1C6C0549211B259300EA79EB /* UIView+YNPageExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YNPageExtend.h"; sourceTree = "<group>"; };
+		1C6C054A211B259300EA79EB /* YNPageScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageScrollMenuView.m; sourceTree = "<group>"; };
+		1C6C054B211B259300EA79EB /* YNPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageScrollView.h; sourceTree = "<group>"; };
+		1C6C054C211B259300EA79EB /* YNPageConfigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageConfigration.h; sourceTree = "<group>"; };
 		1C766F6D208390D300C7B913 /* CommonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
 		1C780EB6207DAC1200054AE1 /* RequestBeanGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGoodsList.h; sourceTree = "<group>"; };
 		1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGoodsList.m; sourceTree = "<group>"; };
@@ -683,6 +710,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1C6C053A211B246400EA79EB /* UnPayOrder */ = {
+			isa = PBXGroup;
+			children = (
+				1C6C0537211B23D900EA79EB /* VCUnPayOrderList.h */,
+				1C6C0538211B23D900EA79EB /* VCUnPayOrderList.m */,
+				1C6C053B211B249700EA79EB /* VCUnPayOrderContaier.h */,
+				1C6C053C211B249700EA79EB /* VCUnPayOrderContaier.m */,
+				1C6C053E211B24B000EA79EB /* VCHandlingOrderContainer.h */,
+				1C6C053F211B24B000EA79EB /* VCHandlingOrderContainer.m */,
+				1C6C0541211B24C500EA79EB /* VCPayOrderContaier.h */,
+				1C6C0542211B24C500EA79EB /* VCPayOrderContaier.m */,
+			);
+			path = UnPayOrder;
+			sourceTree = "<group>";
+		};
+		1C6C0544211B259300EA79EB /* PageScrollMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				1C6C0545211B259300EA79EB /* UIView+YNPageExtend.m */,
+				1C6C0546211B259300EA79EB /* YNPageScrollMenuView.h */,
+				1C6C0547211B259300EA79EB /* YNPageConfigration.m */,
+				1C6C0548211B259300EA79EB /* YNPageScrollView.m */,
+				1C6C0549211B259300EA79EB /* UIView+YNPageExtend.h */,
+				1C6C054A211B259300EA79EB /* YNPageScrollMenuView.m */,
+				1C6C054B211B259300EA79EB /* YNPageScrollView.h */,
+				1C6C054C211B259300EA79EB /* YNPageConfigration.h */,
+			);
+			path = PageScrollMenuView;
+			sourceTree = "<group>";
+		};
 		1C780EBC207DBCE700054AE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +943,7 @@
 		1CD8487B206F7C7100CC9BE9 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				1C6C0544211B259300EA79EB /* PageScrollMenuView */,
 				1C88D0D120AB15B700865DE2 /* MJPhotoBrowser */,
 				1C8A2E2E207875BD0076238D /* QRCode */,
 				1C4CC2852072542A007C24FB /* Dictionary-Access */,
@@ -1028,6 +1086,7 @@
 		1CD84883206F7C7100CC9BE9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1C6C053A211B246400EA79EB /* UnPayOrder */,
 				1C4CC27120724F2B007C24FB /* VCMine.h */,
 				1C4CC27220724F2B007C24FB /* VCMine.m */,
 				1C8A2E1C20759AF40076238D /* VCLogin.h */,
@@ -1138,6 +1197,8 @@
 			children = (
 				1CBF5BBE207A46AE00284EA1 /* ViewHeaderMine.h */,
 				1CBF5BBF207A46AE00284EA1 /* ViewHeaderMine.m */,
+				1C6C0534211B11B500EA79EB /* ViewHeaderBossInfoMine.h */,
+				1C6C0535211B11B600EA79EB /* ViewHeaderBossInfoMine.m */,
 				1CBF5BC1207A4C9800284EA1 /* ViewSectionMine.h */,
 				1CBF5BC2207A4C9800284EA1 /* ViewSectionMine.m */,
 				1CBF5BC4207A4FFB00284EA1 /* ViewBtnHeaderMine.h */,
@@ -1554,6 +1615,7 @@
 				1C5F25B12088BC3C005EAF87 /* WindowGuide.m in Sources */,
 				1CF751F620B1B5C900357DDA /* RequestBeanNoticeList.m in Sources */,
 				1C4CC27020724F05007C24FB /* VCHome.m in Sources */,
+				1C6C054E211B259400EA79EB /* YNPageConfigration.m in Sources */,
 				1C4CC29120726AB2007C24FB /* Utils.m in Sources */,
 				1CBF1DB4208F8A310090BD96 /* RequestBeanSignOrder.m in Sources */,
 				1C4CC28E207266D5007C24FB /* SectionHeaderHome.m in Sources */,
@@ -1569,6 +1631,7 @@
 				1CBF5BE7207CE23B00284EA1 /* CellProxy.m in Sources */,
 				1CBF1DED2091135C0090BD96 /* RequestBeanAddOrder.m in Sources */,
 				1C6C052A2119C12800EA79EB /* SearchHistoryCell.m in Sources */,
+				1C6C0550211B259400EA79EB /* YNPageScrollMenuView.m in Sources */,
 				1CFA388720F61D16005DED5B /* ViewTabOrder.m in Sources */,
 				1C8A2E21207707720076238D /* CellCart.m in Sources */,
 				1C88D0E620AB15B700865DE2 /* MJPhotoToolbar.m in Sources */,
@@ -1593,6 +1656,7 @@
 				1C98270220937A02000EF976 /* ViewMessageOrder.m in Sources */,
 				1CFC7B02208F6D82005F18AB /* CellCancelOrder.m in Sources */,
 				1C8A2E3F207875BD0076238D /* HMScanner.m in Sources */,
+				1C6C054D211B259400EA79EB /* UIView+YNPageExtend.m in Sources */,
 				1CFC7ABB208C7796005F18AB /* ViewSearchWithHome.m in Sources */,
 				1CBF1DE7209109010090BD96 /* ViewOrderCheckAccount.m in Sources */,
 				1CF3C91F20A1D17C0036BD6D /* RequestBeanNewGoods.m in Sources */,
@@ -1610,6 +1674,7 @@
 				1CBF5BCC207A577F00284EA1 /* VCOrderList.m in Sources */,
 				1CD84830206F7ADA00CC9BE9 /* AppDelegate.m in Sources */,
 				1CFC7AFC208E5361005F18AB /* RequestBeanCancelOrder.m in Sources */,
+				1C6C0540211B24B000EA79EB /* VCHandlingOrderContainer.m in Sources */,
 				1CBF1DCC2090CB100090BD96 /* CellCustom.m in Sources */,
 				1CFC7AE4208E2B9D005F18AB /* ViewISBill.m in Sources */,
 				1C4CC2AA207332C7007C24FB /* VCCategory.m in Sources */,
@@ -1618,8 +1683,10 @@
 				1C4CC29420726D4D007C24FB /* CellCategoryHome.m in Sources */,
 				1CFC7AFF208F639D005F18AB /* WindowCancelOrder.m in Sources */,
 				1CFC7ABE208C80DD005F18AB /* VCGoodsList.m in Sources */,
+				1C6C054F211B259400EA79EB /* YNPageScrollView.m in Sources */,
 				1CFA389F20F62723005DED5B /* CellAccountPayDetail.m in Sources */,
 				1C4C15632088FADD00BA8F3C /* RequestBeanSlidePicList.m in Sources */,
+				1C6C0543211B24C500EA79EB /* VCPayOrderContaier.m in Sources */,
 				1CFC7AF3208E3D10005F18AB /* RequestBeanOrderGoodsList.m in Sources */,
 				1CBF5BED207CE71600284EA1 /* CellTopGoods.m in Sources */,
 				1C4CC2882072542A007C24FB /* NSDictionary+JKSafeAccess.m in Sources */,
@@ -1644,6 +1711,7 @@
 				1CBF5BC3207A4C9800284EA1 /* ViewSectionMine.m in Sources */,
 				1C780ECD207DFDF300054AE1 /* RequestBeanCartList.m in Sources */,
 				1CFFF5F220A9EB4300A52675 /* CustConfirmView.m in Sources */,
+				1C6C053D211B249700EA79EB /* VCUnPayOrderContaier.m in Sources */,
 				1C88D0E220AB15B700865DE2 /* MJPhotoLoadingView.m in Sources */,
 				1C4C155D2088CCA200BA8F3C /* RequestBeanAddCart.m in Sources */,
 				1C6C05252119C10A00EA79EB /* VCSearchList.m in Sources */,
@@ -1661,6 +1729,7 @@
 				1CFC01182089D5A200A8E344 /* VCForgotPwdFinish.m in Sources */,
 				1C4CC27320724F2B007C24FB /* VCMine.m in Sources */,
 				1C8A2E3C207875BD0076238D /* HMScannerBorder.m in Sources */,
+				1C6C0536211B11B600EA79EB /* ViewHeaderBossInfoMine.m in Sources */,
 				1C8A2E41207875BD0076238D /* HMScanerCardViewController.m in Sources */,
 				1CFA836B20B3215E0075AE06 /* CellInvoiceDetail.m in Sources */,
 				1CBF1DC92090C79E0090BD96 /* WindowCustom.m in Sources */,
@@ -1684,6 +1753,7 @@
 				1C0E7FCF209A1BCA00D208BE /* RequestBeanOrderNum.m in Sources */,
 				1CBF5C0E207D1FD900284EA1 /* RequestBeanCategoryHome.m in Sources */,
 				1C8A2E42207875BD0076238D /* HMScannerController.m in Sources */,
+				1C6C0539211B23D900EA79EB /* VCUnPayOrderList.m in Sources */,
 				1C4CC2A720732E57007C24FB /* VCTopGoods.m in Sources */,
 				1CFC7AF9208E508D005F18AB /* RequestBeanConfirmOrder.m in Sources */,
 				1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */,

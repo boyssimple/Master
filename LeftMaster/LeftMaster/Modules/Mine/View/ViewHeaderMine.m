@@ -11,13 +11,14 @@
 #import "VCOrderList.h"
 #import "VCLogin.h"
 #import "AppDelegate.h"
+#import "ViewHeaderBossInfoMine.h"
 
 @interface ViewHeaderMine()
 @property(nonatomic,strong)UIImageView *ivBg;
 @property(nonatomic,strong)UIImageView *ivLogo;
 @property(nonatomic,strong)UILabel *lbCompany;
 @property(nonatomic,strong)UILabel *lbName;
-
+@property(nonatomic,strong)ViewHeaderBossInfoMine *bossInfo;
 @property(nonatomic,strong)UILabel *lbTitle;
 @property(nonatomic,strong)UIButton *btnAll;
 @property(nonatomic,strong)UIView *vLine;
@@ -59,6 +60,9 @@
         _lbName.font = [UIFont boldSystemFontOfSize:12*RATIO_WIDHT320];
         _lbName.textColor = [UIColor whiteColor];
         [_ivBg addSubview:_lbName];
+        
+        _bossInfo = [[ViewHeaderBossInfoMine alloc]initWithFrame:CGRectZero];
+        [self addSubview:_bossInfo];
         
         _lbTitle = [[UILabel alloc]initWithFrame:CGRectZero];
         _lbTitle.font = [UIFont boldSystemFontOfSize:14*RATIO_WIDHT320];
@@ -152,7 +156,7 @@
 - (void)updateData{
     self.lbCompany.text = [AppUser share].CUS_NAME;
     self.lbName.text = [AppUser share].SYSUSER_NAME;
-    [self.vUnReceive update:8];
+    [_bossInfo updateData];
 }
 
 - (void)gotoOrderList:(UIGestureRecognizer*)ges{
@@ -212,11 +216,17 @@
     self.lbCompany.top = self.ivLogo.top + (self.ivLogo.height-(self.lbCompany.height + y + self.lbName.height))/2.0;
     self.lbName.top = self.lbCompany.bottom + y;
     
+    r = self.bossInfo.frame;
+    r.origin.x = 0;
+    r.origin.y = self.ivBg.bottom;
+    r.size.width = DEVICEWIDTH;
+    r.size.height = [ViewHeaderBossInfoMine calHeight];
+    self.bossInfo.frame = r;
     
     size = [self.lbTitle sizeThatFits:CGSizeMake(MAXFLOAT, 14*RATIO_WIDHT320)];
     r = self.lbTitle.frame;
     r.origin.x = 10*RATIO_WIDHT320;
-    r.origin.y = self.ivBg.bottom + 12*RATIO_WIDHT320;
+    r.origin.y = self.bossInfo.bottom + 12*RATIO_WIDHT320;
     r.size = size;
     self.lbTitle.frame = r;
     
@@ -224,7 +234,7 @@
     r = self.btnAll.frame;
     r.size.width = size.width + 10*RATIO_WIDHT320;
     r.size.height = self.lbTitle.height + 24*RATIO_WIDHT320;
-    r.origin.y = self.ivBg.bottom;
+    r.origin.y = self.bossInfo.bottom;
     r.origin.x = self.width - r.size.width - 10*RATIO_WIDHT320;
     self.btnAll.frame = r;
     
@@ -281,7 +291,7 @@
 }
 
 + (CGFloat)calHeight{
-    return 100*RATIO_WIDHT320 + 38*RATIO_WIDHT320 + 0.5 + [ViewBtnHeaderMine calHeight];
+    return 100*RATIO_WIDHT320 + 38*RATIO_WIDHT320 + 0.5 + [ViewBtnHeaderMine calHeight] + [ViewHeaderBossInfoMine calHeight];
 }
 
 @end

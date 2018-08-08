@@ -10,7 +10,7 @@ target 'LeftMaster' do
   inhibit_all_warnings!
 
   pod 'AJNetworking'
-  pod 'YYKit'
+#  pod 'YYKit'
   pod 'UITableView-NXEmptyView', '~> 0.1.7'
   pod 'MBProgressHUD', '~> 0.9.1'
   #pod 'WRNavigationBar','~>1.2.0’
