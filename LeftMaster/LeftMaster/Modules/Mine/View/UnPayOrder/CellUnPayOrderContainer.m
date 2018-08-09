@@ -91,6 +91,21 @@
     }
 }
 
+- (void)updateData:(NSDictionary*)data{
+    self.lbNo.text = [data jk_stringForKey:@"FD_NO"];
+    self.lbDate.text = [NSString stringWithFormat:@"下单时间：%@",[data jk_stringForKey:@"FD_ORDER_DATE"]];
+    self.lbPerson.text = [NSString stringWithFormat:@"下单人：%@",[data jk_stringForKey:@"SYSUSER_NAME"]];
+    self.lbPhone.text = [data jk_stringForKey:@"SYSUSER_MOBILE"];
+    self.lbAmount.text = [NSString stringWithFormat:@"订单金额：¥%.2f",[data jk_floatForKey:@"FD_TOTAL_PRICE"]];
+    NSString *str = [NSString stringWithFormat:@"¥%.2f",[data jk_floatForKey:@"FD_TOTAL_PRICE"]];
+    if(self.lbAmount.text.length > 2){
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.lbAmount.text];
+        // 改变颜色
+        [noteStr addAttribute:NSForegroundColorAttributeName value:APP_COLOR range:NSMakeRange(5, str.length)];
+        [self.lbAmount setAttributedText:noteStr];
+    }
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGRect r = self.btnCheck.frame;

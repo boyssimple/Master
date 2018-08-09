@@ -55,6 +55,10 @@
     
 }
 
+- (void)updateData:(NSDictionary*)data{
+    
+}
+
 + (CGFloat)calHeight{
     return 0;
 }

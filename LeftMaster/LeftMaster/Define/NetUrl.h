@@ -12,8 +12,8 @@
 
 
 
-#if 0
-#define Base_Url @"113.204.168.170:4321/"
+#if DEBUG
+#define Base_Url @"113.204.168.170:4322/"
 #else
 #define Base_Url @"masterzuo.cartechfin.com/"
 #endif
@@ -61,6 +61,8 @@
 #define net_account_list_detail @"shop/OrderMobileTran.do?queryCaBillOrderDetail"       //对帐单详情
 #define net_account_list_pay_detail @"shop/OrderMobileTran.do?queryCaBillPayDetail"       //付款明细
 #define net_account_confirm_bill @"shop/OrderMobileTran.do?setCaBillStatus"       //确认对帐单
+#define net_queryCustomerCredit @"shop/OrderMobileTran.do?queryCustomerCredit"       //获取客户信用额度
+#define net_queryCreditPayOrder @"shop/OrderMobileTran.do?queryCreditPayOrder"       //欠款订单
 
 #define net_app_version @"system/UserMobileTran.do?getAppVersion"       //版本
 

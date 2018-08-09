@@ -109,10 +109,57 @@
 }
 
 - (void)existsUpdate{
+    /*
+    */
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSURL *URL = [NSURL URLWithString:@"http://imgsrc.baidu.com/forum/w%3D580/sign=c719dbd8d3b44aed594ebeec831d876a/f9756e600c338744aaf9f7ee580fd9f9d72aa031.jpg"];
+    NSString *url = [NSString stringWithFormat:@"http://%@%@",Base_Url,@"/shop/GoodsCarouselMobileTran.do?getAdvertPicList&page_current=1&page_size=1"];
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"%@",responseObject);
+            NSInteger success = [responseObject jk_integerForKey:@"success"];
+            if(success == 1){
+                NSDictionary *data = [responseObject jk_dictionaryForKey:@"data"];
+                if(data){
+                    NSArray*rows = [data jk_arrayForKey:@"rows"];
+                    if(rows && rows.count > 0){
+                        NSDictionary *d = [rows firstObject];
+                        if(d){
+                            NSString *url = [d jk_stringForKey:@"FILE_PATH"];
+                            if(url){
+                                
+                                NSUserDefaults *defautls = [NSUserDefaults standardUserDefaults];
+                                id downloaded = [defautls objectForKey:@"downloaded"];
+                                if(downloaded){
+                                    if(![url hasSuffix:downloaded]){
+                                        [self downImage:url];
+                                    }else{
+                                        NSLog(@"无需下载广告");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }];
+    [dataTask resume];
+    
+}
+
+- (void)downImage:(NSString*)url{
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
@@ -126,22 +173,6 @@
         NSLog(@"File downloaded to: %@", filePath.relativePath.lastPathComponent);
     }];
     [downloadTask resume];
-    /*
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/get"];
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"" parameters:nil error:nil];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            
-        }
-    }];
-    [dataTask resume];
-     */
 }
 
 - (void)dismiss{

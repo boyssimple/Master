@@ -20,6 +20,7 @@
 
 @interface UIView (extension)
 - (void)updateData;
+- (void)updateData:(NSDictionary*)data;
 + (CGFloat)calHeight;
 -(UINavigationController *) navigationController;
 - (void)removeAllSubviews;

@@ -51,6 +51,8 @@
 		1C6C055A211B310F00EA79EB /* CellUnPayOrderContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0559211B310F00EA79EB /* CellUnPayOrderContainer.m */; };
 		1C6C0560211B3A4B00EA79EB /* CellPayedOrderContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C055F211B3A4B00EA79EB /* CellPayedOrderContainer.m */; };
 		1C6C0563211B3D3100EA79EB /* ViewBarUnPayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0562211B3D3100EA79EB /* ViewBarUnPayOrder.m */; };
+		1C6C0566211C61D100EA79EB /* RequestBeanGetCredit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0565211C61D100EA79EB /* RequestBeanGetCredit.m */; };
+		1C6C0569211C66BF00EA79EB /* RequestBeanCreditOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */; };
 		1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */; };
 		1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EBE207DBCE700054AE1 /* RequestBeanGoodsDetail.m */; };
 		1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EC2207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m */; };
@@ -323,6 +325,10 @@
 		1C6C055F211B3A4B00EA79EB /* CellPayedOrderContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellPayedOrderContainer.m; sourceTree = "<group>"; };
 		1C6C0561211B3D3100EA79EB /* ViewBarUnPayOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewBarUnPayOrder.h; sourceTree = "<group>"; };
 		1C6C0562211B3D3100EA79EB /* ViewBarUnPayOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewBarUnPayOrder.m; sourceTree = "<group>"; };
+		1C6C0564211C61D100EA79EB /* RequestBeanGetCredit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGetCredit.h; sourceTree = "<group>"; };
+		1C6C0565211C61D100EA79EB /* RequestBeanGetCredit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGetCredit.m; sourceTree = "<group>"; };
+		1C6C0567211C66BF00EA79EB /* RequestBeanCreditOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanCreditOrder.h; sourceTree = "<group>"; };
+		1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanCreditOrder.m; sourceTree = "<group>"; };
 		1C766F6D208390D300C7B913 /* CommonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
 		1C780EB6207DAC1200054AE1 /* RequestBeanGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGoodsList.h; sourceTree = "<group>"; };
 		1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGoodsList.m; sourceTree = "<group>"; };
@@ -1297,6 +1303,10 @@
 				1CFA38A420F62E4B005DED5B /* RequestBeanBillPayDetail.m */,
 				1CFA38A620F62F95005DED5B /* RequestBeanConfirmBill.h */,
 				1CFA38A720F62F95005DED5B /* RequestBeanConfirmBill.m */,
+				1C6C0564211C61D100EA79EB /* RequestBeanGetCredit.h */,
+				1C6C0565211C61D100EA79EB /* RequestBeanGetCredit.m */,
+				1C6C0567211C66BF00EA79EB /* RequestBeanCreditOrder.h */,
+				1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1717,6 +1727,7 @@
 				1C98270220937A02000EF976 /* ViewMessageOrder.m in Sources */,
 				1CFC7B02208F6D82005F18AB /* CellCancelOrder.m in Sources */,
 				1C8A2E3F207875BD0076238D /* HMScanner.m in Sources */,
+				1C6C0566211C61D100EA79EB /* RequestBeanGetCredit.m in Sources */,
 				1C6C054D211B259400EA79EB /* UIView+YNPageExtend.m in Sources */,
 				1CFC7ABB208C7796005F18AB /* ViewSearchWithHome.m in Sources */,
 				1CBF1DE7209109010090BD96 /* ViewOrderCheckAccount.m in Sources */,
@@ -1768,6 +1779,7 @@
 				1CBF5BFF207CF86500284EA1 /* CellOrderGoodsList.m in Sources */,
 				1CFC00C52087124B00A8E344 /* NetworkManager.m in Sources */,
 				1CFC7AB8208B78EF005F18AB /* RequestBeanModifyPwd.m in Sources */,
+				1C6C0569211C66BF00EA79EB /* RequestBeanCreditOrder.m in Sources */,
 				1CFC7B05208F7268005F18AB /* ViewHeaderCancelOrder.m in Sources */,
 				1CBF5BC3207A4C9800284EA1 /* ViewSectionMine.m in Sources */,
 				1C780ECD207DFDF300054AE1 /* RequestBeanCartList.m in Sources */,

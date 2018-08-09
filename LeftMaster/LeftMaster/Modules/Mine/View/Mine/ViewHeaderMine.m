@@ -152,6 +152,9 @@
     }
 }
 
+- (void)updateDataCredit:(NSDictionary*)data{
+    [self.bossInfo updateData:data]; 
+}
 
 - (void)updateData{
     self.lbCompany.text = [AppUser share].CUS_NAME;

@@ -95,6 +95,14 @@
     [self setNeedsLayout];
 }
 
+- (void)updateData:(NSDictionary*)data{
+    
+    self.lbLineOfCredit.text = [NSString stringWithFormat:@"%.2f",[data jk_floatForKey:@"FD_CREDIT_TOTAL_MONEY"]];
+    self.lbUseOfCredit.text = [NSString stringWithFormat:@"%.2f",[data jk_floatForKey:@"FD_CREDIT_BALANCE"]];
+    self.lbMonthArrears.text = [NSString stringWithFormat:@"%.2f",[data jk_floatForKey:@"FD_CREDIT_OCCUPY_MONEY"]];;
+    [self setNeedsLayout];
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGSize size = [self.lbMonthArrears sizeThatFits:CGSizeMake(100*RATIO_WIDHT320, MAXFLOAT)];

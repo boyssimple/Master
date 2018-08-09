@@ -16,6 +16,7 @@
 #import "RequestBeanOrderNum.h"
 #import "VCProxyCustmer.h"
 #import "VCAccountContainer.h"
+#import "RequestBeanGetCredit.h"
 
 @interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CommonDelegate,UIActionSheetDelegate,
             UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -41,19 +42,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self loadOrderNum];
-//    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-//    self.navigationController.navigationBar.titleTextAttributes = dict;
-//    self.navigationController.navigationBar.translucent = TRUE;
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self loadCustomerCredit];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-//    NSDictionary *dict = [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
-//    self.navigationController.navigationBar.titleTextAttributes = dict;
-//    self.navigationController.navigationBar.translucent = FALSE;
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 
@@ -67,6 +59,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [weakself.table.mj_header endRefreshing];
     });
+    [self loadCustomerCredit];
 }
 
 - (void)handleNotification:(NSNotification *)notification{
@@ -120,6 +113,22 @@
             ResponseBeanOrderNum *response = responseBean;
             if(response.success){
                 [weakself.header updateData:type withCount:response.num];
+            }
+        }
+    }];
+}
+
+
+- (void)loadCustomerCredit{
+    RequestBeanGetCredit *requestBean = [RequestBeanGetCredit new];
+    requestBean.cus_id = [AppUser share].CUS_ID;
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        if (!err) {
+            // 结果处理
+            ResponseBeanGetCredit *response = responseBean;
+            if(response.success){
+                [weakself.header updateDataCredit:response.data];
             }
         }
     }];
@@ -301,6 +310,7 @@
         
         _table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [weakself loadData];
+            [weakself loadCustomerCredit];
         }];
     }
     return _table;

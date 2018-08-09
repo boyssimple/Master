@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewHeaderBossInfoMine : UIView
+- (void)updateData:(NSDictionary*)data;
 @end
