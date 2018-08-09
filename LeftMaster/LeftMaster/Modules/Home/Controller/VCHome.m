@@ -26,6 +26,7 @@
 #import "RequestBeanVision.h"
 #import "LaunchAdsManager.h"
 #import "VCSearchList.h"
+#import "VCContent.h"
 
 @interface VCHome ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SectionHeaderHomeDelegate,UIScrollViewDelegate,
         UIAlertViewDelegate,CommonDelegate>
@@ -36,6 +37,8 @@
 @property(nonatomic,strong)ViewSearchWithHome *vCart;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSString *downUrl;
+
+@property(nonatomic,strong)NSMutableArray *carousels;
 @end
 
 @implementation VCHome
@@ -121,6 +124,7 @@
 }
 
 - (void)initMain{
+    _carousels = [NSMutableArray array];
     self.page = 1;
     [self.view addSubview:self.table];
     _categorys = [NSMutableArray array];
@@ -178,6 +182,8 @@
                 if (response.data) {
                     NSArray *rows = [response.data jk_arrayForKey:@"rows"];
                     if (rows) {
+                        [self.carousels removeAllObjects];
+                        [self.carousels addObjectsFromArray:rows];
                         NSInteger i = [response.data jk_integerForKey:@"records"];
                         NSMutableArray *images = [NSMutableArray arrayWithCapacity:i];
                         for (NSDictionary *data in rows) {
@@ -373,6 +379,32 @@
     }
 }
 
+#pragma mark - SDCycleScrollViewDelegate
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    NSDictionary *data = [self.carousels objectAtIndex:index];
+    if(data){
+        NSString *type = [data jk_stringForKey:@"GOODSCAROUSEL_TYPE"];
+        if(type){
+            if([type isEqualToString:@"goods"]){
+                NSString *ID = [data jk_stringForKey:@"BUSINESS_ID"];
+                if(ID && ![ID isEqualToString:@""]){
+                    VCGoods *vc = [[VCGoods alloc]init];
+                    vc.goods_id = ID;
+                    [self.navigationController pushViewController:vc animated:TRUE]; 
+                }
+            }else{
+                NSString *ID = [data jk_stringForKey:@"BUSINESS_ID"];
+                NSString *name = [data jk_stringForKey:@"BUSINESS_NAME"];
+                if(ID && ![ID isEqualToString:@""]){
+                    VCContent *vc = [[VCContent alloc]init];
+                    vc.title = name;
+                    [self.navigationController pushViewController:vc animated:TRUE];
+                }
+            }
+        }
+    }
+}
+
 - (UITableView*)table{
     if(!_table){
         _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICEWIDTH, DEVICEHEIGHT) style:UITableViewStyleGrouped];
@@ -403,6 +435,7 @@
         CGRect frame = CGRectMake(0, 0, DEVICEWIDTH, 103*RATIO_WIDHT320);
         _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:frame delegate:self placeholderImage:nil];
         _cycleScrollView.backgroundColor = [UIColor whiteColor];
+        _cycleScrollView.delegate = self;
     }
     return _cycleScrollView;
 }
