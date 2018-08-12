@@ -63,7 +63,7 @@
 #define net_account_confirm_bill @"shop/OrderMobileTran.do?setCaBillStatus"       //确认对帐单
 #define net_queryCustomerCredit @"shop/OrderMobileTran.do?queryCustomerCredit"       //获取客户信用额度
 #define net_queryCreditPayOrder @"shop/OrderMobileTran.do?queryCreditPayOrder"       //欠款订单
-
+#define net_orderCreditPay @"shop/OrderMobileTran.do?orderCreditPay"       //信用额度支付
 #define net_app_version @"system/UserMobileTran.do?getAppVersion"       //版本
 
 #define OPEN_ORDER_LIST @"OPEN_ORDER_LIST"       //打开订单通知

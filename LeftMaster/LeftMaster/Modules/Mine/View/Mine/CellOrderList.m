@@ -30,6 +30,7 @@
 @property(nonatomic,strong)UIButton *btnAgain;
 @property(nonatomic,strong)UIButton *btnReceive;
 @property(nonatomic,strong)UIButton *btnConfirm;
+@property(nonatomic,strong)UIButton *btnPay;
 @property(nonatomic,strong)UIButton *btnCancel;
 
 @end
@@ -148,6 +149,16 @@
         _btnAgain.backgroundColor = APP_COLOR;
         [_vBg addSubview:_btnAgain];
         
+        
+        _btnPay = [[UIButton alloc]initWithFrame:CGRectZero];
+        [_btnPay setTitle:@"付款" forState:UIControlStateNormal];
+        _btnPay.titleLabel.font = [UIFont systemFontOfSize:10*RATIO_WIDHT320];
+        [_btnPay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _btnPay.tag = 104;
+        [_btnPay addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+        _btnPay.backgroundColor = APP_COLOR;
+        [_vBg addSubview:_btnPay];
+        
         _vLine = [[UIView alloc]initWithFrame:CGRectZero];
         _vLine.backgroundColor = RGB3(230);
         [self.contentView addSubview:_vLine];
@@ -177,6 +188,7 @@
     self.btnConfirm.hidden = YES;
     self.btnReceive.hidden = YES;
     self.btnCancel.hidden = YES;
+    self.btnPay.hidden = YES;
     if(self.status == 0){
         if(![AppUser share].isSalesman){
             self.btnConfirm.hidden = NO;
@@ -186,6 +198,11 @@
         self.btnCancel.hidden = NO;
     }else if(self.status == 3){
         self.btnReceive.hidden = NO;
+    }else if(self.status == 10){
+        if([AppUser share].SYSUSER_CUSTOMER_ROLE == 2){
+            self.btnPay.hidden = NO;
+            self.btnCancel.hidden = NO;
+        }
     }
 }
 
@@ -336,12 +353,21 @@
     r.origin.y = self.lbOrderTime.bottom + 8*RATIO_WIDHT320;
     self.btnConfirm.frame = r;
     
+    
+    
     r = self.btnAgain.frame;
     r.size.width = 45*RATIO_WIDHT320;
     r.size.height = 18*RATIO_WIDHT320;
     r.origin.x = self.vBg.width - r.size.width - 10*RATIO_WIDHT320;
     r.origin.y = self.lbOrderTime.bottom + 8*RATIO_WIDHT320;
     self.btnAgain.frame = r;
+    
+    r = self.btnPay.frame;
+    r.size.width = 35*RATIO_WIDHT320;
+    r.size.height = 18*RATIO_WIDHT320;
+    r.origin.x = self.btnAgain.left - r.size.width - 10*RATIO_WIDHT320;
+    r.origin.y = self.lbOrderTime.bottom + 8*RATIO_WIDHT320;
+    self.btnPay.frame = r;
     
     if (self.status == 0) {
         self.btnCancel.left = self.vBg.width - self.btnCancel.width - 10*RATIO_WIDHT320;
@@ -362,6 +388,10 @@
         self.btnAgain.left = self.btnReceive.left - 10*RATIO_WIDHT320 - self.btnAgain.width;
     }else if(self.status == 4 || self.status == 5 || self.status == 6){//已完成
         self.btnAgain.left = self.vBg.width - self.btnAgain.width - 10*RATIO_WIDHT320;
+    }else if(self.status == 10){
+        self.btnPay.left = self.vBg.width - self.btnCancel.width - 10*RATIO_WIDHT320;
+        self.btnCancel.left = self.btnPay.left - self.btnCancel.width - 10*RATIO_WIDHT320;
+        self.btnAgain.left = self.btnCancel.left - self.btnAgain.width - 10*RATIO_WIDHT320;
     }
     
     

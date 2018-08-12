@@ -89,9 +89,33 @@
 }
 
 - (void)updateData{
-    self.lbLineOfCredit.text = @"10000.00";
-    self.lbUseOfCredit.text = @"100000.00";
-    self.lbMonthArrears.text = @"0.00";
+    if([AppUser share].SYSUSER_CUSTOMER_ROLE != 2){
+        self.lbLineOfCredit.hidden = TRUE;
+        self.lbLineOfCreditText.hidden = TRUE;
+        self.lbUseOfCredit.hidden = TRUE;
+        self.lbUseOfCreditText.hidden = TRUE;
+        self.vLine.hidden = TRUE;
+        self.lbMonthArrears.hidden = TRUE;
+        self.lbMonthArrearsText.hidden = TRUE;
+        self.btnRight.hidden = TRUE;
+        self.vLineTwo.hidden = TRUE;
+    }else{
+        
+        self.lbLineOfCredit.hidden = FALSE;
+        self.lbLineOfCreditText.hidden = FALSE;
+        self.lbUseOfCredit.hidden = FALSE;
+        self.lbUseOfCreditText.hidden = FALSE;
+        self.vLine.hidden = FALSE;
+        self.lbMonthArrears.hidden = FALSE;
+        self.lbMonthArrearsText.hidden = FALSE;
+        self.btnRight.hidden = FALSE;
+        self.vLineTwo.hidden = FALSE;
+        
+        
+        self.lbLineOfCredit.text = @"10000.00";
+        self.lbUseOfCredit.text = @"100000.00";
+        self.lbMonthArrears.text = @"0.00";
+    }
     [self setNeedsLayout];
 }
 
@@ -122,8 +146,8 @@
     self.lbMonthArrearsText.frame = r;
     
     
-    self.lbMonthArrears.top = ((self.height-8*RATIO_WIDHT320) - self.lbMonthArrears.height - 15*RATIO_WIDHT320 - self.lbMonthArrearsText.height)/2.0;
-    self.lbMonthArrearsText.top = self.lbMonthArrears.bottom + 15*RATIO_WIDHT320;
+    self.lbMonthArrears.top = ((self.height-8*RATIO_WIDHT320) - self.lbMonthArrears.height - 10*RATIO_WIDHT320 - self.lbMonthArrearsText.height)/2.0;
+    self.lbMonthArrearsText.top = self.lbMonthArrears.bottom + 10*RATIO_WIDHT320;
     
     r = self.btnRight.frame;
     r.size.width = 100*RATIO_WIDHT320;
@@ -156,8 +180,8 @@
     r.origin.y = 0;
     self.lbLineOfCreditText.frame = r;
     
-    self.lbLineOfCredit.top = ((self.height-8*RATIO_WIDHT320) - self.lbLineOfCredit.height - 15*RATIO_WIDHT320 - self.lbLineOfCreditText.height)/2.0;
-    self.lbLineOfCreditText.top = self.lbLineOfCredit.bottom + 15*RATIO_WIDHT320;
+    self.lbLineOfCredit.top = ((self.height-8*RATIO_WIDHT320) - self.lbLineOfCredit.height - 10*RATIO_WIDHT320 - self.lbLineOfCreditText.height)/2.0;
+    self.lbLineOfCreditText.top = self.lbLineOfCredit.bottom + 10*RATIO_WIDHT320;
     
     size = [self.lbUseOfCredit sizeThatFits:CGSizeMake(w, MAXFLOAT)];
     r = self.lbUseOfCredit.frame;
@@ -175,8 +199,8 @@
     r.origin.y = 0;
     self.lbUseOfCreditText.frame = r;
     
-    self.lbUseOfCredit.top = ((self.height-8*RATIO_WIDHT320) - self.lbUseOfCredit.height - 15*RATIO_WIDHT320 - self.lbUseOfCreditText.height)/2.0;
-    self.lbUseOfCreditText.top = self.lbLineOfCredit.bottom + 15*RATIO_WIDHT320;
+    self.lbUseOfCredit.top = ((self.height-8*RATIO_WIDHT320) - self.lbUseOfCredit.height - 10*RATIO_WIDHT320 - self.lbUseOfCreditText.height)/2.0;
+    self.lbUseOfCreditText.top = self.lbLineOfCredit.bottom + 10*RATIO_WIDHT320;
     
     r = self.vLineTwo.frame;
     r.size.width = DEVICEWIDTH;
@@ -187,6 +211,9 @@
 }
 
 + (CGFloat)calHeight{
-    return 90*RATIO_WIDHT320;
+    if([AppUser share].SYSUSER_CUSTOMER_ROLE != 2){
+        return 0;
+    }
+    return 80*RATIO_WIDHT320;
 }
 @end

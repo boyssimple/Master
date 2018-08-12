@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CellUnPayOrderContainer : UITableViewCell
-
+@property(nonatomic,assign)NSInteger index;
+@property(nonatomic,strong)void(^clickBlock)(NSInteger index);
 @end

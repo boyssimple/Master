@@ -10,4 +10,7 @@
 
 @interface ViewBarUnPayOrder : UIView
 
+@property(nonatomic,strong)void(^clickBlock)(NSInteger index,BOOL selected);
+
+- (void)updateDataPrice:(CGFloat)total;
 @end

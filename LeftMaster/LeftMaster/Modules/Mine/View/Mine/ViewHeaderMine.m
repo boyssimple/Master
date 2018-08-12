@@ -142,13 +142,13 @@
     if (index == 0) {
         [self.vConfirm update:count];
     }else if(index == 1){
-        [self.vUnPay update:count];
-    }else if(index == 2){
         [self.vAudution update:count];
-    }else if(index == 3){
+    }else if(index == 2){
         [self.vUnSend update:count];
-    }else if(index == 4){
+    }else if(index == 3){
         [self.vUnReceive update:count];
+    }else if(index == 4){
+        [self.vUnPay update:count];
     }
 }
 

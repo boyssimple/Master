@@ -16,6 +16,9 @@
 #import "RequestBeanCancelOrder.h"
 #import "WindowCancelOrder.h"
 #import "VCWriteOrderAgain.h"
+#import "WindowPayWay.h"
+
+#import "RequestBeanCreditPay.h"
 
 @interface VCUnPay ()<UITableViewDelegate,UITableViewDataSource,CommonDelegate,UIAlertViewDelegate,WindowCancelOrderDelegate>
 @property (nonatomic, strong) UITableView *table;
@@ -46,7 +49,7 @@
     requestBean.user_id = [AppUser share].SYSUSER_ID;
     requestBean.cus_id = [AppUser share].CUS_ID;
     requestBean.page_current = self.page;
-    requestBean.order_status = @"0";
+    requestBean.order_status = @"10";
     [Utils showHanding:requestBean.hubTips with:self.view];
     __weak typeof(self) weakself = self;
     [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
@@ -87,6 +90,28 @@
             ResponseBeanConfirmOrder *response = responseBean;
             if(response.success){
                 [weakself loadData];
+            }
+        }
+    }];
+}
+
+- (void)waitPayAction{
+    RequestBeanCreditPay *requestBean = [RequestBeanCreditPay new];
+    requestBean.FD_SUMIT_USER_ID = [AppUser share].SYSUSER_ID;
+    requestBean.FD_ID = self.orderId;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [Utils hiddenHanding:self.view withTime:0.5];
+        if (!err) {
+            // 结果处理
+            ResponseBeanCreditPay *response = responseBean;
+            if(response.success){
+                [weakself loadData];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:response.msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                alert.tag = 1002;
+                [alert show];
             }
         }
     }];
@@ -153,52 +178,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - CommonDelegate
-- (void)clickActionWithIndex:(NSInteger)index withDataIndex:(NSInteger)dataIndex{
-    NSDictionary *data = [self.dataSource objectAtIndex:dataIndex];
-    self.orderId = [data jk_stringForKey:@"FD_ID"];
-    if(index == 1){
-        
-        WindowCancelOrder *windowCancel = [[WindowCancelOrder alloc]init];
-        windowCancel.delegate = self;
-        [windowCancel show];
-    }else if(index == 2){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定提交审核？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-        alert.tag = 1001;
-        [alert show];
-    }else if(index == 3){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定再来一单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-        alert.tag = 1002;
-        [alert show];
-    }
-}
-
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSInteger tag = alertView.tag;
-    if(tag == 1000){
-        if(buttonIndex == 0){
-            
-        }else{
-            
-        }
-    }else if(tag == 1001){
-        if(buttonIndex == 0){
-            [self confirmAction];
-        }else{
-            
-        }
-    }else if(tag == 1002){
-        
-        if(buttonIndex == 0){
-            VCWriteOrderAgain *vc = [[VCWriteOrderAgain alloc]init];
-            vc.orderId = self.orderId;
-            [self.navigationController pushViewController:vc animated:TRUE];
-            
-        }
-    }
-}
-
 #pragma mark - WindowCancelOrderDelegate
 - (void)selectReason:(NSString *)reason{
     RequestBeanCancelOrder *requestBean = [RequestBeanCancelOrder new];
@@ -218,6 +197,58 @@
             }
         }
     }];
+}
+
+#pragma mark - CommonDelegate
+- (void)clickActionWithIndex:(NSInteger)index withDataIndex:(NSInteger)dataIndex{
+    NSDictionary *data = [self.dataSource objectAtIndex:dataIndex];
+    self.orderId = [data jk_stringForKey:@"FD_ID"];
+    if(index == 3){
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定再来一单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+        alert.tag = 1001;
+        [alert show];
+    }else if(index == 1){
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定取消订单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+        alert.tag = 1000;
+        [alert show];
+    }else if(index == 4){
+        //付款
+        WindowPayWay *win =[[WindowPayWay alloc]init];
+        __weak typeof(self) weakself = self;
+        win.clickBlock = ^(NSInteger index) {
+            [weakself handlePay:index];
+        };
+        [win show];
+    }
+}
+
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 1000){
+        if (buttonIndex == 0) {
+            WindowCancelOrder *windowCancel = [[WindowCancelOrder alloc]init];
+            windowCancel.delegate = self;
+            [windowCancel show];
+        }
+    }else if(alertView.tag == 1001){
+        
+        if (buttonIndex == 0) {
+            VCWriteOrderAgain *vc = [[VCWriteOrderAgain alloc]init];
+            vc.orderId = self.orderId;
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }
+    }
+}
+
+- (void)handlePay:(NSInteger)index{
+    if (index == 0) {
+        
+    }else{
+        [self waitPayAction];
+    }
 }
 
 - (ViewSearchOrderList*)searchView{

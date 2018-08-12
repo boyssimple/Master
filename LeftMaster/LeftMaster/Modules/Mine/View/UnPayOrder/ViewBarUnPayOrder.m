@@ -23,7 +23,7 @@
         self.backgroundColor = [UIColor whiteColor];
         _btnCheck = [[UIButton alloc]initWithFrame:CGRectZero];
         _btnCheck.titleLabel.font = [UIFont systemFontOfSize:14*RATIO_WIDHT320];
-        _btnCheck.tag = 101;
+        _btnCheck.tag = 100;
         [_btnCheck setImage:[UIImage imageNamed:@"Shopping-Cart_icon_normal"] forState:UIControlStateNormal];
         [_btnCheck setImage:[UIImage imageNamed:@"Shopping-Cart_icon_selected"] forState:UIControlStateSelected];
         [_btnCheck addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -32,6 +32,7 @@
         _lbCount = [[UILabel alloc]initWithFrame:CGRectZero];
         _lbCount.font = [UIFont systemFontOfSize:10*RATIO_WIDHT320];
         _lbCount.textColor = RGB(0, 0, 0);
+        _lbCount.text = @"全部";
         [self addSubview:_lbCount];
         
         _lbPrice = [[UILabel alloc]initWithFrame:CGRectZero];
@@ -41,7 +42,7 @@
         
         _btnOrder = [[UIButton alloc]initWithFrame:CGRectZero];
         _btnOrder.titleLabel.font = [UIFont boldSystemFontOfSize:16*RATIO_WIDHT320];
-        _btnOrder.tag = 102;
+        _btnOrder.tag = 101;
         [_btnOrder setTitle:@"去结算" forState:UIControlStateNormal];
         [_btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _btnOrder.backgroundColor = [UIColor redColor];
@@ -54,44 +55,35 @@
 
 - (void)clickAction:(UIButton*)sender{
     NSInteger tag = sender.tag;
-//    if (tag == 101) {
-//        sender.selected = !sender.selected;
-//        if ([self.delegate respondsToSelector:@selector(clickCheck:)]) {
-//            [self.delegate clickCheck:sender.selected];
-//        }
-//    }else if(tag == 102){
-//        if ([self.delegate respondsToSelector:@selector(clickOrder)]) {
-//            [self.delegate clickOrder];
-//        }
-//    }
+    if(self.clickBlock){
+        if (tag == 100) {
+            self.btnCheck.selected = !self.btnCheck.selected;
+            self.clickBlock(0,self.btnCheck.selected);
+        }else if(tag == 101){
+            self.clickBlock(1,FALSE);
+        }
+    }
 }
 
-- (void)updateData:(NSInteger)num withPrice:(CGFloat)total{
-    if(num > 0){
-        self.btnCheck.selected = TRUE;
-    }else{
-        self.btnCheck.selected = FALSE;
-    }
-    self.lbCount.text = [NSString stringWithFormat:@"共计%zi个商品",num];
-    self.lbPrice.text = [NSString stringWithFormat:@"¥%.2f",total];
+- (void)updateDataPrice:(CGFloat)total{
+    self.lbPrice.text = [NSString stringWithFormat:@"合计：%.2f",total];
     
     if(self.lbPrice.text.length > 2){
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.lbPrice.text];
         // 改变颜色
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*RATIO_WIDHT320] range:NSMakeRange(self.lbPrice.text.length-3, 3)];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16*RATIO_WIDHT320] range:NSMakeRange(0, 3)];
         [self.lbPrice setAttributedText:noteStr];
     }
     [self setNeedsLayout];
 }
 
 - (void)updateData{
-    self.lbCount.text = @"共计0个商品";
-    self.lbPrice.text = @"¥???.00";
+    self.lbPrice.text = @"合计：0.00";
     
     if(self.lbPrice.text.length > 2){
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.lbPrice.text];
         // 改变颜色
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*RATIO_WIDHT320] range:NSMakeRange(self.lbPrice.text.length-3, 3)];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16*RATIO_WIDHT320] range:NSMakeRange(0, 3)];
         [self.lbPrice setAttributedText:noteStr];
     }
 }
@@ -118,6 +110,14 @@
     r.size = size;
     self.lbCount.frame = r;
     
+    
+    size = [self.lbPrice sizeThatFits:CGSizeMake(MAXFLOAT, 10*RATIO_WIDHT320)];
+    r = self.lbPrice.frame;
+    r.origin.x = self.lbCount.right + 15*RATIO_WIDHT320;
+    r.origin.y = (self.height - size.height)/2.0;
+    r.size = size;
+    self.lbPrice.frame = r;
+    
     r = self.btnOrder.frame;
     r.size.width = 120*RATIO_WIDHT320;
     r.size.height = self.height;
@@ -125,12 +125,6 @@
     r.origin.y = 0;
     self.btnOrder.frame = r;
     
-    size = [self.lbPrice sizeThatFits:CGSizeMake(MAXFLOAT, 10*RATIO_WIDHT320)];
-    r = self.lbPrice.frame;
-    r.origin.x = self.btnOrder.left - size.width - 20*RATIO_WIDHT320;
-    r.origin.y = (self.height - size.height)/2.0;
-    r.size = size;
-    self.lbPrice.frame = r;
 }
 
 + (CGFloat)calHeight{

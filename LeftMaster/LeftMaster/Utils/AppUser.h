@@ -24,7 +24,7 @@
 @property(nonatomic,assign)NSInteger SYSUSER_SEX;   //性别
 @property(nonatomic,assign)BOOL isSalesman;         //是否业务员
 @property(nonatomic,assign)BOOL isModifyPwd;         //是否需要修改密码
-
+@property(nonatomic,assign)NSInteger SYSUSER_CUSTOMER_ROLE; //客户账号角色(1:员工,2:老板)
 - (void)parse:(NSDictionary*)data;
 
 + (instancetype)share;

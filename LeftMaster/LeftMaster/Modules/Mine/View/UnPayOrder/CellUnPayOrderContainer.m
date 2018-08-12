@@ -74,6 +74,9 @@
 
 
 - (void)clickAction:(UIButton*)sender{
+    if (self.clickBlock) {
+        self.clickBlock(self.index);
+    }
 }
 
 - (void)updateData{
@@ -82,7 +85,6 @@
     self.lbPerson.text = @"下单人：张三";
     self.lbPhone.text = @"15909327516";
     self.lbAmount.text = @"订单金额：¥100";
-    
     if(self.lbAmount.text.length > 2){
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.lbAmount.text];
         // 改变颜色
@@ -104,6 +106,8 @@
         [noteStr addAttribute:NSForegroundColorAttributeName value:APP_COLOR range:NSMakeRange(5, str.length)];
         [self.lbAmount setAttributedText:noteStr];
     }
+    
+    self.btnCheck.selected = [data jk_boolForKey:@"selected"];
 }
 
 - (void)layoutSubviews{

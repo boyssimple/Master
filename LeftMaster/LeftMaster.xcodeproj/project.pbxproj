@@ -54,6 +54,9 @@
 		1C6C0566211C61D100EA79EB /* RequestBeanGetCredit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0565211C61D100EA79EB /* RequestBeanGetCredit.m */; };
 		1C6C0569211C66BF00EA79EB /* RequestBeanCreditOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */; };
 		1C6C056C211C8C4400EA79EB /* VCContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C056B211C8C4400EA79EB /* VCContent.m */; };
+		1C6C056F211FE41700EA79EB /* WindowPayWay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C056E211FE41700EA79EB /* WindowPayWay.m */; };
+		1C6C0572211FE6C200EA79EB /* ViewPayWay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0571211FE6C200EA79EB /* ViewPayWay.m */; };
+		1C6C0575211FF04000EA79EB /* RequestBeanCreditPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C0574211FF04000EA79EB /* RequestBeanCreditPay.m */; };
 		1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */; };
 		1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EBE207DBCE700054AE1 /* RequestBeanGoodsDetail.m */; };
 		1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C780EC2207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m */; };
@@ -332,6 +335,12 @@
 		1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanCreditOrder.m; sourceTree = "<group>"; };
 		1C6C056A211C8C4400EA79EB /* VCContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCContent.h; sourceTree = "<group>"; };
 		1C6C056B211C8C4400EA79EB /* VCContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCContent.m; sourceTree = "<group>"; };
+		1C6C056D211FE41700EA79EB /* WindowPayWay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowPayWay.h; sourceTree = "<group>"; };
+		1C6C056E211FE41700EA79EB /* WindowPayWay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowPayWay.m; sourceTree = "<group>"; };
+		1C6C0570211FE6C200EA79EB /* ViewPayWay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewPayWay.h; sourceTree = "<group>"; };
+		1C6C0571211FE6C200EA79EB /* ViewPayWay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewPayWay.m; sourceTree = "<group>"; };
+		1C6C0573211FF04000EA79EB /* RequestBeanCreditPay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanCreditPay.h; sourceTree = "<group>"; };
+		1C6C0574211FF04000EA79EB /* RequestBeanCreditPay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanCreditPay.m; sourceTree = "<group>"; };
 		1C766F6D208390D300C7B913 /* CommonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
 		1C780EB6207DAC1200054AE1 /* RequestBeanGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGoodsList.h; sourceTree = "<group>"; };
 		1C780EB7207DAC1200054AE1 /* RequestBeanGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGoodsList.m; sourceTree = "<group>"; };
@@ -834,6 +843,10 @@
 				1CFA389B20F62714005DED5B /* CellAccountDetail.m */,
 				1CFA389D20F62723005DED5B /* CellAccountPayDetail.h */,
 				1CFA389E20F62723005DED5B /* CellAccountPayDetail.m */,
+				1C6C056D211FE41700EA79EB /* WindowPayWay.h */,
+				1C6C056E211FE41700EA79EB /* WindowPayWay.m */,
+				1C6C0570211FE6C200EA79EB /* ViewPayWay.h */,
+				1C6C0571211FE6C200EA79EB /* ViewPayWay.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1312,6 +1325,8 @@
 				1C6C0565211C61D100EA79EB /* RequestBeanGetCredit.m */,
 				1C6C0567211C66BF00EA79EB /* RequestBeanCreditOrder.h */,
 				1C6C0568211C66BF00EA79EB /* RequestBeanCreditOrder.m */,
+				1C6C0573211FF04000EA79EB /* RequestBeanCreditPay.h */,
+				1C6C0574211FF04000EA79EB /* RequestBeanCreditPay.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1818,6 +1833,7 @@
 				1CFA38A220F62AC0005DED5B /* RequestBeanBillDetail.m in Sources */,
 				1CBF5C05207D0AAE00284EA1 /* ViewBtnGoods.m in Sources */,
 				1CFC7ACF208CD526005F18AB /* CellAttrGoods.m in Sources */,
+				1C6C0572211FE6C200EA79EB /* ViewPayWay.m in Sources */,
 				1CBFA5FC207E59A0001926DE /* AppUser.m in Sources */,
 				1CBF5C08207D111B00284EA1 /* RequestBeanLogin.m in Sources */,
 				1CBF5C11207E2D9300284EA1 /* ViewSearchOrderList.m in Sources */,
@@ -1838,6 +1854,7 @@
 				1C6C052B2119C12800EA79EB /* HeaderSearchHistory.m in Sources */,
 				1C88D0E520AB15B700865DE2 /* MJPhoto.m in Sources */,
 				1CFA836820B321150075AE06 /* VCInvoiceDetail.m in Sources */,
+				1C6C056F211FE41700EA79EB /* WindowPayWay.m in Sources */,
 				1C780EBF207DBCE700054AE1 /* RequestBeanGoodsDetail.m in Sources */,
 				1CBF5BD5207A6AA600284EA1 /* CellNotice.m in Sources */,
 				1CBF5BDB207A730600284EA1 /* CellNoticeList.m in Sources */,
@@ -1847,6 +1864,7 @@
 				1CBF5BBA2078827500284EA1 /* ViewTotalOrder.m in Sources */,
 				1CFA38A520F62E4B005DED5B /* RequestBeanBillPayDetail.m in Sources */,
 				1CBF1DE1209108E00090BD96 /* CellOrderCheckAccount.m in Sources */,
+				1C6C0575211FF04000EA79EB /* RequestBeanCreditPay.m in Sources */,
 				1CBF5C0B207D1DBB00284EA1 /* RequestBeanCustomer.m in Sources */,
 				1C8A2E24207707890076238D /* ViewTotalCart.m in Sources */,
 				1CFC7AD2208E05CF005F18AB /* VCModifyPassword.m in Sources */,

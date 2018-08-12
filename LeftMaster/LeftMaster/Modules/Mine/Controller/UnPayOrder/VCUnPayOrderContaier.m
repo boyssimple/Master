@@ -16,6 +16,7 @@
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)NSString *orderId;
 @property(nonatomic,strong)ViewBarUnPayOrder *vControlBar;
+@property(nonatomic,assign)CGFloat total;
 @end
 
 @implementation VCUnPayOrderContaier
@@ -55,12 +56,61 @@
     }];
 }
 
+- (void)clickCheck:(NSInteger)index{
+    [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if(index == idx){
+            NSMutableDictionary *data = [obj mutableCopy];
+            BOOL selected = [obj jk_boolForKey:@"selected"];
+            [data setObject:@(!selected) forKey:@"selected"];
+            [self.dataSource replaceObjectAtIndex:idx withObject:data];
+        }
+    }];
+    [self.table reloadData];
+    [self calTotal];
+}
+
+- (void)selectedALL:(BOOL)selected{
+    [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableDictionary *data = [obj mutableCopy];
+        [data setObject:@(selected) forKey:@"selected"];
+        [self.dataSource replaceObjectAtIndex:idx withObject:data];
+    }];
+    [self.table reloadData];
+    [self calTotal];
+}
+
+- (void)calTotal{
+    self.total = 0;
+    __weak typeof(self) weakself = self;
+    [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL selected = [obj jk_boolForKey:@"selected"];
+        if(selected){
+            weakself.total += [obj jk_floatForKey:@"FD_TOTAL_PRICE"];
+        }
+    }];
+    
+    [self.vControlBar updateDataPrice:self.total];
+}
+
+- (void)gotoPay{
+    
+    NSMutableArray *paySelects = [NSMutableArray array];
+    [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        BOOL selected = [obj jk_boolForKey:@"selected"];
+        if(selected){
+            [paySelects addObject:obj];
+        }
+    }];
+    //计算
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;//self.dataSource.count;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -73,6 +123,11 @@
     if (!cell) {
         cell = [[CellUnPayOrderContainer alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    cell.index = indexPath.row;
+    __weak typeof(self) weakself = self;
+    cell.clickBlock = ^(NSInteger index) {
+        [weakself clickCheck:index];
+    };
     [cell updateData:[self.dataSource objectAtIndex:indexPath.row]];
     return cell;
 }
@@ -137,6 +192,14 @@
     if(!_vControlBar){
         _vControlBar = [[ViewBarUnPayOrder alloc]initWithFrame:CGRectMake(0, DEVICEHEIGHT - [ViewBarUnPayOrder calHeight] - NAV_STATUS_HEIGHT - 40*RATIO_WIDHT750, DEVICEWIDTH, [ViewBarUnPayOrder calHeight])];
         [_vControlBar updateData];
+        __weak typeof(self) weakself = self;
+        _vControlBar.clickBlock = ^(NSInteger index,BOOL selected) {
+            if(index == 0){
+                [weakself selectedALL:selected];
+            }else{
+                [weakself gotoPay];
+            }
+        };
     }
     return _vControlBar;
 }
