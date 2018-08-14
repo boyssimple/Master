@@ -17,13 +17,14 @@
 #import "VCProxyCustmer.h"
 #import "VCAccountContainer.h"
 #import "RequestBeanGetCredit.h"
+#import "VCUserInfo.h"
+#import "VCUserAccount.h"
+#import "VCEnterpriseList.h"
 
-@interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CommonDelegate,UIActionSheetDelegate,
-            UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CommonDelegate>
 @property(nonatomic,strong)UITableView *table;
 @property(nonatomic,strong)ViewHeaderMine *header;
 @property(nonatomic,strong)ViewWithExit *footer;
-@property(nonatomic,strong)UIImagePickerController *pickerController;
 @end
 
 @implementation VCMine
@@ -64,33 +65,6 @@
 
 - (void)handleNotification:(NSNotification *)notification{
     [self loadData];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    NSLog(@"%@",picker);
-    [self.pickerController dismissViewControllerAnimated:TRUE completion:^{
-        
-    }];
-}
-
-//跳转到imagePicker里
-- (void)makePhoto
-{
-    self.pickerController.sourceType =UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:self.pickerController animated:YES completion:nil];
-}
-//跳转到相册
-- (void)choosePicture
-{
-    self.pickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [self presentViewController:self.pickerController animated:TRUE completion:nil];
-}
-//跳转图库
-- (void)pictureLibrary
-{
-    self.pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:self.pickerController animated:TRUE completion:nil];
 }
 
 
@@ -136,15 +110,15 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if([AppUser share].isSalesman){
-        return 5;
-    }else{
-        return 4;
+    if(section == 5 && ![AppUser share].isSalesman){
+        return 0;
     }
+        
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -157,33 +131,36 @@
     if (!cell) {
         cell = [[CellMine alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    if(indexPath.row == 0){
+    if(indexPath.section == 0){
         [cell updateData:@"通知消息" with:@""];
-    }else if(indexPath.row == 1){
+    }else if(indexPath.section == 1){
+        [cell updateData:@"个人帐户" with:@""];
+    }else if(indexPath.section == 2){
+        [cell updateData:@"企业帐户" with:@""];
+    }else if(indexPath.section == 3){
         [cell updateData:@"订单对账" with:@""];
-    }else if(indexPath.row == 2){
+    }else if(indexPath.section == 4){
         [cell updateData:@"联系客服" with:@"400-1696444"];
+    }else if(indexPath.section == 5){
+        [cell updateData:@"当前客户" with:[AppUser share].CUS_NAME];
+    }else if(indexPath.section == 6){
+        [cell updateData:@"设置" with:@""];
     }
     
-    if([AppUser share].isSalesman){
-        if(indexPath.row == 3){
-            [cell updateData:@"当前客户" with:[AppUser share].CUS_NAME];
-        }else if(indexPath.row == 4){
-            [cell updateData:@"设置" with:@""];
-        }
-    }else{
-        if(indexPath.row == 3){
-            [cell updateData:@"设置" with:@""];
-        }
-    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 8.f*RATIO_WIDHT320;
+    if(section == 0){
+        return 8.f*RATIO_WIDHT320;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(section == 6){
+        return 60*RATIO_WIDHT320;
+    }
     return 0.00001f;
 }
 
@@ -204,98 +181,51 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 0){
+    if(indexPath.section == 0){//通知消息
         VCNotice *vc = [[VCNotice alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(indexPath.row == 1){
+    }else if(indexPath.section == 1){//个人帐户
+        VCUserAccount *vc = [[VCUserAccount alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.section == 2){//企业帐户
+        VCEnterpriseList *vc = [[VCEnterpriseList alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.section == 3){//订单对账
         VCAccountContainer *vc = [[VCAccountContainer alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(indexPath.row == 2){
+    }else if(indexPath.section == 4){//联系客服
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"400-1696444"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-    }else{
-        if([AppUser share].isSalesman){
-            if(indexPath.row == 3){
-                VCProxyCustmer*vc = [[VCProxyCustmer alloc]init];
-                vc.type = 1;
-                vc.hidesBottomBarWhenPushed = TRUE;
-                [self.navigationController pushViewController:vc animated:TRUE];
-            }else if(indexPath.row == 4){
-                VCSetting *vc = [[VCSetting alloc]init];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }else{
-            if(indexPath.row == 3){
-                VCSetting *vc = [[VCSetting alloc]init];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }
-    }
-}
-
-- (void)showMethod{
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"相机",@"照片", nil];
-    // 显示
-    action.tag = 101;
-    [action showInView:self.view];
-}
-
-#pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet.tag == 100) {
-        if (buttonIndex == 0) {
-            [self showMethod];
-        }
-    }else{
-        if (buttonIndex == 0) {
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            {
-                NSLog(@"支持相机");
-                [self makePhoto];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请在设置-->隐私-->相机，中开启本应用的相机访问权限！！" delegate:self cancelButtonTitle:@"取消"otherButtonTitles:@"我知道了",nil];
-                [alert show];
-            }
-        }else if(buttonIndex == 1){
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-            {
-                NSLog(@"支持相册");
-                [self choosePicture];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请在设置-->隐私-->照片，中开启本应用的相机访问权限！！" delegate:self cancelButtonTitle:@"取消"otherButtonTitles:@"我知道了",nil];
-                [alert show];
-            }
-        }
+    }else if(indexPath.section == 5){//当前客户
+        VCProxyCustmer*vc = [[VCProxyCustmer alloc]init];
+        vc.type = 1;
+        vc.hidesBottomBarWhenPushed = TRUE;
+        [self.navigationController pushViewController:vc animated:TRUE];
+    }else if(indexPath.section == 6){//设置
+        VCSetting *vc = [[VCSetting alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 #pragma mark - CommonDelegate
 - (void)clickActionWithIndex:(NSInteger)index{
     if (index == 0) {
-        [self showModifyAvatar];
+        
+        
+        VCUserInfo *vc = [[VCUserInfo alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+//        [self showModifyAvatar];
     }
 }
 
-//用户选中图片之后的回调
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    
-    NSLog(@"%s,info == %@",__func__,info);
-    
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self.header setImage:image];
-    [self.pickerController dismissViewControllerAnimated:TRUE completion:nil];
-    
-//    [self.headIconsetImage:userImage];
-//    self.headIcon.contentMode = UIViewContentModeScaleAspectFill;
-//    self.headIcon.clipsToBounds =YES;
-    //照片上传
-//    [selfupDateHeadIcon:userImage];
-}
 
 - (UITableView*)table{
     if(!_table){
@@ -324,24 +254,6 @@
         [_header updateData];
     }
     return _header;
-}
-
-
-- (void)showModifyAvatar{
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"修改头像" otherButtonTitles:nil, nil];
-    // 显示
-    action.tag = 100;
-    [action showInView:self.view];
-}
-
-- (UIImagePickerController *)pickerController{
-    if (!_pickerController) {
-        _pickerController = [[UIImagePickerController alloc]init];
-        _pickerController.view.backgroundColor = [UIColor orangeColor];
-        _pickerController.delegate = self;
-        _pickerController.allowsEditing = YES;
-    }
-    return _pickerController;
 }
 
 @end

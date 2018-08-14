@@ -13,6 +13,7 @@
 
 #define LOGIN_FLAG @"LOGIN_FLAG"
 #define LOGIN_USER_COUNT @"LOGIN_USER_COUNT"    //保存登录帐号
+#define LOGIN_USER_PASSWORD @"LOGIN_USER_PASSWORD"    //保存登录密码
 #define USER_MODIFY_PWD @"USER_MODIFY_PWD"    //是否需要修改密码
 #define MISS_PASSWORD_COUNT @"MISS_PASSWORD_COUNT"    //错误密码记数
 

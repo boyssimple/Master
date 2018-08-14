@@ -174,6 +174,7 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
                 if(response.success){
                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                     [defaults setObject:userName forKey:LOGIN_USER_COUNT];
+                    [defaults setObject:tfPwd forKey:LOGIN_USER_PASSWORD];
                     NSString *swf = [userName substringWithRange:NSMakeRange(5, 6)];
                     if ([swf isEqualToString:tfPwd]) {
                         [defaults setObject:@(1) forKey:USER_MODIFY_PWD];
@@ -193,20 +194,25 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
                         [JPUSHService setAlias:[AppUser share].SYSUSER_ACCOUNT completion:nil seq:1];
                     }
                     
-                    
-                    if([AppUser share].isSalesman){
-                        VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
-                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-                        [appDelegate restoreRootViewController:nav];
-                    }else{
-                        VCMain *vc = [[VCMain alloc]init];
-                        [appDelegate restoreRootViewController:vc];
-                    }
+                    // 同步到主线程
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if([AppUser share].isSalesman){
+                            VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
+                            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+                            [appDelegate restoreRootViewController:nav];
+                        }else{
+                            VCMain *vc = [[VCMain alloc]init];
+                            [appDelegate restoreRootViewController:vc];
+                        }
+                    });
                 }
             });
         }else{
-            ResponseBeanLogin *response = responseBean;
-            [Utils showSuccessToast:response.msg with:weakself.view withTime:1.1];
+            if(err.code == -1004){
+                [Utils showSuccessToast:@"未能连接到服务器" with:weakself.view withTime:1.1];
+            }else{
+                [Utils showSuccessToast:err.message with:weakself.view withTime:1.1];
+            }
         }
         
     }];

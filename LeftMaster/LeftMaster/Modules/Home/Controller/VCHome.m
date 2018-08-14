@@ -27,6 +27,7 @@
 #import "LaunchAdsManager.h"
 #import "VCSearchList.h"
 #import "VCContent.h"
+#import "AppDelegate.h"
 
 @interface VCHome ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SectionHeaderHomeDelegate,UIScrollViewDelegate,
         UIAlertViewDelegate,CommonDelegate>
@@ -45,10 +46,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[LaunchAdsManager shareManager] setupLaunchAd:^{
-        NSLog(@"检查版本");
-        [self getVision];
-    }];
+    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if(!delegate.isShowAds){
+        delegate.isShowAds = TRUE;
+        LaunchAdsManager *launch = [[LaunchAdsManager alloc]init];
+        [launch setupLaunchAd:^{
+            NSLog(@"检查版本");
+            [self getVision];
+        }];
+    }
     
     [self initMain];
     [self loadCarouseListData];

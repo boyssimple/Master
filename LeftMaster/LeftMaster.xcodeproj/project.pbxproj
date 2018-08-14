@@ -92,6 +92,15 @@
 		1C8A2E41207875BD0076238D /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8A2E37207875BD0076238D /* HMScanerCardViewController.m */; };
 		1C8A2E42207875BD0076238D /* HMScannerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8A2E39207875BD0076238D /* HMScannerController.m */; };
 		1C98270220937A02000EF976 /* ViewMessageOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C98270020937A01000EF976 /* ViewMessageOrder.m */; };
+		1CB1AED32121B945006450B9 /* VCUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AED22121B945006450B9 /* VCUserInfo.m */; };
+		1CB1AEDA2121C38E006450B9 /* CellUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AED92121C38E006450B9 /* CellUserInfo.m */; };
+		1CB1AEDE2121CC75006450B9 /* VCUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEDD2121CC75006450B9 /* VCUserAccount.m */; };
+		1CB1AEE12121CC90006450B9 /* VCEnterpriseAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEE02121CC90006450B9 /* VCEnterpriseAccount.m */; };
+		1CB1AEE52121CDC2006450B9 /* ViewInputText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEE42121CDC2006450B9 /* ViewInputText.m */; };
+		1CB1AEE82121D683006450B9 /* VCEnterpriseList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEE72121D683006450B9 /* VCEnterpriseList.m */; };
+		1CB1AEEE2122FBCC006450B9 /* CellEnterpriseList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEED2122FBCC006450B9 /* CellEnterpriseList.m */; };
+		1CB1AEF12122FCAB006450B9 /* VCEnterpriseAccountBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEF02122FCAB006450B9 /* VCEnterpriseAccountBind.m */; };
+		1CB1AEF42123198A006450B9 /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AEF32123198A006450B9 /* NetManager.m */; };
 		1CBCB28220C65B7E00700963 /* NetWorkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBCB28120C65B7E00700963 /* NetWorkTools.m */; };
 		1CBF1DAE208F7A040090BD96 /* Reason.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBF1DAD208F7A040090BD96 /* Reason.m */; };
 		1CBF1DB1208F85620090BD96 /* RequestBeanQueryCartNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBF1DB0208F85620090BD96 /* RequestBeanQueryCartNum.m */; };
@@ -412,6 +421,24 @@
 		1C8A2E3B207875BD0076238D /* HMScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMScannerViewController.h; sourceTree = "<group>"; };
 		1C98270020937A01000EF976 /* ViewMessageOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewMessageOrder.m; sourceTree = "<group>"; };
 		1C98270420937A51000EF976 /* ViewMessageOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewMessageOrder.h; sourceTree = "<group>"; };
+		1CB1AED12121B945006450B9 /* VCUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCUserInfo.h; sourceTree = "<group>"; };
+		1CB1AED22121B945006450B9 /* VCUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUserInfo.m; sourceTree = "<group>"; };
+		1CB1AED82121C38E006450B9 /* CellUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellUserInfo.h; sourceTree = "<group>"; };
+		1CB1AED92121C38E006450B9 /* CellUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellUserInfo.m; sourceTree = "<group>"; };
+		1CB1AEDC2121CC75006450B9 /* VCUserAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCUserAccount.h; sourceTree = "<group>"; };
+		1CB1AEDD2121CC75006450B9 /* VCUserAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCUserAccount.m; sourceTree = "<group>"; };
+		1CB1AEDF2121CC90006450B9 /* VCEnterpriseAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCEnterpriseAccount.h; sourceTree = "<group>"; };
+		1CB1AEE02121CC90006450B9 /* VCEnterpriseAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCEnterpriseAccount.m; sourceTree = "<group>"; };
+		1CB1AEE32121CDC2006450B9 /* ViewInputText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewInputText.h; sourceTree = "<group>"; };
+		1CB1AEE42121CDC2006450B9 /* ViewInputText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewInputText.m; sourceTree = "<group>"; };
+		1CB1AEE62121D683006450B9 /* VCEnterpriseList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCEnterpriseList.h; sourceTree = "<group>"; };
+		1CB1AEE72121D683006450B9 /* VCEnterpriseList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCEnterpriseList.m; sourceTree = "<group>"; };
+		1CB1AEEC2122FBCC006450B9 /* CellEnterpriseList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellEnterpriseList.h; sourceTree = "<group>"; };
+		1CB1AEED2122FBCC006450B9 /* CellEnterpriseList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellEnterpriseList.m; sourceTree = "<group>"; };
+		1CB1AEEF2122FCAB006450B9 /* VCEnterpriseAccountBind.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCEnterpriseAccountBind.h; sourceTree = "<group>"; };
+		1CB1AEF02122FCAB006450B9 /* VCEnterpriseAccountBind.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCEnterpriseAccountBind.m; sourceTree = "<group>"; };
+		1CB1AEF22123198A006450B9 /* NetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetManager.h; sourceTree = "<group>"; };
+		1CB1AEF32123198A006450B9 /* NetManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
 		1CBCB28020C65B7E00700963 /* NetWorkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetWorkTools.h; sourceTree = "<group>"; };
 		1CBCB28120C65B7E00700963 /* NetWorkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetWorkTools.m; sourceTree = "<group>"; };
 		1CBF1DAC208F7A040090BD96 /* Reason.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reason.h; sourceTree = "<group>"; };
@@ -879,28 +906,14 @@
 			children = (
 				1C4CC27120724F2B007C24FB /* VCMine.h */,
 				1C4CC27220724F2B007C24FB /* VCMine.m */,
-				1C8A2E1C20759AF40076238D /* VCLogin.h */,
-				1C8A2E1D20759AF40076238D /* VCLogin.m */,
-				1CBF5BD0207A6A5E00284EA1 /* VCNotice.h */,
-				1CBF5BD1207A6A5E00284EA1 /* VCNotice.m */,
-				1CBF5BD6207A72AE00284EA1 /* VCNoticeList.h */,
-				1CBF5BD7207A72AE00284EA1 /* VCNoticeList.m */,
-				1CBF5BDC207A793100284EA1 /* VCNoticeDetail.h */,
-				1CBF5BDD207A793100284EA1 /* VCNoticeDetail.m */,
-				1CBF5BDF207A7A1800284EA1 /* VCSetPassword.h */,
-				1CBF5BE0207A7A1800284EA1 /* VCSetPassword.m */,
 				1CBF5BFA207CF70800284EA1 /* VCOrderGoodsList.h */,
 				1CBF5BFB207CF70800284EA1 /* VCOrderGoodsList.m */,
 				1C7A754B207F335400C140D2 /* VCInvoice.h */,
 				1C7A754C207F335400C140D2 /* VCInvoice.m */,
 				1CFA836620B321150075AE06 /* VCInvoiceDetail.h */,
 				1CFA836720B321150075AE06 /* VCInvoiceDetail.m */,
-				1C780EE0207EFDCC00054AE1 /* VCForgotPwd.h */,
-				1C780EE1207EFDCC00054AE1 /* VCForgotPwd.m */,
 				1CFC011320898D8200A8E344 /* VCOrderCheckAccount.h */,
 				1CFC011420898D8200A8E344 /* VCOrderCheckAccount.m */,
-				1CFC01162089D5A200A8E344 /* VCForgotPwdFinish.h */,
-				1CFC01172089D5A200A8E344 /* VCForgotPwdFinish.m */,
 				1CFC7AC1208CC93E005F18AB /* VCSetting.h */,
 				1CFC7AC2208CC93E005F18AB /* VCSetting.m */,
 				1CFA387420F61A28005DED5B /* VCAccountContainer.h */,
@@ -915,6 +928,8 @@
 				1CFA389520F62694005DED5B /* VCAccountOrderDetail.m */,
 				1CFA389720F626A2005DED5B /* VCAccountPayDetail.h */,
 				1CFA389820F626A2005DED5B /* VCAccountPayDetail.m */,
+				1CB1AED12121B945006450B9 /* VCUserInfo.h */,
+				1CB1AED22121B945006450B9 /* VCUserInfo.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1007,6 +1022,69 @@
 				1C8A2E3B207875BD0076238D /* HMScannerViewController.h */,
 			);
 			path = QRCode;
+			sourceTree = "<group>";
+		};
+		1CB1AECF2121B8FC006450B9 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				1CBF5BD0207A6A5E00284EA1 /* VCNotice.h */,
+				1CBF5BD1207A6A5E00284EA1 /* VCNotice.m */,
+				1CBF5BD6207A72AE00284EA1 /* VCNoticeList.h */,
+				1CBF5BD7207A72AE00284EA1 /* VCNoticeList.m */,
+				1CBF5BDC207A793100284EA1 /* VCNoticeDetail.h */,
+				1CBF5BDD207A793100284EA1 /* VCNoticeDetail.m */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		1CB1AED02121B90D006450B9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1C8A2E1C20759AF40076238D /* VCLogin.h */,
+				1C8A2E1D20759AF40076238D /* VCLogin.m */,
+				1CBF5BDF207A7A1800284EA1 /* VCSetPassword.h */,
+				1CBF5BE0207A7A1800284EA1 /* VCSetPassword.m */,
+				1C780EE0207EFDCC00054AE1 /* VCForgotPwd.h */,
+				1C780EE1207EFDCC00054AE1 /* VCForgotPwd.m */,
+				1CFC01162089D5A200A8E344 /* VCForgotPwdFinish.h */,
+				1CFC01172089D5A200A8E344 /* VCForgotPwdFinish.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1CB1AED72121C361006450B9 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				1CB1AED82121C38E006450B9 /* CellUserInfo.h */,
+				1CB1AED92121C38E006450B9 /* CellUserInfo.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		1CB1AEDB2121CC5F006450B9 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				1CB1AEDC2121CC75006450B9 /* VCUserAccount.h */,
+				1CB1AEDD2121CC75006450B9 /* VCUserAccount.m */,
+				1CB1AEDF2121CC90006450B9 /* VCEnterpriseAccount.h */,
+				1CB1AEE02121CC90006450B9 /* VCEnterpriseAccount.m */,
+				1CB1AEE62121D683006450B9 /* VCEnterpriseList.h */,
+				1CB1AEE72121D683006450B9 /* VCEnterpriseList.m */,
+				1CB1AEEF2122FCAB006450B9 /* VCEnterpriseAccountBind.h */,
+				1CB1AEF02122FCAB006450B9 /* VCEnterpriseAccountBind.m */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		1CB1AEE22121CDA9006450B9 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				1CB1AEE32121CDC2006450B9 /* ViewInputText.h */,
+				1CB1AEE42121CDC2006450B9 /* ViewInputText.m */,
+				1CB1AEEC2122FBCC006450B9 /* CellEnterpriseList.h */,
+				1CB1AEED2122FBCC006450B9 /* CellEnterpriseList.m */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		1CD84822206F7ADA00CC9BE9 = {
@@ -1106,6 +1184,8 @@
 				1C6C0551211B27EA00EA79EB /* UIView+Frame.m */,
 				1C6C0554211B28FF00EA79EB /* UIGestureRecognizer+YYAdd.h */,
 				1C6C0555211B28FF00EA79EB /* UIGestureRecognizer+YYAdd.m */,
+				1CB1AEF22123198A006450B9 /* NetManager.h */,
+				1CB1AEF32123198A006450B9 /* NetManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1271,6 +1351,9 @@
 		1CD84883206F7C7100CC9BE9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1CB1AEDB2121CC5F006450B9 /* Account */,
+				1CB1AED02121B90D006450B9 /* Login */,
+				1CB1AECF2121B8FC006450B9 /* Notification */,
 				1C6C055D211B32C700EA79EB /* Mine */,
 				1C6C055C211B32A100EA79EB /* Order */,
 				1C6C053A211B246400EA79EB /* UnPayOrder */,
@@ -1334,6 +1417,8 @@
 		1CD84885206F7C7100CC9BE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1CB1AEE22121CDA9006450B9 /* Account */,
+				1CB1AED72121C361006450B9 /* UserInfo */,
 				1C6C055B211B326500EA79EB /* Mine */,
 				1C6C0557211B30F200EA79EB /* UnPayOrder */,
 			);
@@ -1672,6 +1757,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB1AEF12122FCAB006450B9 /* VCEnterpriseAccountBind.m in Sources */,
 				1CFC011520898D8200A8E344 /* VCOrderCheckAccount.m in Sources */,
 				1C88D0E420AB15B700865DE2 /* MJPhotoView.m in Sources */,
 				1C780EE2207EFDCC00054AE1 /* VCForgotPwd.m in Sources */,
@@ -1732,19 +1818,24 @@
 				1C8A2E27207865D40076238D /* CellCategory.m in Sources */,
 				1CBF1DB1208F85620090BD96 /* RequestBeanQueryCartNum.m in Sources */,
 				1C88D0E720AB15B700865DE2 /* MJPhotoProgressView.m in Sources */,
+				1CB1AEDE2121CC75006450B9 /* VCUserAccount.m in Sources */,
 				1C4CC26D20724CE6007C24FB /* VCMain.m in Sources */,
 				1CBF1DB7208F95000090BD96 /* CartGoods.m in Sources */,
 				1CFC011B2089DF7700A8E344 /* ViewWithExit.m in Sources */,
+				1CB1AEEE2122FBCC006450B9 /* CellEnterpriseList.m in Sources */,
+				1CB1AEE52121CDC2006450B9 /* ViewInputText.m in Sources */,
 				1CFC7AC9208CD1F9005F18AB /* RequestBeanQueryOrder.m in Sources */,
 				1CBF5C02207CFD9000284EA1 /* ViewHeaderGoods.m in Sources */,
 				1C780EC3207DF1E900054AE1 /* RequestBeanAlwaysBuyGoods.m in Sources */,
 				1C6C0563211B3D3100EA79EB /* ViewBarUnPayOrder.m in Sources */,
 				1CBF1DD52090F8CC0090BD96 /* RequestBeanSendInfo.m in Sources */,
 				1C6C0553211B27EB00EA79EB /* UIView+Frame.m in Sources */,
+				1CB1AEF42123198A006450B9 /* NetManager.m in Sources */,
 				1C780EB8207DAC1200054AE1 /* RequestBeanGoodsList.m in Sources */,
 				1C88D0E920AB15B700865DE2 /* MJPhotoBrowser.m in Sources */,
 				1C780EDC207E0E9200054AE1 /* VCOrderContaier.m in Sources */,
 				1C98270220937A02000EF976 /* ViewMessageOrder.m in Sources */,
+				1CB1AEE82121D683006450B9 /* VCEnterpriseList.m in Sources */,
 				1CFC7B02208F6D82005F18AB /* CellCancelOrder.m in Sources */,
 				1C8A2E3F207875BD0076238D /* HMScanner.m in Sources */,
 				1C6C0566211C61D100EA79EB /* RequestBeanGetCredit.m in Sources */,
@@ -1772,6 +1863,7 @@
 				1C4CC2AA207332C7007C24FB /* VCCategory.m in Sources */,
 				1C00956620CC157C00B3DB20 /* ViewSearchHeader.m in Sources */,
 				1CBF5BC6207A4FFB00284EA1 /* ViewBtnHeaderMine.m in Sources */,
+				1CB1AEE12121CC90006450B9 /* VCEnterpriseAccount.m in Sources */,
 				1C4CC29420726D4D007C24FB /* CellCategoryHome.m in Sources */,
 				1CFC7AFF208F639D005F18AB /* WindowCancelOrder.m in Sources */,
 				1CFC7ABE208C80DD005F18AB /* VCGoodsList.m in Sources */,
@@ -1779,6 +1871,7 @@
 				1CFA389F20F62723005DED5B /* CellAccountPayDetail.m in Sources */,
 				1C4C15632088FADD00BA8F3C /* RequestBeanSlidePicList.m in Sources */,
 				1C6C0543211B24C500EA79EB /* VCPayOrderContaier.m in Sources */,
+				1CB1AEDA2121C38E006450B9 /* CellUserInfo.m in Sources */,
 				1CFC7AF3208E3D10005F18AB /* RequestBeanOrderGoodsList.m in Sources */,
 				1CBF5BED207CE71600284EA1 /* CellTopGoods.m in Sources */,
 				1C4CC2882072542A007C24FB /* NSDictionary+JKSafeAccess.m in Sources */,
@@ -1811,6 +1904,7 @@
 				1C88D0E320AB15B700865DE2 /* MBProgressHUD+Add.m in Sources */,
 				1C8A2E3E207875BD0076238D /* HMScannerViewController.m in Sources */,
 				1CBF5BDE207A793100284EA1 /* VCNoticeDetail.m in Sources */,
+				1CB1AED32121B945006450B9 /* VCUserInfo.m in Sources */,
 				1CFC7AD5208E087D005F18AB /* VCProxyCustmer.m in Sources */,
 				1CFC7AED208E327E005F18AB /* VCUnReceive.m in Sources */,
 				1C6C055A211B310F00EA79EB /* CellUnPayOrderContainer.m in Sources */,

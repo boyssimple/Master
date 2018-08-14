@@ -12,6 +12,7 @@
 #import "VCOrder.h"
 #import "VCProxyCustmer.h"
 #import "LaunchAdsManager.h"
+#import "RequestBeanLogin.h"
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
 
@@ -49,6 +50,8 @@
             VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
             self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:vc];
         }else{
+            [self autoLogin];
+            
             VCMain *vc = [[VCMain alloc]init];
             self.window.rootViewController = vc;
         }
@@ -79,6 +82,35 @@
                                                object:nil];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)autoLogin{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [defaults objectForKey:LOGIN_USER_COUNT];
+    NSString *tfPwd = [defaults objectForKey:LOGIN_USER_PASSWORD];
+    RequestBeanLogin *requestBean = [RequestBeanLogin new];
+    requestBean.userName = userName;
+    requestBean.passWord = tfPwd;
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        if(!err){
+            // 结果处理
+            ResponseBeanLogin *response = responseBean;
+            if(response.success){
+                //存信息到沙盒
+                [Utils saveUserInfo:response.data];
+                //解析数据
+                [[AppUser share] parse:response.data];
+                //设置推送别名
+                if (weakself.isLogin) {
+                    [JPUSHService setAlias:[AppUser share].SYSUSER_ACCOUNT completion:nil seq:1];
+                }
+            }
+        }else{
+            
+        }
+        
+    }];
 }
 
 // 登陆后淡入淡出更换rootViewController

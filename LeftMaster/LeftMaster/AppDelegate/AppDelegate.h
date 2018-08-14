@@ -17,6 +17,8 @@ static NSString *channel = @"Publish channel";
 @property (strong, nonatomic) UIWindow *window;
 @property(nonatomic,strong)NSString *billNo;
 @property(nonatomic,strong)NSString *month;
+@property(nonatomic,assign)BOOL isShowAds;
+
 
 
 - (void)restoreRootViewController:(UIViewController *)rootViewController;
