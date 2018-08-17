@@ -13,4 +13,5 @@
 @property(nonatomic,strong)void(^clickBlock)(NSInteger index,BOOL selected);
 
 - (void)updateDataPrice:(CGFloat)total;
+- (void)updateCal:(NSInteger)num;
 @end

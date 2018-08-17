@@ -15,6 +15,6 @@
 
 @interface ResponseBeanCreditPay : AJResponseBeanBase
 @property(nonatomic,assign)NSInteger success;
-@property(nonatomic,strong)NSString *msg;
+@property(nonatomic,strong)NSString *message;
 @property(nonatomic,strong)NSDictionary *data;
 @end

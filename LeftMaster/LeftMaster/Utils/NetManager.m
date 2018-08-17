@@ -46,12 +46,13 @@ static NetManager * _singleton;
 }
 
 - (void)request:(NSString *)method withUrl:(NSString*)urlStr withParams:(NSDictionary*)param successBlock:(void(^)(id resobject))successBlock failurBlock:(void(^)(NSError *error))errorBlock{
-    //签名生成
-    NSString *str =[self signStr:param];
-    NSString *hString = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"待签名：%@", [self MD5ForLower32Bate:hString]);
-    
-    NSString *url = [NSString stringWithFormat:@"http://httpbin.org/get/%@",urlStr];
+    NSMutableDictionary *newParam = [param mutableCopy];
+    [newParam setObject:@"18082916013301600472" forKey:@"requestNo"];
+    [newParam setObject:urlStr forKey:@"service"];
+    [newParam setObject:@"18082916013301600472" forKey:@"partnerId"];
+    [newParam setObject:@"MD5" forKey:@"signType"];
+    [newParam setObject:@"748f0bcf8d02e2977fa1e7c345db9b80" forKey:@"sign"];
+    NSString *url = [NSString stringWithFormat:@"http://open.qizhangtong.com:8810"];
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:method URLString:url parameters:param error:nil];
     
     NSURLSessionDataTask *dataTask = [self.manager dataTaskWithRequest:request uploadProgress:^(NSProgress * _Nonnull uploadProgress) {

@@ -65,6 +65,9 @@
 #define net_queryCreditPayOrder @"shop/OrderMobileTran.do?queryCreditPayOrder"       //欠款订单
 #define net_orderCreditPay @"shop/OrderMobileTran.do?orderCreditPay"       //信用额度支付
 #define net_app_version @"system/UserMobileTran.do?getAppVersion"       //版本
+#define net_updateUserInfo @"system/UserMobileTran.do?updateUserInfo"       //修改用户信息
+#define net_userPhotoUpload @"system/UserMobileTran.do?userPhotoUpload"       //上传头像
+#define net_getUserInfo @"system/UserMobileTran.do?getUserInfoByUserId"       //获取用户信息
 
 #define OPEN_ORDER_LIST @"OPEN_ORDER_LIST"       //打开订单通知
 

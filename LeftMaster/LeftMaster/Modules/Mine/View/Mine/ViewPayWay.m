@@ -52,10 +52,24 @@
     [self setNeedsLayout];
 }
 
+- (void)updateDataWithDesc:(NSString*)desc{
+    self.lbDesc.text = desc;
+    [self setNeedsLayout];
+}
+
 - (void)updateData{
     self.lbTitle.text = @"立即支付";
     self.lbDesc.text = @"立即支付可让您购买的宝贝早日到您身边";
     [self setNeedsLayout];
+}
+
+- (void)enabled:(BOOL)enabled{
+    self.btnCheck.enabled = enabled;
+    if(!enabled){
+        self.lbTitle.textColor = [UIColor grayColor];
+    }else{
+        self.lbTitle.textColor = [UIColor blackColor];
+    }
 }
 
 - (void)layoutSubviews{

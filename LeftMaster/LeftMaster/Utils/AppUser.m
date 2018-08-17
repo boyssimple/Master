@@ -43,6 +43,11 @@ static AppUser * _user;
     self.SYSUSER_SEX = [data jk_integerForKey:@"SYSUSER_SEX"];
     self.SYSUSER_COMPANYID = [data jk_stringForKey:@"SYSUSER_COMPANYID"];
     self.SYSUSER_CUSTOMER_ROLE = [data jk_integerForKey:@"SYSUSER_CUSTOMER_ROLE"];
+    if(self.SYSUSER_CUSTOMER_ROLE == 2){
+        self.isBoss = TRUE;
+    }else{
+        self.isBoss = FALSE;
+    }
     if(self.ACCOUNT_TYPE == 10){
         self.isSalesman = TRUE;
     }else{

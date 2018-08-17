@@ -196,6 +196,11 @@
         }
         
         self.tfCount.text = [NSString stringWithFormat:@"%zi",data.FD_NUM];
+        if(data.FD_NUM > 1){
+            [self.btnMinus setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }else{
+            [self.btnMinus setTitleColor:RGB3(197) forState:UIControlStateNormal];
+        }
         
         if (data.GOODS_PRICE == 0) {
             self.lbPrice.text = [NSString stringWithFormat:@"¥?/%@",data.GOODS_UNIT];

@@ -10,7 +10,7 @@
 
 @interface RequestBeanCreditOrder : AJRequestBeanBase
 @property(nonatomic,strong)NSString *cus_id;
-@property(nonatomic,strong)NSString *FD_PAY_STATUS;//为空时所有，待付款:1  未付款:2
+@property(nonatomic,strong)NSString *FD_PAY_STATUS;//为空时所有，待付款:1  已付款:2
 @end
 
 @interface ResponseBeanCreditOrder : AJResponseBeanBase

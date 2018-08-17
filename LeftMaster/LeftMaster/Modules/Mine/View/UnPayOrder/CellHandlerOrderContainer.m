@@ -6,9 +6,9 @@
 //  Copyright © 2018年 simple. All rights reserved.
 //
 
-#import "CellPayedOrderContainer.h"
+#import "CellHandlerOrderContainer.h"
 
-@interface CellPayedOrderContainer()
+@interface CellHandlerOrderContainer()
 @property(nonatomic,strong)UILabel *lbNo;
 @property(nonatomic,strong)UIView *vLine;
 @property(nonatomic,strong)UILabel *lbAmount;
@@ -16,13 +16,10 @@
 @property(nonatomic,strong)UILabel *lbPerson;
 @property(nonatomic,strong)UILabel *lbPhone;
 
-
-@property(nonatomic,strong)UILabel *lbPayDate;
-@property(nonatomic,strong)UILabel *lbPayWay;
 @property(nonatomic,strong)UIView *vLineTwo;
 
 @end
-@implementation CellPayedOrderContainer
+@implementation CellHandlerOrderContainer
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -59,16 +56,6 @@
         _lbPhone.textColor = [UIColor blackColor];
         [self.contentView addSubview:_lbPhone];
         
-        _lbPayDate = [[UILabel alloc]initWithFrame:CGRectZero];
-        _lbPayDate.font = [UIFont systemFontOfSize:12*RATIO_WIDHT320];
-        _lbPayDate.textColor = [UIColor blackColor];
-        [self.contentView addSubview:_lbPayDate];
-        
-        _lbPayWay = [[UILabel alloc]initWithFrame:CGRectZero];
-        _lbPayWay.font = [UIFont systemFontOfSize:12*RATIO_WIDHT320];
-        _lbPayWay.textColor = [UIColor blackColor];
-        [self.contentView addSubview:_lbPayWay];
-        
         _vLineTwo = [[UIView alloc]initWithFrame:CGRectZero];
         _vLineTwo.backgroundColor = APP_Gray_COLOR;
         [self.contentView addSubview:_vLineTwo];
@@ -93,8 +80,6 @@
         [noteStr addAttribute:NSForegroundColorAttributeName value:APP_COLOR range:NSMakeRange(5, 4)];
         [self.lbAmount setAttributedText:noteStr];
     }
-    self.lbPayDate.text = @"支付时间：2018-6-5 10:41:37";
-    self.lbPayWay.text = @"余额支付";
 }
 
 
@@ -111,8 +96,6 @@
         [noteStr addAttribute:NSForegroundColorAttributeName value:APP_COLOR range:NSMakeRange(5, str.length)];
         [self.lbAmount setAttributedText:noteStr];
     }
-    
-    
 }
 
 
@@ -163,22 +146,6 @@
     r.origin.y = self.lbDate.bottom + 15*RATIO_WIDHT320;
     self.lbPhone.frame = r;
     
-    
-    
-    size = [self.lbPayDate sizeThatFits:CGSizeMake(MAXFLOAT, 12*RATIO_WIDHT320)];
-    r = self.lbPayDate.frame;
-    r.size = size;
-    r.origin.x = self.lbNo.left;
-    r.origin.y = self.lbPerson.bottom + 15*RATIO_WIDHT320;
-    self.lbPayDate.frame = r;
-    
-    size = [self.lbPayWay sizeThatFits:CGSizeMake(MAXFLOAT, 12*RATIO_WIDHT320)];
-    r = self.lbPayWay.frame;
-    r.size = size;
-    r.origin.x = self.lbPayDate.right + 30*RATIO_WIDHT320;
-    r.origin.y = self.lbPerson.bottom + 15*RATIO_WIDHT320;
-    self.lbPayWay.frame = r;
-    
     r = self.vLineTwo.frame;
     r.size.width = DEVICEWIDTH;
     r.size.height = 5*RATIO_WIDHT320;
@@ -188,7 +155,7 @@
 }
 
 + (CGFloat)calHeight{
-    return 170*RATIO_WIDHT320 + 0.5;
+    return 140*RATIO_WIDHT320 + 0.5;
 }
 
 @end

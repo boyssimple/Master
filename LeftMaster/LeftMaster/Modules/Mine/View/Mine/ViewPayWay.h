@@ -15,4 +15,6 @@
 @property(nonatomic,strong)UILabel *lbDesc;
 @property(nonatomic,strong)void(^clickBlock)(NSInteger index,BOOL selected);
 - (void)updateData:(NSString*)title withDesc:(NSString*)desc;
+- (void)updateDataWithDesc:(NSString*)desc;
+- (void)enabled:(BOOL)enabled;
 @end

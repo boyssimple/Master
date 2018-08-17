@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CellUserInfo : UITableViewCell
+@property(nonatomic,strong)UIImageView *ivAvatar;
 - (void)updateData:(NSString*)name with:(NSString*)text hiddenArrow:(BOOL)show withType:(NSInteger)type;
 + (CGFloat)calHeightTWo;
 @end

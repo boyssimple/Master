@@ -15,5 +15,6 @@
 @interface ResponseBeanAddOrder : AJResponseBeanBase
 @property(nonatomic,assign)NSInteger success;
 @property(nonatomic,strong)NSString *msg;
+@property(nonatomic,strong)NSString *FD_ID;
 @property(nonatomic,strong)NSDictionary *data;
 @end

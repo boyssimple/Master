@@ -18,6 +18,8 @@
 #import "CartGoods.h"
 #import "RequestBeanAddOrder.h"
 #import "NetWorkTools.h"
+#import "WindowPayAlert.h"
+#import "RequestBeanCreditPay.h"
 
 @interface VCWriteOrder ()<CommonDelegate,WindowCustomDelegate,UIScrollViewDelegate,ViewTotalBottomWriteOrderDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UIScrollView *mainView;
@@ -172,8 +174,6 @@
 }
 
 - (void)addOrderAction{
-    
-    
     RequestBeanAddOrder *requestBean = [RequestBeanAddOrder new];
     NSMutableDictionary *orderInfo = [[NSMutableDictionary alloc]init];
     [orderInfo setObject:[AppUser share].SYSUSER_ID forKey:@"FD_CREATE_USER_ID"];
@@ -199,8 +199,6 @@
     NSString *param = [Utils dictToJsonStr:orderInfo];
     
     NSString *result = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(nil,(CFStringRef)param,nil,(CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
-    NSString *encodedValue = [[Utils dictToJsonStr:orderInfo] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",[Utils dictToJsonStr:orderInfo]);
     requestBean.oderInfo = result;//[Utils dictToJsonStr:orderInfo];
     NSLog(@"结果:%@",requestBean.oderInfo);
     
@@ -212,9 +210,23 @@
         if (!err) {
             // 结果处理
             if(response.success){
-                [Utils showSuccessToast:@"下单成功" with:self.view withTime:1 withBlock:^{
-                    [weakself.navigationController popViewControllerAnimated:TRUE];
-                }];
+                if([AppUser share].isBoss){
+                    [Utils hiddenHanding:self.view withTime:0.1];
+                    WindowPayAlert *alert = [[WindowPayAlert alloc]init];
+                    alert.clickBlock = ^(NSInteger index) {
+                        if(index == 0){
+                            [weakself rightNowPay:response.FD_ID];
+                        }else{
+                            [weakself creditPay:response.FD_ID];
+                            
+                        }
+                    };
+                    [alert show];
+                }else{
+                    [Utils showSuccessToast:@"下单成功" with:self.view withTime:1 withBlock:^{
+                        [weakself.navigationController popViewControllerAnimated:TRUE];
+                    }];
+                }
                 [weakself postNotification:REFRESH_CART_LIST withObject:nil];
             }else{
                 [Utils showSuccessToast:response.msg with:weakself.view withTime:1];
@@ -226,6 +238,35 @@
                 [Utils showSuccessToast:@"请求失败" with:weakself.view withTime:1];
             }
             
+        }
+    }];
+}
+
+//立即支付
+- (void)rightNowPay:(NSString*)orderId{
+    [Utils showSuccessToast:@"选择在线支付" with:self.view withTime:1];
+}
+
+//信用支付
+- (void)creditPay:(NSString*)orderId{
+    RequestBeanCreditPay *requestBean = [RequestBeanCreditPay new];
+    requestBean.FD_SUMIT_USER_ID = [AppUser share].SYSUSER_ID;
+    requestBean.FD_ID = orderId;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [Utils hiddenHanding:self.view withTime:0.5];
+        if (!err) {
+            // 结果处理
+            ResponseBeanCreditPay *response = responseBean;
+            if(response.success){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"下单成功" message:[NSString stringWithFormat:@"下单成功，消费额度：¥%.2f",self.totalPrice] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                alert.tag = 101;
+                [alert show];
+            }else{
+                [Utils showSuccessToast:@"支付失败" with:self.view withTime:1];
+            }
+        }else{
+            [Utils showSuccessToast:@"请求失败" with:self.view withTime:1];
         }
     }];
 }
@@ -268,7 +309,7 @@
         return;
     }
     if (self.totalPrice < 500) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"订单金额未达到500元免运费条件，将自付运费，请确认!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"订单金额未达到500元免运费条件，将自付运费，请确认!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         alert.tag = 100;
         [alert show];
     }else{
@@ -282,6 +323,8 @@
         if (buttonIndex == 1) {
             [self addOrderAction];
         }
+    }else if(alertView.tag == 101){
+        [self.navigationController popViewControllerAnimated:TRUE];
     }
 }
 

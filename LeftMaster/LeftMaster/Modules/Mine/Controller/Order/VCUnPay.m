@@ -16,8 +16,8 @@
 #import "RequestBeanCancelOrder.h"
 #import "WindowCancelOrder.h"
 #import "VCWriteOrderAgain.h"
-#import "WindowPayWay.h"
-
+#import "WindowPayAlert.h"
+#import "VCWebView.h"
 #import "RequestBeanCreditPay.h"
 
 @interface VCUnPay ()<UITableViewDelegate,UITableViewDataSource,CommonDelegate,UIAlertViewDelegate,WindowCancelOrderDelegate>
@@ -109,7 +109,7 @@
             if(response.success){
                 [weakself loadData];
                 
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:response.msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:response.message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 alert.tag = 1002;
                 [alert show];
             }
@@ -215,9 +215,9 @@
         [alert show];
     }else if(index == 4){
         //付款
-        WindowPayWay *win =[[WindowPayWay alloc]init];
+        WindowPayAlert *win =[[WindowPayAlert alloc]init];
         __weak typeof(self) weakself = self;
-        win.clickBlock = ^(NSInteger index) {
+        win.clickBlock = ^(NSInteger index) { 
             [weakself handlePay:index];
         };
         [win show];
@@ -245,7 +245,11 @@
 
 - (void)handlePay:(NSInteger)index{
     if (index == 0) {
-        
+        VCWebView *vc = [[VCWebView alloc]init];
+        vc.url = @"http://cashier.qizhangtong.com:8807/cashier/portal/batchPay.html?batchNo=B18090215513901600001&gid=5b8b968b137b2b3d6942e01e&tradeTypes=BALANCE_PAY%2COFFLINE_PAY_PAY&resultCode=EXECUTE_SUCCESS&sign=b591a163a4c8ed33b0112af174c16193&resultMessage=%E6%88%90%E5%8A%9F&requestNo=8726201747068358&version=1.0&appClient=false&protocol=HTTP_FORM_JSON&success=true&service=tradeRedirectBatchPay&signType=MD5&merchOrderNo=1663438437162268&partnerId=18082916013301600472&operatorId=18090211551001600120";
+        vc.title = @"企账通收银台";
+        [self.navigationController pushViewController:vc animated:TRUE];
+//        [Utils showSuccessToast:@"选择在线支付" with:self.view withTime:1];
     }else{
         [self waitPayAction];
     }

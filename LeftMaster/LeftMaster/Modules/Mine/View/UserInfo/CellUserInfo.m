@@ -12,7 +12,6 @@
 @property(nonatomic,strong)UILabel *lbTitle;
 @property(nonatomic,strong)UIImageView *ivArrow;
 
-@property(nonatomic,strong)UIImageView *ivAvatar;
 @property(nonatomic,strong)UILabel *lbText;
 @property(nonatomic,strong)UIView *vLine;
 
@@ -48,6 +47,7 @@
         _ivAvatar = [[UIImageView alloc]initWithFrame:CGRectZero];
         _ivAvatar.userInteractionEnabled = YES;
         _ivAvatar.layer.cornerRadius = 25*RATIO_WIDHT320;
+        _ivAvatar.layer.masksToBounds = TRUE;
         _ivAvatar.image = [UIImage imageNamed:@"User_Default"];
         [self.contentView addSubview:_ivAvatar];
         

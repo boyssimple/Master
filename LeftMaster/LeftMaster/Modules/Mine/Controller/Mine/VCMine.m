@@ -20,6 +20,8 @@
 #import "VCUserInfo.h"
 #import "VCUserAccount.h"
 #import "VCEnterpriseList.h"
+#import "VCWebView.h"
+#import "RequestBeanGetUserInfo.h"
 
 @interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CommonDelegate>
 @property(nonatomic,strong)UITableView *table;
@@ -44,6 +46,7 @@
     [super viewWillAppear:animated];
     [self loadOrderNum];
     [self loadCustomerCredit];
+    [self loadInfoData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -52,7 +55,6 @@
 
 - (void)loadData{
     [self loadOrderNum];
-    [self.header updateData];
     [self.table reloadData];
     int64_t delayInSeconds = 0.6;
     __weak typeof(self) weakself = self;
@@ -61,6 +63,22 @@
         [weakself.table.mj_header endRefreshing];
     });
     [self loadCustomerCredit];
+}
+
+- (void)loadInfoData{
+    
+    RequestBeanGetUserInfo *requestBean = [RequestBeanGetUserInfo new];
+    requestBean.SYSUSER_ID = [AppUser share].SYSUSER_ID;
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        if (!err) {
+            // 结果处理
+            ResponseBeanGetUserInfo *response = responseBean;
+            if(response.success){
+                [weakself.header updateData:response.data];
+            }
+        }
+    }];
 }
 
 - (void)handleNotification:(NSNotification *)notification{
@@ -114,7 +132,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(section == 5 && ![AppUser share].isSalesman){
+    if(![AppUser share].isBoss){
+        if(section == 0 || section == 1 || section == 2 || section == 5){
+            return 0;
+        }
+    }else if(section == 5 && ![AppUser share].isSalesman){
         return 0;
     }
         
@@ -186,9 +208,16 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.section == 1){//个人帐户
-        VCUserAccount *vc = [[VCUserAccount alloc]init];
+        
+        VCWebView *vc = [[VCWebView alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.url = @"http://wallet.qizhangtong.com:8814/api/redirect.html?gid=5b8b8582137b2b3d6942e00c&resultCode=EXECUTE_SUCCESS&sign=c03f979b43de23a5547ddbafef01a43c&resultMessage=%E6%88%90%E5%8A%9F&requestNo=8666216224006140&userId=18090211551001600120&version=1.0&appClient=false&protocol=HTTP_FORM_JSON&success=true&service=walletRedirect&signType=MD5&merchOrderNo=0027515258167617&partnerId=18082916013301600472&operatorId=18090211551001600120";
+        vc.title = @"个人帐户";
         [self.navigationController pushViewController:vc animated:YES];
+        return;
+//        VCUserAccount *vc = [[VCUserAccount alloc]init];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.section == 2){//企业帐户
         VCEnterpriseList *vc = [[VCEnterpriseList alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -241,6 +270,7 @@
         _table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [weakself loadData];
             [weakself loadCustomerCredit];
+            [weakself loadInfoData];
         }];
     }
     return _table;

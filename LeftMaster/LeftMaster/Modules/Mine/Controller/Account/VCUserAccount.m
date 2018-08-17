@@ -9,6 +9,7 @@
 #import "VCUserAccount.h"
 #import "ViewInputText.h"
 #import "NetManager.h"
+#import "RequestBeanRegisterAccount.h"
 
 @interface VCUserAccount ()<UITextFieldDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)UIScrollView *mainScroll;

@@ -88,6 +88,13 @@
     }
 }
 
+- (void)updateCal:(NSInteger)num{
+    if(num > 0){
+        [self.btnOrder setTitle:[NSString stringWithFormat:@"去结算(%ld)",num] forState:UIControlStateNormal];
+    }else{
+        [self.btnOrder setTitle:@"去结算" forState:UIControlStateNormal];
+    }
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];

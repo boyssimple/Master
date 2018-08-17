@@ -50,7 +50,6 @@
             VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
             self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:vc];
         }else{
-            [self autoLogin];
             
             VCMain *vc = [[VCMain alloc]init];
             self.window.rootViewController = vc;

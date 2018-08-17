@@ -17,6 +17,7 @@
 @property(nonatomic,strong)NSString *orderId;
 @property(nonatomic,strong)ViewBarUnPayOrder *vControlBar;
 @property(nonatomic,assign)CGFloat total;
+@property(nonatomic,assign)NSInteger num;
 @end
 
 @implementation VCUnPayOrderContaier
@@ -36,7 +37,7 @@
 
 - (void)loadData{
     RequestBeanCreditOrder *requestBean = [RequestBeanCreditOrder new];
-//    requestBean.FD_PAY_STATUS = [AppUser share].SYSUSER_ID;
+    requestBean.FD_PAY_STATUS = @"1";
     requestBean.cus_id = [AppUser share].CUS_ID;
     [Utils showHanding:requestBean.hubTips with:self.view];
     __weak typeof(self) weakself = self;
@@ -82,14 +83,17 @@
 - (void)calTotal{
     self.total = 0;
     __weak typeof(self) weakself = self;
+    self.num = 0;
     [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         BOOL selected = [obj jk_boolForKey:@"selected"];
         if(selected){
+            self.num++;
             weakself.total += [obj jk_floatForKey:@"FD_TOTAL_PRICE"];
         }
     }];
     
     [self.vControlBar updateDataPrice:self.total];
+    [self.vControlBar updateCal:self.num];
 }
 
 - (void)gotoPay{

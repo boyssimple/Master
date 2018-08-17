@@ -6,10 +6,11 @@
 //  Copyright © 2018年 simple. All rights reserved.
 //
 
-#import "WindowPayWay.h"
+#import "WindowPayAlert.h"
 #import "ViewPayWay.h"
+#import "RequestBeanGetCredit.h"
 
-@interface WindowPayWay()
+@interface WindowPayAlert()
 @property (nonatomic, strong) UIView *grayView;
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIButton* btnSubmit;
@@ -23,14 +24,14 @@
 @property(nonatomic,strong)ViewPayWay *waitPay;
 @end
 
-@implementation WindowPayWay
+@implementation WindowPayAlert
 
 - (id)init
 {
     self = [super initWithFrame:(CGRect) {{0.f,0.f}, [[UIScreen mainScreen] bounds].size}];
     if (self) {
         self.windowLevel = UIWindowLevelAlert;
-        selectPayWayWindow = self;
+        payWayAlertWindow = self;
         [self setupSubviews];
     }
     
@@ -89,7 +90,34 @@
         [weakself handleClick:index with:selected];
     };
     [_mainView addSubview:self.waitPay];
-    [self.waitPay updateData:@"稍后支付" withDesc:@"稍后支付需要等业务人员审核"];
+    [self.waitPay updateData:@"信用支付" withDesc:@"当前信用额度：¥0.00"];
+    [self.waitPay enabled:FALSE];
+    [self loadCustomerCredit];
+    
+}
+
+
+- (void)loadCustomerCredit{
+    
+    [Utils showHanding:@"加载中..." with:self];
+    RequestBeanGetCredit *requestBean = [RequestBeanGetCredit new];
+    requestBean.cus_id = [AppUser share].CUS_ID;
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [MBProgressHUD hideAllHUDsForView:self animated:YES];
+        if (!err) {
+            // 结果处理
+            ResponseBeanGetCredit *response = responseBean;
+            if(response.success){
+                if([response.data jk_floatForKey:@"FD_CREDIT_BALANCE"] > 0){
+                    [self.waitPay enabled:TRUE];
+                }else{
+                    [self.waitPay enabled:FALSE];
+                }
+                [weakself.waitPay updateDataWithDesc:[NSString stringWithFormat:@"当前信用额度：¥%.2f",[response.data jk_floatForKey:@"FD_CREDIT_BALANCE"]]];
+            }
+        }
+    }];
 }
 
 - (void)handleClick:(NSInteger)index with:(BOOL)selected{
@@ -143,14 +171,14 @@
 - (void)dismiss {
     __weak typeof(self) weakself = self;
     [UIView animateWithDuration:0.3 animations:^{
-        selectPayWayWindow.alpha = 0;
+        payWayAlertWindow.alpha = 0;
         weakself.mainView.top = DEVICEHEIGHT;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 animations:^{
             weakself.grayView.alpha = 0;
         } completion:^(BOOL finished) {
-            [selectPayWayWindow removeAllSubviews];
-            selectPayWayWindow = nil;
+            [payWayAlertWindow removeAllSubviews];
+            payWayAlertWindow = nil;
             [self resignKeyWindow];
         }];
     }];

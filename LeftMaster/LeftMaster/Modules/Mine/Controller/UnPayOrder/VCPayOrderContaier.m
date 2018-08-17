@@ -8,14 +8,13 @@
 
 #import "VCPayOrderContaier.h"
 #import "CellPayedOrderContainer.h"
-#import "RequestBeanQueryOrder.h"
+#import "RequestBeanCreditOrder.h"
 
-@interface VCPayOrderContaier ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate>
+@interface VCPayOrderContaier ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *table;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)NSString *orderId;
-@property(nonatomic,strong)NSString *keywords;
 @end
 
 @implementation VCPayOrderContaier
@@ -34,32 +33,20 @@
 
 
 - (void)loadData{
-    RequestBeanQueryOrder *requestBean = [RequestBeanQueryOrder new];
-    requestBean.user_id = [AppUser share].SYSUSER_ID;
+    RequestBeanCreditOrder *requestBean = [RequestBeanCreditOrder new];
+    requestBean.FD_PAY_STATUS = @"2";
     requestBean.cus_id = [AppUser share].CUS_ID;
-    requestBean.page_current = self.page;
-    if (self.keywords) {
-        requestBean.search_key = self.keywords;
-    }
     [Utils showHanding:requestBean.hubTips with:self.view];
     __weak typeof(self) weakself = self;
     [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
         [Utils hiddenHanding:self.view withTime:0.5];
         [weakself.table.mj_header endRefreshing];
-        [weakself.table.mj_footer endRefreshing];
         if (!err) {
             // 结果处理
-            ResponseBeanQueryOrder *response = responseBean;
+            ResponseBeanCreditOrder *response = responseBean;
             if(response.success){
-                if(self.page == 1){
-                    [weakself.dataSource removeAllObjects];
-                }
+                [weakself.dataSource removeAllObjects];
                 NSArray *datas = [response.data jk_arrayForKey:@"rows"];
-                if(datas.count == 0 || datas.count < requestBean.page_size){
-                    [weakself.table.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    [weakself.table.mj_footer resetNoMoreData];
-                }
                 [weakself.dataSource addObjectsFromArray:datas];
                 [weakself.table reloadData];
             }
@@ -72,7 +59,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;//self.dataSource.count;
+    return 1;//self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -86,6 +73,7 @@
         cell = [[CellPayedOrderContainer alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     [cell updateData];
+//    [cell updateData:[self.dataSource objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -116,17 +104,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
-
-#pragma mark - CommonDelegate
-- (void)clickActionWithIndex:(NSInteger)index withDataIndex:(NSInteger)dataIndex{
-    
-}
-
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-}
-
 - (UITableView*)table{
     if(!_table){
         _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICEWIDTH, DEVICEHEIGHT) style:UITableViewStyleGrouped];

@@ -162,6 +162,19 @@
     [_bossInfo updateData];
 }
 
+- (void)updateData:(NSDictionary *)data{
+    if(!data){
+        return;
+    }
+    NSDictionary *dic = [data jk_dictionaryForKey:@"USER_PHOTO_JSON"];
+    if(dic){
+        [self.ivLogo pt_setImage:[dic jk_stringForKey:@"getfileurl"]];
+    }
+    
+    self.lbCompany.text = [data jk_stringForKey:@"CUS_NAME"];
+    self.lbName.text = [data jk_stringForKey:@"SYSUSER_NAME"];
+}
+
 - (void)gotoOrderList:(UIGestureRecognizer*)ges{
     NSInteger tag = ges.view.tag - 200;
     
