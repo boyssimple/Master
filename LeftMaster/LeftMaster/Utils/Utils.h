@@ -37,4 +37,8 @@
 +(NSString *)dictToJsonStr:(NSDictionary *)dict;
 
 +(NSString *)convertToJsonData:(NSDictionary *)dict;
+
++(BOOL)checkIDCard:(NSString *)idCard;
+
++ (BOOL)checkBankCardNo:(NSString*)cardNo;
 @end

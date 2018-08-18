@@ -27,6 +27,9 @@
 @property(nonatomic,assign)NSInteger SYSUSER_CUSTOMER_ROLE; //客户账号角色(1:员工,2:老板)
 @property(nonatomic,assign)BOOL isBoss;         //是否老板
 @property(nonatomic,strong)NSDictionary *USER_PHOTO_JSON;//用户头像信息
+@property(nonatomic,strong)NSString *eaUserId_person;//企业通个人帐号ID
+@property(nonatomic,strong)NSString *eaUserId_corp;//企业通企业帐号ID
+
 
 - (void)parse:(NSDictionary*)data;
 

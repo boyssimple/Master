@@ -22,6 +22,8 @@
 #import "NetWorkTools.h"
 #import "WindowPayAlert.h"
 #import "RequestBeanCreditPay.h"
+#import "RequestBeanPayGoods.h"
+#import "VCWebView.h"
 
 @interface VCWriteOrderAgain ()<CommonDelegate,WindowCustomDelegate,UIScrollViewDelegate,ViewTotalBottomWriteOrderDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UIScrollView *mainView;
@@ -261,9 +263,9 @@
                     WindowPayAlert *alert = [[WindowPayAlert alloc]init];
                     alert.clickBlock = ^(NSInteger index) {
                         if(index == 0){
-                            [weakself rightNowPay:response.FD_ID];
+                            [weakself rightNowPay:response.FD_NO];
                         }else{
-                            [weakself creditPay:response.FD_ID];
+                            [weakself creditPay:response.FD_NO];
                             
                         }
                     };
@@ -290,8 +292,36 @@
 
 //立即支付
 - (void)rightNowPay:(NSString*)orderId{
-    [Utils showSuccessToast:@"选择在线支付" with:self.view withTime:1];
+    RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
     
+    if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
+        requestBean.eaUserId = [AppUser share].eaUserId_corp;
+    }else if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
+        requestBean.eaUserId = [AppUser share].eaUserId_person;
+    }
+    requestBean.merchOrderNo = orderId;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [Utils hiddenHanding:self.view withTime:0.5];
+        if (!err) {
+            // 结果处理
+            ResponseBeanPayGoods *response = responseBean;
+            if(response.success){
+                [weakself loadData];
+                [weakself gotoPay:response.result];
+            }
+        }
+    }];
+    
+}
+
+- (void)gotoPay:(NSString*)result{
+    
+    VCWebView *vc = [[VCWebView alloc]init];
+    vc.url = result;
+    vc.title = @"企账通收银台";
+    [self.navigationController pushViewController:vc animated:TRUE];
 }
 
 //信用支付

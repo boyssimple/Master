@@ -10,8 +10,12 @@
 #import "ViewInputText.h"
 #import "NetManager.h"
 #import "RequestBeanRegisterAccount.h"
+#import "RequestBeanSendMsg.h"
+#import "RequestBeanRegisterAccount.h"
+#import "RequestBeanGetWalletPage.h"
 
-@interface VCUserAccount ()<UITextFieldDelegate,UIScrollViewDelegate>
+@interface VCUserAccount ()<UITextFieldDelegate,UIScrollViewDelegate,UIWebViewDelegate>
+@property(nonatomic,strong)UIWebView *webView;
 @property(nonatomic,strong)UIScrollView *mainScroll;
 @property(nonatomic,strong)ViewInputText *vName;
 @property(nonatomic,strong)ViewInputText *vIdCard;
@@ -44,6 +48,12 @@
 - (void)initMain{
     self.title = @"个人帐户";
     [self.view addSubview:self.mainScroll];
+    [self.view addSubview:self.webView];
+    if(self.isRegister){
+        self.mainScroll.hidden = TRUE;
+        self.webView.hidden = FALSE;
+        [self loadData];
+    }
 }
 
 
@@ -77,31 +87,44 @@
 
 - (void)clickAction:(UIButton*)sender{
     if(sender.tag == 100){
-//        [self sendSmsEvent];
-    }else if(sender.tag == 101){
-        NSDictionary *param = @{@"name":@"luowei",@"abc":@"1232",@"abcd":@"中国"};
-        [[NetManager sharedInstance] requestPost:@"" withParams:param successBlock:^(id resobject) {
-            
-        } failurBlock:^(NSError *error) {
-            
-        }];
-        
-//        NSString *code = [self.tfCheckCode.text trim];
-//        if(code.length == 0){
-//            [Utils showToast:@"请输入验证码" with:self.view withTime:0.8];
-//        }else if([code isEqualToString:self.random]){
-//            VCForgotPwdFinish *vc = [[VCForgotPwdFinish alloc]init];
-//            vc.phone = self.tfPhone.text;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }else{
-//            [Utils showToast:@"验证码错误" with:self.view withTime:0.8];
-//        }
+        [self confirmEvent];
     }
 }
-/*
-- (void)sendSmsEvent{
+
+- (void)confirmEvent{
+    NSString *name = [self.vName.tfText.text trim];
+    NSString *idCard = [self.vIdCard.tfText.text trim];
+    NSString *bankCard = [self.vBankCard.tfText.text trim];
+    NSString *phone = [self.vPhone.tfText.text trim];
+    NSString *code = [self.vCode.tfText.text trim];
+    
     [self.view endEditing:YES];
-    NSString *phone = [self.tfPhone.text trim];
+    
+    if(name.length == 0){
+        [Utils showToast:@"请输入姓名" with:self.view withTime:0.8];
+        return;
+    }
+    
+    if(idCard.length == 0){
+        [Utils showToast:@"请输入身份证号" with:self.view withTime:0.8];
+        return;
+    }
+    
+    if(![Utils checkIDCard:idCard]){
+        [Utils showToast:@"身份证号错误" with:self.view withTime:0.8];
+        return;
+    }
+    
+    if(bankCard.length == 0){
+        [Utils showToast:@"请输入银行卡号" with:self.view withTime:0.8];
+        return;
+    }
+    
+    if(![Utils checkBankCardNo:bankCard]){
+        [Utils showToast:@"银行卡号错误" with:self.view withTime:0.8];
+        return;
+    }
+    
     if(phone.length == 0){
         [Utils showToast:@"请输入手机号码" with:self.view withTime:0.8];
         return;
@@ -111,20 +134,67 @@
         return;
     }
     
-    RequestBeanSms *requestBean = [RequestBeanSms new];
+    if(code.length == 0){
+        [Utils showToast:@"请输入验证码" with:self.view withTime:0.8];
+        return;
+    }
+    
+    RequestBeanRegisterAccount *requestBean = [RequestBeanRegisterAccount new];
+    requestBean.outUserId = [AppUser share].SYSUSER_ID;
+    requestBean.captcha = code;
+    requestBean.mobileNo = phone;
+    requestBean.realName = name;
+    requestBean.certNo = idCard;
+    requestBean.bankCard = bankCard;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        if(!err){
+            // 结果处理
+            ResponseBeanRegisterAccount *response = responseBean;
+            if(response.success){
+                self.isRegister = TRUE;
+                self.mainScroll.hidden = TRUE;
+                self.webView.hidden = FALSE;
+                [weakself loadData];
+                [Utils showSuccessToast:@"注册成功" with:weakself.view withTime:0.6 withBlock:^{
+                }];
+                
+            }else{
+                [Utils showToast:response.message with:self.view withTime:0.8];
+            }
+        }else{
+            [Utils showSuccessToast:@"注册失败" with:weakself.view withTime:1];
+        }
+        
+    }];
+}
+
+- (void)sendSmsEvent{
+    [self.view endEditing:YES];
+    NSString *phone = [self.vPhone.tfText.text trim];
+    if(phone.length == 0){
+        [Utils showToast:@"请输入手机号码" with:self.view withTime:0.8];
+        return;
+    }
+    if(phone.length != 11){
+        [Utils showToast:@"手机号码错误" with:self.view withTime:0.8];
+        return;
+    }
+    
+    RequestBeanSendMsg *requestBean = [RequestBeanSendMsg new];
     requestBean.mobile = phone;
     [Utils showHanding:requestBean.hubTips with:self.view];
     __weak typeof(self) weakself = self;
     [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
         if(!err){
             // 结果处理
-            ResponseBeanSms *response = responseBean;
+            ResponseBeanSendMsg *response = responseBean;
             if(response.success){
-                weakself.random = response.RANDOM;
                 [Utils showSuccessToast:@"已发送" with:weakself.view withTime:0.6];
                 [weakself startTimer];
             }else{
-                [Utils showToast:response.msg with:self.view withTime:0.8];
+                [Utils showToast:response.message with:self.view withTime:0.8];
             }
         }else{
             [Utils showSuccessToast:@"发送失败" with:weakself.view withTime:1];
@@ -133,61 +203,38 @@
     }];
 }
 
-- (void)startTimer{
-    if(!self.isExecuting){
-        self.isExecuting = TRUE;
-        [self.btnCheckCode setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        self.btnCheckCode.enabled = NO;
-        NSInteger ts = 60;
-        __block NSInteger t = ts;
-        
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        self._timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-        
-        dispatch_source_set_timer(self._timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-        __weak typeof(self) weakself = self;
-        dispatch_source_set_event_handler(self._timer, ^{
-            
-            if(t <= 0){ //倒计时结束，关闭
-                dispatch_source_cancel(weakself._timer);
-                weakself._timer = nil;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakself reset];
-                });
+
+- (void)loadData{
+    RequestBeanGetWalletPage *requestBean = [RequestBeanGetWalletPage new];
+    requestBean.eaUserId = [AppUser share].eaUserId_person;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        if(!err){
+            // 结果处理
+            ResponseBeanGetWalletPage *response = responseBean;
+            if(response.success){
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:response.result]];
+                [weakself.webView loadRequest:request];
             }else{
-                
-                NSInteger seconds = t % (ts+1);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    NSLog(@"执行");
-                    [weakself.btnCheckCode setTitle:[NSString stringWithFormat:@"%zi秒后重发", seconds] forState:UIControlStateNormal];
-                });
-                t--;
+                [Utils showToast:response.message with:self.view withTime:0.8];
             }
-        });
-        dispatch_resume(weakself._timer);
-    }
-    
+        }else{
+            [Utils showToast:@"网络错误" with:self.view withTime:0.8];
+        }
+        
+    }];
 }
 
-- (void)reset{
-    [self.btnCheckCode setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [self.btnCheckCode setTitleColor:APP_COLOR forState:UIControlStateNormal];
-    self.btnCheckCode.enabled = YES;
-    self.isExecuting = FALSE;
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [Utils hiddenHanding:self.view withTime:0.5];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
     
 }
- 
- */
 
 
 - (void)startTimer{
@@ -264,6 +311,7 @@
         _vIdCard = [[ViewInputText alloc]initWithFrame:CGRectMake(0, self.vName.bottom, DEVICEWIDTH, [ViewInputText calHeight])];
         _vIdCard.lbName.text = @"身份证号";
         _vIdCard.tfText.placeholder = @"请输入身份证号码";
+        _vIdCard.tfText.keyboardType = UIKeyboardTypeNumberPad;
         _vIdCard.tfText.delegate = self;
         
         _vIdCard.type = 1;
@@ -278,6 +326,7 @@
         _vBankCard.lbName.text = @"银行卡号";
         _vBankCard.tfText.placeholder = @"请输入银行卡号";
         _vBankCard.tfText.delegate = self;
+        _vBankCard.tfText.keyboardType = UIKeyboardTypeNumberPad;
         _vBankCard.type = 1;
         [_vBankCard updateData];
     }
@@ -288,8 +337,9 @@
     if(!_vPhone){
         _vPhone = [[ViewInputText alloc]initWithFrame:CGRectMake(0, self.vBankCard.bottom, DEVICEWIDTH, [ViewInputText calHeight])];
         _vPhone.lbName.text = @"预留手机号";
-        _vPhone.tfText.placeholder = @"请输入身份证号码";
+        _vPhone.tfText.placeholder = @"请输入手机号";
         _vPhone.tfText.delegate = self;
+        _vPhone.tfText.keyboardType = UIKeyboardTypePhonePad;
         _vPhone.type = 1;
         [_vPhone updateData];
     }
@@ -305,7 +355,7 @@
         _vCode.type = 2;
         __weak typeof(self) weakself = self;
         _vCode.clickBlock = ^{
-            [weakself startTimer];
+            [weakself sendSmsEvent];
         };
         [_vCode updateData];
     }
@@ -322,9 +372,19 @@
         _btnNext.titleLabel.font = [UIFont systemFontOfSize:17*RATIO_WIDHT320];
         _btnNext.layer.cornerRadius = 4.5f;
         [_btnNext addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        _btnNext.tag = 101;
+        _btnNext.tag = 100;
     }
     return _btnNext;
+}
+
+- (UIWebView*)webView{
+    if(!_webView){
+        
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEVICEWIDTH, DEVICEHEIGHT)];
+        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.delegate = self;
+    }
+    return _webView;
 }
 
 

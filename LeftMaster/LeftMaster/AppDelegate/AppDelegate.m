@@ -50,7 +50,7 @@
             VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
             self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:vc];
         }else{
-            
+            [self autoLogin];
             VCMain *vc = [[VCMain alloc]init];
             self.window.rootViewController = vc;
         }
@@ -91,7 +91,7 @@
     requestBean.userName = userName;
     requestBean.passWord = tfPwd;
     __weak typeof(self) weakself = self;
-    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+    [NetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
         if(!err){
             // 结果处理
             ResponseBeanLogin *response = responseBean;
@@ -106,7 +106,7 @@
                 }
             }
         }else{
-            
+            NSLog(@"错误%@",err);
         }
         
     }];

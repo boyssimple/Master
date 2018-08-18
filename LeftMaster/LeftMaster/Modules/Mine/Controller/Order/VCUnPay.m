@@ -19,6 +19,7 @@
 #import "WindowPayAlert.h"
 #import "VCWebView.h"
 #import "RequestBeanCreditPay.h"
+#import "RequestBeanPayGoods.h"
 
 @interface VCUnPay ()<UITableViewDelegate,UITableViewDataSource,CommonDelegate,UIAlertViewDelegate,WindowCancelOrderDelegate>
 @property (nonatomic, strong) UITableView *table;
@@ -26,6 +27,7 @@
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)NSString *orderId;
+@property(nonatomic,strong)NSString *orderNo;
 @end
 
 @implementation VCUnPay
@@ -43,6 +45,10 @@
     [self.view addSubview:self.table];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadData];
+}
 
 - (void)loadData{
     RequestBeanQueryOrder *requestBean = [RequestBeanQueryOrder new];
@@ -116,6 +122,40 @@
         }
     }];
 }
+
+
+- (void)payAction{
+    RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
+    if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
+        requestBean.eaUserId = [AppUser share].eaUserId_corp;
+    }else if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
+        requestBean.eaUserId = [AppUser share].eaUserId_person;
+    }
+    
+    requestBean.merchOrderNo = self.orderNo;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [Utils hiddenHanding:self.view withTime:0.5];
+        if (!err) {
+            // 结果处理
+            ResponseBeanPayGoods *response = responseBean;
+            if(response.success){
+                [weakself loadData];
+                [weakself gotoPay:response.result];
+            }
+        }
+    }];
+}
+
+- (void)gotoPay:(NSString*)result{
+    
+    VCWebView *vc = [[VCWebView alloc]init];
+    vc.url = result;
+    vc.title = @"企账通收银台";
+    [self.navigationController pushViewController:vc animated:TRUE];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -203,6 +243,7 @@
 - (void)clickActionWithIndex:(NSInteger)index withDataIndex:(NSInteger)dataIndex{
     NSDictionary *data = [self.dataSource objectAtIndex:dataIndex];
     self.orderId = [data jk_stringForKey:@"FD_ID"];
+    self.orderNo = [data jk_stringForKey:@"FD_NO"];
     if(index == 3){
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定再来一单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
@@ -245,11 +286,7 @@
 
 - (void)handlePay:(NSInteger)index{
     if (index == 0) {
-        VCWebView *vc = [[VCWebView alloc]init];
-        vc.url = @"http://cashier.qizhangtong.com:8807/cashier/portal/batchPay.html?batchNo=B18090215513901600001&gid=5b8b968b137b2b3d6942e01e&tradeTypes=BALANCE_PAY%2COFFLINE_PAY_PAY&resultCode=EXECUTE_SUCCESS&sign=b591a163a4c8ed33b0112af174c16193&resultMessage=%E6%88%90%E5%8A%9F&requestNo=8726201747068358&version=1.0&appClient=false&protocol=HTTP_FORM_JSON&success=true&service=tradeRedirectBatchPay&signType=MD5&merchOrderNo=1663438437162268&partnerId=18082916013301600472&operatorId=18090211551001600120";
-        vc.title = @"企账通收银台";
-        [self.navigationController pushViewController:vc animated:TRUE];
-//        [Utils showSuccessToast:@"选择在线支付" with:self.view withTime:1];
+        [self payAction];
     }else{
         [self waitPayAction];
     }

@@ -42,6 +42,8 @@ static AppUser * _user;
     self.SYSUSER_NAME = [data jk_stringForKey:@"SYSUSER_NAME"];
     self.SYSUSER_SEX = [data jk_integerForKey:@"SYSUSER_SEX"];
     self.SYSUSER_COMPANYID = [data jk_stringForKey:@"SYSUSER_COMPANYID"];
+    self.eaUserId_person = [data jk_stringForKey:@"eaUserId_person"];
+    self.eaUserId_corp = [data jk_stringForKey:@"eaUserId_corp"];
     self.SYSUSER_CUSTOMER_ROLE = [data jk_integerForKey:@"SYSUSER_CUSTOMER_ROLE"];
     if(self.SYSUSER_CUSTOMER_ROLE == 2){
         self.isBoss = TRUE;

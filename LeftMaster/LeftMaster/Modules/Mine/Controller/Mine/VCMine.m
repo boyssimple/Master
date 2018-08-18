@@ -20,7 +20,6 @@
 #import "VCUserInfo.h"
 #import "VCUserAccount.h"
 #import "VCEnterpriseList.h"
-#import "VCWebView.h"
 #import "RequestBeanGetUserInfo.h"
 
 @interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CommonDelegate>
@@ -209,19 +208,23 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.section == 1){//个人帐户
         
-        VCWebView *vc = [[VCWebView alloc]init];
+        VCUserAccount *vc = [[VCUserAccount alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.url = @"http://wallet.qizhangtong.com:8814/api/redirect.html?gid=5b8b8582137b2b3d6942e00c&resultCode=EXECUTE_SUCCESS&sign=c03f979b43de23a5547ddbafef01a43c&resultMessage=%E6%88%90%E5%8A%9F&requestNo=8666216224006140&userId=18090211551001600120&version=1.0&appClient=false&protocol=HTTP_FORM_JSON&success=true&service=walletRedirect&signType=MD5&merchOrderNo=0027515258167617&partnerId=18082916013301600472&operatorId=18090211551001600120";
-        vc.title = @"个人帐户";
+        if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
+            vc.isRegister = TRUE;
+        }
         [self.navigationController pushViewController:vc animated:YES];
-        return;
-//        VCUserAccount *vc = [[VCUserAccount alloc]init];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.section == 2){//企业帐户
-        VCEnterpriseList *vc = [[VCEnterpriseList alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
+            VCEnterpriseList *vc = [[VCEnterpriseList alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您未开通企业账户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            alert.tag = 1000;
+            [alert show];
+        }
     }else if(indexPath.section == 3){//订单对账
         VCAccountContainer *vc = [[VCAccountContainer alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -255,6 +258,11 @@
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 1000){
+        
+    }
+}
 
 - (UITableView*)table{
     if(!_table){

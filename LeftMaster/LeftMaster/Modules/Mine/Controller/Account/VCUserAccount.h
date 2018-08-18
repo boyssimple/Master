@@ -9,5 +9,5 @@
 #import "VCBase.h"
 
 @interface VCUserAccount : VCBase
-
+@property(nonatomic,assign)BOOL isRegister;
 @end

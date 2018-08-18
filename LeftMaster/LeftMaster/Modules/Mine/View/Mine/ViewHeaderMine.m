@@ -42,8 +42,8 @@
         _ivLogo = [[UIImageView alloc]initWithFrame:CGRectZero];
         _ivLogo.image = [UIImage imageNamed:@"logo"];
         _ivLogo.userInteractionEnabled = YES;
-        _ivLogo.layer.borderColor = RGB(206, 2, 206).CGColor;
-        _ivLogo.layer.borderWidth = 1.f;
+//        _ivLogo.layer.borderColor = RGB(206, 2, 206).CGColor;
+//        _ivLogo.layer.borderWidth = 1.f;
         _ivLogo.layer.cornerRadius = 25*RATIO_WIDHT320;
         _ivLogo.backgroundColor = [UIColor whiteColor];
         _ivLogo.clipsToBounds = YES;
@@ -168,7 +168,10 @@
     }
     NSDictionary *dic = [data jk_dictionaryForKey:@"USER_PHOTO_JSON"];
     if(dic){
-        [self.ivLogo pt_setImage:[dic jk_stringForKey:@"getfileurl"]];
+        NSString *url = [dic jk_stringForKey:@"getfileurl"];
+        if(url){
+            [self.ivLogo pt_setImage:url];
+        }
     }
     
     self.lbCompany.text = [data jk_stringForKey:@"CUS_NAME"];

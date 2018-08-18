@@ -108,6 +108,9 @@
 		1CB1AF0621267492006450B9 /* RequestBeanRegisterAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF0521267492006450B9 /* RequestBeanRegisterAccount.m */; };
 		1CB1AF092126A336006450B9 /* CellHandlerOrderContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF082126A336006450B9 /* CellHandlerOrderContainer.m */; };
 		1CB1AF0C2126A6A9006450B9 /* VCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF0B2126A6A9006450B9 /* VCWebView.m */; };
+		1CB1AF102127C251006450B9 /* RequestBeanSendMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF0F2127C251006450B9 /* RequestBeanSendMsg.m */; };
+		1CB1AF132127CEDA006450B9 /* RequestBeanGetWalletPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF122127CEDA006450B9 /* RequestBeanGetWalletPage.m */; };
+		1CB1AF162127D028006450B9 /* RequestBeanPayGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1AF152127D028006450B9 /* RequestBeanPayGoods.m */; };
 		1CBCB28220C65B7E00700963 /* NetWorkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBCB28120C65B7E00700963 /* NetWorkTools.m */; };
 		1CBF1DAE208F7A040090BD96 /* Reason.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBF1DAD208F7A040090BD96 /* Reason.m */; };
 		1CBF1DB1208F85620090BD96 /* RequestBeanQueryCartNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBF1DB0208F85620090BD96 /* RequestBeanQueryCartNum.m */; };
@@ -460,6 +463,12 @@
 		1CB1AF082126A336006450B9 /* CellHandlerOrderContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellHandlerOrderContainer.m; sourceTree = "<group>"; };
 		1CB1AF0A2126A6A9006450B9 /* VCWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCWebView.h; sourceTree = "<group>"; };
 		1CB1AF0B2126A6A9006450B9 /* VCWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCWebView.m; sourceTree = "<group>"; };
+		1CB1AF0E2127C250006450B9 /* RequestBeanSendMsg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanSendMsg.h; sourceTree = "<group>"; };
+		1CB1AF0F2127C251006450B9 /* RequestBeanSendMsg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanSendMsg.m; sourceTree = "<group>"; };
+		1CB1AF112127CEDA006450B9 /* RequestBeanGetWalletPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanGetWalletPage.h; sourceTree = "<group>"; };
+		1CB1AF122127CEDA006450B9 /* RequestBeanGetWalletPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanGetWalletPage.m; sourceTree = "<group>"; };
+		1CB1AF142127D028006450B9 /* RequestBeanPayGoods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestBeanPayGoods.h; sourceTree = "<group>"; };
+		1CB1AF152127D028006450B9 /* RequestBeanPayGoods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestBeanPayGoods.m; sourceTree = "<group>"; };
 		1CBCB28020C65B7E00700963 /* NetWorkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetWorkTools.h; sourceTree = "<group>"; };
 		1CBCB28120C65B7E00700963 /* NetWorkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetWorkTools.m; sourceTree = "<group>"; };
 		1CBF1DAC208F7A040090BD96 /* Reason.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reason.h; sourceTree = "<group>"; };
@@ -1110,6 +1119,21 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		1CB1AF0D2127C231006450B9 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				1CB1AF0E2127C250006450B9 /* RequestBeanSendMsg.h */,
+				1CB1AF0F2127C251006450B9 /* RequestBeanSendMsg.m */,
+				1CB1AF0421267492006450B9 /* RequestBeanRegisterAccount.h */,
+				1CB1AF0521267492006450B9 /* RequestBeanRegisterAccount.m */,
+				1CB1AF112127CEDA006450B9 /* RequestBeanGetWalletPage.h */,
+				1CB1AF122127CEDA006450B9 /* RequestBeanGetWalletPage.m */,
+				1CB1AF142127D028006450B9 /* RequestBeanPayGoods.h */,
+				1CB1AF152127D028006450B9 /* RequestBeanPayGoods.m */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
 		1CD84822206F7ADA00CC9BE9 = {
 			isa = PBXGroup;
 			children = (
@@ -1389,6 +1413,7 @@
 		1CD84884206F7C7100CC9BE9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1CB1AF0D2127C231006450B9 /* Pay */,
 				1CBF5C06207D111B00284EA1 /* RequestBeanLogin.h */,
 				1CBF5C07207D111B00284EA1 /* RequestBeanLogin.m */,
 				1C780ECE207E02D500054AE1 /* RequestBeanNotice.h */,
@@ -1441,8 +1466,6 @@
 				1CB1AEF921245272006450B9 /* RequestBeanUploadImg.m */,
 				1CB1AF0121259EDD006450B9 /* RequestBeanGetUserInfo.h */,
 				1CB1AF0221259EDD006450B9 /* RequestBeanGetUserInfo.m */,
-				1CB1AF0421267492006450B9 /* RequestBeanRegisterAccount.h */,
-				1CB1AF0521267492006450B9 /* RequestBeanRegisterAccount.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1843,6 +1866,7 @@
 				1CBF1DED2091135C0090BD96 /* RequestBeanAddOrder.m in Sources */,
 				1C6C052A2119C12800EA79EB /* SearchHistoryCell.m in Sources */,
 				1C6C0550211B259400EA79EB /* YNPageScrollMenuView.m in Sources */,
+				1CB1AF132127CEDA006450B9 /* RequestBeanGetWalletPage.m in Sources */,
 				1CFA388720F61D16005DED5B /* ViewTabOrder.m in Sources */,
 				1C8A2E21207707720076238D /* CellCart.m in Sources */,
 				1C88D0E620AB15B700865DE2 /* MJPhotoToolbar.m in Sources */,
@@ -1876,11 +1900,13 @@
 				1CFC7B02208F6D82005F18AB /* CellCancelOrder.m in Sources */,
 				1C8A2E3F207875BD0076238D /* HMScanner.m in Sources */,
 				1C6C0566211C61D100EA79EB /* RequestBeanGetCredit.m in Sources */,
+				1CB1AF162127D028006450B9 /* RequestBeanPayGoods.m in Sources */,
 				1C6C054D211B259400EA79EB /* UIView+YNPageExtend.m in Sources */,
 				1CB1AF002124733C006450B9 /* WindowPayAlert.m in Sources */,
 				1CFC7ABB208C7796005F18AB /* ViewSearchWithHome.m in Sources */,
 				1CBF1DE7209109010090BD96 /* ViewOrderCheckAccount.m in Sources */,
 				1CF3C91F20A1D17C0036BD6D /* RequestBeanNewGoods.m in Sources */,
+				1CB1AF102127C251006450B9 /* RequestBeanSendMsg.m in Sources */,
 				1CFC7AEA208E3242005F18AB /* VCUnSend.m in Sources */,
 				1CBF5BB420787A1600284EA1 /* ViewGoodsList.m in Sources */,
 				1CBF1DCF2090CB7B0090BD96 /* Custom.m in Sources */,

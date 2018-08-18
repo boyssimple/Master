@@ -6,13 +6,12 @@
 //  Copyright © 2018年 simple. All rights reserved.
 //
 
-#import "RequestBeanRegisterAccount.h"
+#import "RequestBeanSendMsg.h"
 
-@implementation RequestBeanRegisterAccount
-
+@implementation RequestBeanSendMsg
 
 - (NSString*)apiPath{
-    return net_getUserInfo;
+    return net_shop_sendRegisterMsg;
 }
 
 - (BOOL)isShowHub{
@@ -20,26 +19,18 @@
 }
 
 - (NSString *)hubTips{
-    return @"加载中...";
+    return @"发送中...";
 }
-
-
 
 @end
 
-@implementation ResponseBeanRegisterAccount
+@implementation ResponseBeanSendMsg
 
 - (BOOL)checkSuccess{
     if (self.success) {
-        return TRUE; 
+        return TRUE;
     }
     return FALSE;
 }
 
 @end
-
-
-
-
-
-

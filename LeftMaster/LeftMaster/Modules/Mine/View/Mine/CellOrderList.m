@@ -199,7 +199,7 @@
     }else if(self.status == 3){
         self.btnReceive.hidden = NO;
     }else if(self.status == 10){
-        if([AppUser share].SYSUSER_CUSTOMER_ROLE == 2){
+        if([AppUser share].isBoss){
             self.btnPay.hidden = NO;
             self.btnCancel.hidden = NO;
         }
@@ -389,9 +389,13 @@
     }else if(self.status == 4 || self.status == 5 || self.status == 6){//已完成
         self.btnAgain.left = self.vBg.width - self.btnAgain.width - 10*RATIO_WIDHT320;
     }else if(self.status == 10){
-        self.btnPay.left = self.vBg.width - self.btnCancel.width - 10*RATIO_WIDHT320;
-        self.btnCancel.left = self.btnPay.left - self.btnCancel.width - 10*RATIO_WIDHT320;
-        self.btnAgain.left = self.btnCancel.left - self.btnAgain.width - 10*RATIO_WIDHT320;
+        if(![AppUser share].isBoss){
+            self.btnPay.left = self.vBg.width - self.btnPay.width - 10*RATIO_WIDHT320;
+        }else{
+            self.btnPay.left = self.vBg.width - self.btnCancel.width - 10*RATIO_WIDHT320;
+            self.btnCancel.left = self.btnPay.left - self.btnCancel.width - 10*RATIO_WIDHT320;
+            self.btnAgain.left = self.btnCancel.left - self.btnAgain.width - 10*RATIO_WIDHT320;
+        }
     }
     
     

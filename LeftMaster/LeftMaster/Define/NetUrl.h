@@ -69,6 +69,13 @@
 #define net_userPhotoUpload @"system/UserMobileTran.do?userPhotoUpload"       //上传头像
 #define net_getUserInfo @"system/UserMobileTran.do?getUserInfoByUserId"       //获取用户信息
 
+
+#define net_shop_sendRegisterMsg @"shop/EaMobileTran.do?sendRegisterMsg"       //企账通发送短信
+#define net_shop_enterprise_platform_register @"shop/EaMobileTran.do?commonAuditRegister"       //注册企账通开户
+#define net_shop_my_wallet @"shop/EaMobileTran.do?walletRedirect"       //个人钱包页面获取
+#define net_shop_onlinePay @"shop/EaMobileTran.do?onlinePay"       //支付
+
+
 #define OPEN_ORDER_LIST @"OPEN_ORDER_LIST"       //打开订单通知
 
 
