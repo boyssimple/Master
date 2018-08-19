@@ -194,17 +194,14 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
                         [JPUSHService setAlias:[AppUser share].SYSUSER_ACCOUNT completion:nil seq:1];
                     }
                     
-                    // 同步到主线程
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if([AppUser share].isSalesman){
-                            VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
-                            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-                            [appDelegate restoreRootViewController:nav];
-                        }else{
-                            VCMain *vc = [[VCMain alloc]init];
-                            [appDelegate restoreRootViewController:vc];
-                        }
-                    });
+                    if([AppUser share].isSalesman){
+                        VCProxyCustmer *vc = [[VCProxyCustmer alloc]init];
+                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+                        [appDelegate restoreRootViewController:nav];
+                    }else{
+                        VCMain *vc = [[VCMain alloc]init];
+                        [appDelegate restoreRootViewController:vc];
+                    }
                 }
             });
         }else{

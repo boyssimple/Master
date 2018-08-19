@@ -176,6 +176,17 @@
 }
 
 - (void)addOrderAction{
+    if([AppUser share].isBoss){
+        if (![AppUser share].eaUserId_person || [AppUser share].eaUserId_person.length == 0 || ![AppUser share].eaUserId_corp || [AppUser share].eaUserId_corp.length == 0 ) {
+        
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            alert.tag = 102;
+            [alert show];
+            return;
+        }
+        
+    }
+    
     RequestBeanAddOrder *requestBean = [RequestBeanAddOrder new];
     NSMutableDictionary *orderInfo = [[NSMutableDictionary alloc]init];
     [orderInfo setObject:[AppUser share].SYSUSER_ID forKey:@"FD_CREATE_USER_ID"];
@@ -219,7 +230,7 @@
                         if(index == 0){
                             [weakself rightNowPay:response.FD_NO];
                         }else{
-                            [weakself creditPay:response.FD_NO];
+                            [weakself creditPay:response.FD_ID];
                             
                         }
                     };
@@ -292,7 +303,7 @@
                 alert.tag = 101;
                 [alert show];
             }else{
-                [Utils showSuccessToast:@"支付失败" with:self.view withTime:1];
+                [Utils showSuccessToast:response.message with:self.view withTime:1];
             }
         }else{
             [Utils showSuccessToast:@"请求失败" with:self.view withTime:1];
@@ -338,7 +349,7 @@
         return;
     }
     if (self.totalPrice < 500) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"订单金额未达到500元免运费条件，将自付运费，请确认!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"订单金额未达到500元免运费条件，将自付运费，请确认!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 100;
         [alert show];
     }else{

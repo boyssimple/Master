@@ -14,6 +14,7 @@
 #import "RequestBeanPayGoods.h"
 #import "RequestBeanCreditPay.h"
 #import "VCWebView.h"
+#import "VCOrder.h"
 
 @interface VCUnPayOrderContaier ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *table;
@@ -121,6 +122,19 @@
         [Utils showToast:@"请选择订单" with:self.view withTime:1.5];
         return;
     }
+    
+    if([AppUser share].isBoss){
+        if (![AppUser share].eaUserId_person || [AppUser share].eaUserId_person.length == 0 || ![AppUser share].eaUserId_corp || [AppUser share].eaUserId_corp.length == 0 ) {
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            alert.tag = 102;
+            [alert show];
+            return;
+        }
+        
+    }
+    
+    
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定支付？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.tag = 100;
     [alert show];
@@ -265,6 +279,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSDictionary *data = [self.dataSource objectAtIndex:indexPath.row];
+    VCOrder *vc = [[VCOrder alloc]init];
+    vc.orderId = [data jk_stringForKey:@"FD_ID"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

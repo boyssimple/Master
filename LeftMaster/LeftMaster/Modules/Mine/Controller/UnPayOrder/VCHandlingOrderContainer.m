@@ -9,6 +9,7 @@
 #import "VCHandlingOrderContainer.h"
 #import "CellPayedOrderContainer.h"
 #import "RequestBeanCreditOrder.h"
+#import "VCOrder.h"
 
 @interface VCHandlingOrderContainer ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *table;
@@ -103,17 +104,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSDictionary *data = [self.dataSource objectAtIndex:indexPath.row];
+    VCOrder *vc = [[VCOrder alloc]init];
+    vc.orderId = [data jk_stringForKey:@"FD_ID"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - CommonDelegate
-- (void)clickActionWithIndex:(NSInteger)index withDataIndex:(NSInteger)dataIndex{
-    
-}
-
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-}
 
 - (UITableView*)table{
     if(!_table){

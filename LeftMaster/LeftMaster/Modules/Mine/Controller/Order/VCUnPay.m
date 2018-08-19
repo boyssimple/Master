@@ -125,6 +125,16 @@
 
 
 - (void)payAction{
+    if([AppUser share].isBoss){
+        if (![AppUser share].eaUserId_person || [AppUser share].eaUserId_person.length == 0 || ![AppUser share].eaUserId_corp || [AppUser share].eaUserId_corp.length == 0 ) {
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            alert.tag = 102;
+            [alert show];
+            return;
+        }
+        
+    }
     RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
     if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
         requestBean.eaUserId = [AppUser share].eaUserId_corp;
