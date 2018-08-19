@@ -223,16 +223,6 @@
 }
 
 - (void)addOrderAction{
-    if([AppUser share].isBoss){
-        if (![AppUser share].eaUserId_person || [AppUser share].eaUserId_person.length == 0 || ![AppUser share].eaUserId_corp || [AppUser share].eaUserId_corp.length == 0 ) {
-            
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            alert.tag = 102;
-            [alert show];
-            return;
-        }
-        
-    }
     RequestBeanAddOrder *requestBean = [RequestBeanAddOrder new];
     NSMutableDictionary *orderInfo = [[NSMutableDictionary alloc]init];
     [orderInfo setObject:[AppUser share].SYSUSER_ID forKey:@"FD_CREATE_USER_ID"];
@@ -302,27 +292,33 @@
 
 //立即支付
 - (void)rightNowPay:(NSString*)orderId{
-    RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
-    
-    if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
-        requestBean.eaUserId = [AppUser share].eaUserId_corp;
-    }else if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
-        requestBean.eaUserId = [AppUser share].eaUserId_person;
-    }
-    requestBean.merchOrderNo = orderId;
-    [Utils showHanding:requestBean.hubTips with:self.view];
-    __weak typeof(self) weakself = self;
-    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
-        [Utils hiddenHanding:self.view withTime:0.5];
-        if (!err) {
-            // 结果处理
-            ResponseBeanPayGoods *response = responseBean;
-            if(response.success){
-                [weakself loadData];
-                [weakself gotoPay:response.result];
-            }
+    if(([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length != 0) || ([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length != 0)){
+        RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
+        
+        if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
+            requestBean.eaUserId = [AppUser share].eaUserId_corp;
+        }else if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
+            requestBean.eaUserId = [AppUser share].eaUserId_person;
         }
-    }];
+        requestBean.merchOrderNo = orderId;
+        [Utils showHanding:requestBean.hubTips with:self.view];
+        __weak typeof(self) weakself = self;
+        [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+            [Utils hiddenHanding:self.view withTime:0.5];
+            if (!err) {
+                // 结果处理
+                ResponseBeanPayGoods *response = responseBean;
+                if(response.success){
+                    [weakself loadData];
+                    [weakself gotoPay:response.result];
+                }
+            }
+        }];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alert.tag = 102;
+        [alert show];
+    }
     
 }
 

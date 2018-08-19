@@ -18,6 +18,10 @@
 #import "RequestBeanSignOrder.h"
 #import "VCWriteOrderAgain.h"
 #import "VCUnPay.h"
+#import "WindowPayAlert.h"
+#import "VCWebView.h"
+#import "RequestBeanCreditPay.h"
+#import "RequestBeanPayGoods.h"
 
 @interface VCOrderContaier ()<UITableViewDelegate,UITableViewDataSource,CommonDelegate,UIAlertViewDelegate,WindowCancelOrderDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *table;
@@ -25,6 +29,7 @@
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)NSString *orderId;
+@property(nonatomic,strong)NSString *orderNo;
 @property(nonatomic,strong)NSString *keywords;
 @end
 
@@ -145,6 +150,82 @@
     }];
 }
 
+
+- (void)handlePay:(NSInteger)index{
+    if (index == 0) {
+        [self payAction];
+    }else{
+        [self waitPayAction];
+    }
+}
+
+
+- (void)waitPayAction{
+    RequestBeanCreditPay *requestBean = [RequestBeanCreditPay new];
+    requestBean.FD_SUMIT_USER_ID = [AppUser share].SYSUSER_ID;
+    requestBean.FD_ID = self.orderId;
+    [Utils showHanding:requestBean.hubTips with:self.view];
+    __weak typeof(self) weakself = self;
+    [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+        [Utils hiddenHanding:self.view withTime:0.5];
+        if (!err) {
+            // 结果处理
+            ResponseBeanCreditPay *response = responseBean;
+            if(response.success){
+                [weakself loadData];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:response.message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                alert.tag = 1002;
+                [alert show];
+            }
+        }
+    }];
+}
+
+
+- (void)payAction{
+    
+    if(([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length != 0) || ([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length != 0)){
+        RequestBeanPayGoods *requestBean = [RequestBeanPayGoods new];
+        if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
+            requestBean.eaUserId = [AppUser share].eaUserId_corp;
+        }else if([AppUser share].eaUserId_person && [AppUser share].eaUserId_person.length > 0){
+            requestBean.eaUserId = [AppUser share].eaUserId_person;
+        }
+        
+        requestBean.merchOrderNo = self.orderNo;
+        [Utils showHanding:requestBean.hubTips with:self.view];
+        __weak typeof(self) weakself = self;
+        [AJNetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
+            [Utils hiddenHanding:self.view withTime:0.5];
+            if (!err) {
+                // 结果处理
+                ResponseBeanPayGoods *response = responseBean;
+                if(response.success){
+                    [weakself loadData];
+                    [weakself gotoPay:response.result];
+                }
+            }
+        }];
+    }else{
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请先进行个人/企业开户!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alert.tag = 102;
+        [alert show];
+    }
+    
+    
+}
+
+- (void)gotoPay:(NSString*)result{
+    
+    VCWebView *vc = [[VCWebView alloc]init];
+    vc.url = result;
+    vc.title = @"企账通收银台";
+    [self.navigationController pushViewController:vc animated:TRUE];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -211,6 +292,7 @@
     
     NSDictionary *data = [self.dataSource objectAtIndex:dataIndex];
     self.orderId = [data jk_stringForKey:@"FD_ID"];
+    self.orderNo = [data jk_stringForKey:@"FD_NO"];
     if(index == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定签收？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
         alert.tag = 1000;
@@ -227,6 +309,15 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"确定再来一单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
         alert.tag = 1003;
         [alert show];
+    }else if(index == 4){
+        
+        //付款
+        WindowPayAlert *win =[[WindowPayAlert alloc]init];
+        __weak typeof(self) weakself = self;
+        win.clickBlock = ^(NSInteger index) {
+            [weakself handlePay:index];
+        };
+        [win show];
     }
 }
 

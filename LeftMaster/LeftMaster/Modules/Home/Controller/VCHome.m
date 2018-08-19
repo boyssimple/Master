@@ -28,9 +28,10 @@
 #import "VCSearchList.h"
 #import "VCContent.h"
 #import "AppDelegate.h"
+#import "NetManager.h"
 
 @interface VCHome ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SectionHeaderHomeDelegate,UIScrollViewDelegate,
-        UIAlertViewDelegate,CommonDelegate>
+UIAlertViewDelegate,CommonDelegate>
 @property(nonatomic,strong)UITableView *table;
 @property(nonatomic,strong)SDCycleScrollView *cycleScrollView;
 @property(nonatomic,strong)NSMutableArray *categorys;
@@ -80,6 +81,9 @@
                                              selector:@selector(refreshAll)
                                                  name:REFRESH_ALL_INFO
                                                object:nil];
+    
+    
+    
 }
 
 - (void)refreshAll{
@@ -143,7 +147,7 @@
     [self.view addSubview:self.table];
     _categorys = [NSMutableArray array];
     _goodsList = [NSMutableArray array];
-
+    
     //修改初始密码
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *isModify = [defaults objectForKey:USER_MODIFY_PWD];
@@ -163,91 +167,118 @@
 }
 
 - (void)loadData{
-    RequestBeanCategoryHome *requestBean = [RequestBeanCategoryHome new];
-    requestBean.parent_id = 0;
-    requestBean.page_current = 1;
-    requestBean.page_size = 8;
-    __weak typeof(self) weakself = self;
     
-    [NetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
-        [weakself.table.mj_footer endRefreshing];
-        [weakself.table.mj_header endRefreshing];
-        if (!err) {
-            // 结果处理
-            ResponseBeanCategoryHome *response = responseBean;
-            [weakself.categorys removeAllObjects];
-            [weakself.categorys addObjectsFromArray:[response.data jk_arrayForKey:@"rows"]];
-            [weakself.table reloadData];
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    __weak typeof(self) weakself = self;
+    NSDictionary *param = @{@"page_size":@"8",@"page_current":@"1",@"parent_id":@"0"};
+    [[NetManager shareInstance] requestPost:net_goods_category param:param withVC:self successBlock:^(id resobject) {
+        //        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        [weakself endRefresh];
+        NSLog(@"%@", resobject);
+        if(resobject){
+            NSInteger success = [resobject jk_integerForKey:@"success"];
+            if(success == 1){
+                NSDictionary *data = [resobject jk_dictionaryForKey:@"data"];
+                [weakself.categorys removeAllObjects];
+                [weakself.categorys addObjectsFromArray:[data jk_arrayForKey:@"rows"]];
+                [weakself.table reloadData];
+            }
         }
-    }];
+    } failurBlock:^(NSError *error) {
+        //        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        [weakself endRefresh];
+        
+    } withShowHUD:TRUE];
+}
+
+- (void)endRefresh{
+    [self.table.mj_footer endRefreshing];
+    [self.table.mj_header endRefreshing];
 }
 
 - (void)loadCarouseListData{
-    RequestBeanCarouseList *requestBean = [RequestBeanCarouseList new];
-    requestBean.page_current = 1;
-    requestBean.page_size = 5;
-    __weak typeof(self) weakself = self;
     
-    [NetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
-        if (!err) {
-            // 结果处理
-            ResponseBeanCarouseList *response = responseBean;
-            if (response.success) {
-                if (response.data) {
-                    NSArray *rows = [response.data jk_arrayForKey:@"rows"];
-                    if (rows) {
-                        [self.carousels removeAllObjects];
-                        [self.carousels addObjectsFromArray:rows];
-                        NSInteger i = [response.data jk_integerForKey:@"records"];
-                        NSMutableArray *images = [NSMutableArray arrayWithCapacity:i];
-                        for (NSDictionary *data in rows) {
-                            [images addObject:[data jk_stringForKey:@"FILE_PATH"]];
-                        }
-                        weakself.cycleScrollView.imageURLStringsGroup = images;
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    __weak typeof(self) weakself = self;
+    NSDictionary *param = @{@"page_size":@"5",@"page_current":@"1"};
+    [[NetManager shareInstance] requestPost:net_goods_carouse_list param:param withVC:self successBlock:^(id resobject) {
+        //        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        [weakself endRefresh];
+        NSLog(@"%@", resobject);
+        if(resobject){
+            NSInteger success = [resobject jk_integerForKey:@"success"];
+            if(success == 1){
+                NSDictionary *data = [resobject jk_dictionaryForKey:@"data"];
+                NSArray *rows = [data jk_arrayForKey:@"rows"];
+                if (rows) {
+                    [self.carousels removeAllObjects];
+                    [self.carousels addObjectsFromArray:rows];
+                    NSInteger i = [data jk_integerForKey:@"records"];
+                    NSMutableArray *images = [NSMutableArray arrayWithCapacity:i];
+                    for (NSDictionary *data in rows) {
+                        [images addObject:[data jk_stringForKey:@"FILE_PATH"]];
                     }
+                    weakself.cycleScrollView.imageURLStringsGroup = images;
                 }
             }
         }
-    }];
+    } failurBlock:^(NSError *error) {
+        //        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        [weakself endRefresh];
+        
+    } withShowHUD:TRUE];
+    
 }
 
 - (void)loadGoodsListData{
-    RequestBeanNewGoods *requestBean = [RequestBeanNewGoods new];
-    requestBean.price_order = @"desc";
-    requestBean.cus_id = [AppUser share].CUS_ID;
-    requestBean.company_id = [AppUser share].SYSUSER_COMPANYID;
-    requestBean.page_current = self.page;
-    requestBean.page_size = 10;
-    [Utils showHanding:requestBean.hubTips with:self.view];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     __weak typeof(self) weakself = self;
-    [NetworkManager requestWithBean:requestBean callBack:^(__kindof AJResponseBeanBase * _Nullable responseBean, AJError * _Nullable err) {
-        [Utils hiddenHanding:self.view withTime:0.5];
-        [weakself.table.mj_footer endRefreshing];
-        [weakself.table.mj_header endRefreshing];
-        if (!err) {
-            // 结果处理
-            ResponseBeanNewGoods *response = responseBean;
-            
-            if(self.page == 1){
-                [weakself.goodsList removeAllObjects];
-            }
-            NSArray *datas = [response.data jk_arrayForKey:@"rows"];
-            if(datas.count == 0 || datas.count < requestBean.page_size){
-                [weakself.table.mj_footer endRefreshingWithNoMoreData];
-                weakself.table.mj_footer.hidden = TRUE;
-            }else{
-                [weakself.table.mj_footer resetNoMoreData];
-                weakself.table.mj_footer.hidden = TRUE;
-            }
-            [weakself.goodsList addObjectsFromArray:datas];
-            [weakself.table reloadData];
-        }else{
-            if (self.page > 1) {
-                [weakself.table.mj_footer endRefreshingWithNoMoreData];
-                weakself.table.mj_footer.hidden = TRUE;
+    NSString *cus_id = [AppUser share].CUS_ID;
+    if(!cus_id){
+        cus_id = @"";
+    }
+    
+    NSString *company_id = [AppUser share].SYSUSER_COMPANYID;
+    if(!company_id){
+        company_id = @"";
+    }
+    NSDictionary *param = @{@"page_size":@(10),@"page_current":@(self.page),@"price_order":@"desc",@"cus_id":cus_id,@"company_id":company_id,};
+    [[NetManager shareInstance] requestGet:net_goods_new_list param:param withVC:self successBlock:^(id resobject) {
+        [MBProgressHUD hideHUDForView:weakself.view animated:TRUE];
+        [weakself endRefresh];
+        NSLog(@"loadGoodsListData:%@", resobject);
+        if(resobject){
+            NSInteger success = [resobject jk_integerForKey:@"success"];
+            if(success == 1){
+                NSDictionary *data = [resobject jk_dictionaryForKey:@"data"];
+                if(self.page == 1){
+                    [weakself.goodsList removeAllObjects];
+                }
+                NSArray *datas = [data jk_arrayForKey:@"rows"];
+                if(datas.count == 0 || datas.count < 10){
+                    [weakself.table.mj_footer endRefreshingWithNoMoreData];
+                    weakself.table.mj_footer.hidden = TRUE;
+                }else{
+                    [weakself.table.mj_footer resetNoMoreData];
+                    weakself.table.mj_footer.hidden = TRUE;
+                }
+                [weakself.goodsList addObjectsFromArray:datas];
+                [weakself.table reloadData];
             }
         }
-    }];
+    } failurBlock:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        [weakself endRefresh];
+        
+        if (self.page > 1) {
+            [weakself.table.mj_footer endRefreshingWithNoMoreData];
+            weakself.table.mj_footer.hidden = TRUE;
+        }
+        
+    } withShowHUD:TRUE];
+    
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -404,7 +435,7 @@
                 if(ID && ![ID isEqualToString:@""]){
                     VCGoods *vc = [[VCGoods alloc]init];
                     vc.goods_id = ID;
-                    [self.navigationController pushViewController:vc animated:TRUE]; 
+                    [self.navigationController pushViewController:vc animated:TRUE];
                 }
             }else{
                 NSString *ID = [data jk_stringForKey:@"BUSINESS_ID"];

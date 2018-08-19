@@ -1,16 +1,18 @@
 //
 //  NetManager.h
-//  LeftMaster
+//  CarNetworking
 //
-//  Created by simple on 2018/8/14.
-//  Copyright © 2018年 simple. All rights reserved.
+//  Created by yanyu on 2018/8/7.
+//  Copyright © 2018年 baojie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @interface NetManager : NSObject
-+ (instancetype)sharedInstance;
 
-- (void)requestPost:(NSString*)urlStr withParams:(NSDictionary*)param successBlock:(void(^)(id resobject))successBlock failurBlock:(void(^)(NSError *error))errorBlock;
-- (void)requestGet:(NSString*)urlStr withParams:(NSDictionary*)param successBlock:(void(^)(id resobject))successBlock failurBlock:(void(^)(NSError *error))errorBlock;
++(NetManager *)shareInstance;
+- (void)requestPost:(NSString *)url param:(NSDictionary*)params withVC:(UIViewController*)vc successBlock:(void(^)(id resobject))successBlock failurBlock:(void(^)(NSError *error))errorBlock withShowHUD:(BOOL)show;
+
+
+- (void)requestGet:(NSString *)url param:(NSDictionary*)params withVC:(UIViewController*)vc successBlock:(void(^)(id resobject))successBlock failurBlock:(void(^)(NSError *error))errorBlock withShowHUD:(BOOL)show;
 @end

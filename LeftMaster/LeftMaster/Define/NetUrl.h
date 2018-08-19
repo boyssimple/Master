@@ -13,7 +13,7 @@
 
 
 //#if DEBUG
-#define Base_Url @"113.204.168.170:4322/"
+#define Base_Url @"113.204.6.165:8999/"//@"113.204.168.170:4322/"
 //#else
 //#define Base_Url @"masterzuo.cartechfin.com/"
 //#endif

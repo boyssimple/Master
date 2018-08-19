@@ -115,6 +115,7 @@
 // 登陆后淡入淡出更换rootViewController
 - (void)restoreRootViewController:(UIViewController *)rootViewController
 {
+    self.window.rootViewController = nil;
     typedef void (^Animation)(void);
     UIWindow* window = [UIApplication sharedApplication].keyWindow;
     

@@ -119,14 +119,11 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
     }else if(tag == 102){
         self.tfUser.text = @"";
     }else if(tag == 103){
+        sender.selected = !sender.selected;
         self.tfPwd.secureTextEntry = !self.tfPwd.isSecureTextEntry;
-        if(self.tfPwd.secureTextEntry){
-            NSString *text = [self.tfPwd.text trim];
-            self.tfPwd.text = @" ";
-            self.tfPwd.text = text;
-        }else{
-            [self.tfPwd becomeFirstResponder];
-        }
+        
+        NSString *text = [self.tfPwd.text trim];
+        self.tfPwd.text = text;
     }
 }
 
@@ -387,6 +384,7 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
         _tfPwd = [[UITextField alloc]initWithFrame:CGRectZero];
         _tfPwd.secureTextEntry = YES;
         _tfPwd.delegate = self;
+        _tfPwd.keyboardType = UIKeyboardTypeAlphabet;
         _tfPwd.placeholder = @"请输入登录密码";
     }
     return _tfPwd;
@@ -441,6 +439,8 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
         _btnEye = [[UIButton alloc]initWithFrame:CGRectZero];
         [_btnEye addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [_btnEye setImage:[UIImage imageNamed:@"Login-User-Eye"] forState:UIControlStateNormal];
+        [_btnEye setImage:[UIImage imageNamed:@"Login-User-Eye-Closed"] forState:UIControlStateSelected];
+        
         _btnEye.tag = 103;
     }
     return _btnEye;

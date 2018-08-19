@@ -176,6 +176,26 @@
 - (void)updateData:(NSDictionary*)data{
     self.lbNo.text = [data jk_stringForKey:@"FD_NO"];
     self.lbStatus.text = [data jk_stringForKey:@"FD_ORDER_STATUS_NAME"];
+    if(![data jk_stringForKey:@"FD_ORDER_STATUS_NAME"] || [data jk_stringForKey:@"FD_ORDER_STATUS_NAME"].length == 0){
+        if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 0){
+            self.lbStatus.text = @"待确认";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 10){
+            self.lbStatus.text = @"待付款";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 1){
+            self.lbStatus.text = @"待审核";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 2){
+            self.lbStatus.text = @"待发货";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 3){
+            self.lbStatus.text = @"待收货";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 4){
+            self.lbStatus.text = @"已完成";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 5){
+            self.lbStatus.text = @"审核不通过";
+        }else if([data jk_integerForKey:@"FD_ORDER_STATUS"] == 6){
+            self.lbStatus.text = @"订单取消";
+        }
+    }
+    
     self.lbCompany.text = [data jk_stringForKey:@"fd_name"];
     
     self.lbOrderAmountText.text = [NSString stringWithFormat:@"¥%@",[data jk_stringForKey:@"FD_TOTAL_PRICE"]];

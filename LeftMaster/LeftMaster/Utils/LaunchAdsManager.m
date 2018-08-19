@@ -60,14 +60,16 @@
         if(animatedImage1){
             _ivContent.animatedImage = animatedImage1;
         }else{
-            NSData *data1 = [NSData dataWithContentsOfFile:filePath];
+            data1 = [NSData dataWithContentsOfFile:filePath];
             _ivContent.image = [UIImage imageWithData:data1];
         }
-    }else{
-        NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"image2" withExtension:@"jpg"];
-        NSData *data1 = [NSData dataWithContentsOfURL:url1];
-        FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
-        _ivContent.animatedImage = animatedImage1;
+        if(!data1){
+            
+            NSUserDefaults *defautls = [NSUserDefaults standardUserDefaults];
+            [defautls removeObjectForKey:@"downloaded"];
+            [defautls synchronize];
+            [self existsUpdate];
+        }
     }
     _ivContent.userInteractionEnabled = TRUE;
     [_vContent addSubview:_ivContent];
@@ -137,11 +139,23 @@
                                 NSUserDefaults *defautls = [NSUserDefaults standardUserDefaults];
                                 id downloaded = [defautls objectForKey:@"downloaded"];
                                 if(downloaded){
-                                    if(![url hasSuffix:downloaded]){
+                                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                                    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:downloaded];
+                                    
+                                    
+                                    NSData *data1 = [NSData dataWithContentsOfFile:filePath];
+                                    if(!data1){
                                         [self downImage:url];
                                     }else{
-                                        NSLog(@"无需下载广告");
+                                        if(![url hasSuffix:downloaded]){
+                                            [self downImage:url];
+                                        }else{
+                                            NSLog(@"无需下载广告");
+                                        }
                                     }
+                                }else{
+                                    [self downImage:url];
                                 }
                             }
                         }

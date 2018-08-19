@@ -20,6 +20,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "PhotoBrowser.h"
+#import "VCWebView.h"
 
 @interface VCGoods ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,ViewHeaderGoodsDelegate,CommonDelegate,
         UIWebViewDelegate,ViewHeaderGoodsDelegate>
@@ -55,7 +56,20 @@
     [self.view addSubview:self.table];
     [self.view addSubview:self.bottom];
     [self observeNotification:REFRESH_CART_LIST];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openPayVC:) name:Notification_Open_Pay object:nil];
 }
+
+
+- (void)openPayVC:(NSNotification*)notification{
+    
+    VCWebView *vc = [[VCWebView alloc]init];
+    vc.url = notification.object;
+    vc.title = @"企账通收银台";
+    vc.hidesBottomBarWhenPushed = TRUE;
+    [self.navigationController pushViewController:vc animated:TRUE];
+    
+}
+
 
 
 - (void)loadData{
