@@ -271,11 +271,8 @@
 
 
 - (void)gotoPay:(NSString*)result{
-    
-    VCWebView *vc = [[VCWebView alloc]init];
-    vc.url = result;
-    vc.title = @"企账通收银台";
-    [self.navigationController pushViewController:vc animated:TRUE];
+    [self.navigationController popViewControllerAnimated:TRUE];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_Open_Pay object:result];
 }
 
 

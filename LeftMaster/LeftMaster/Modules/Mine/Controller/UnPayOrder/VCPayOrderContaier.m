@@ -9,6 +9,7 @@
 #import "VCPayOrderContaier.h"
 #import "CellPayedOrderContainer.h"
 #import "RequestBeanCreditOrder.h"
+#import "CellHandlerOrderContainer.h"
 
 @interface VCPayOrderContaier ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *table;
@@ -34,7 +35,6 @@
 
 - (void)loadData{
     RequestBeanCreditOrder *requestBean = [RequestBeanCreditOrder new];
-    requestBean.FD_PAY_STATUS = @"2";
     requestBean.cus_id = [AppUser share].CUS_ID;
     [Utils showHanding:requestBean.hubTips with:self.view];
     __weak typeof(self) weakself = self;
@@ -59,7 +59,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;//self.dataSource.count;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

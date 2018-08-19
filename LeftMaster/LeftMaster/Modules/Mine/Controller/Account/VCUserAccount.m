@@ -53,6 +53,9 @@
         self.mainScroll.hidden = TRUE;
         self.webView.hidden = FALSE;
         [self loadData];
+    }else{
+        self.mainScroll.hidden = FALSE;
+        self.webView.hidden = TRUE;
     }
 }
 

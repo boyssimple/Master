@@ -49,11 +49,19 @@
     AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if(!delegate.isShowAds){
         delegate.isShowAds = TRUE;
-        LaunchAdsManager *launch = [[LaunchAdsManager alloc]init];
-        [launch setupLaunchAd:^{
-            NSLog(@"检查版本");
+        
+        NSUserDefaults *defautls = [NSUserDefaults standardUserDefaults];
+        id downloaded = [defautls objectForKey:@"downloaded"];
+        if(downloaded){
+            
+            LaunchAdsManager *launch = [[LaunchAdsManager alloc]init];
+            [launch setupLaunchAd:^{
+                NSLog(@"检查版本");
+                [self getVision];
+            }];
+        }else{
             [self getVision];
-        }];
+        }
     }
     
     [self initMain];

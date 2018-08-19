@@ -18,6 +18,7 @@
 #import "RequestBeanAddCart.h"
 #import "RequestBeanSetCart.h"
 #import "CustConfirmView.h"
+#import "VCWebView.h"
 
 @interface VCCart ()<UITableViewDelegate,UITableViewDataSource,ViewTotalCartDelegate,CommonDelegate,UIAlertViewDelegate,CellCartDelegate,CustConfirmViewDelegate>
 @property(nonatomic,strong)UITableView *table;
@@ -60,8 +61,20 @@
     [self observeNotification:REFRESH_CART_LIST];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAll) name:REFRESH_ALL_INFO object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openPayVC:) name:Notification_Open_Pay object:nil];
     
 }
+
+- (void)openPayVC:(NSNotification*)notification{
+    
+    VCWebView *vc = [[VCWebView alloc]init];
+    vc.url = notification.object;
+    vc.title = @"企账通收银台";
+    vc.hidesBottomBarWhenPushed = TRUE;
+    [self.navigationController pushViewController:vc animated:TRUE];
+    
+}
+
 
 - (void)refreshAll{
     self.page = 1;

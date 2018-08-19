@@ -28,8 +28,8 @@
 
 - (void)initMain{
     self.title = @"欠款订单";
-    [self.view addSubview:self.vTab];
     [self.view addSubview:self.mainScroll];
+    [self.view addSubview:self.vTab];
     
     for (NSInteger i = 0 ;i<self.vcList.count;i++) {
         NSString *vcName = [self.vcList objectAtIndex:i];
@@ -82,7 +82,7 @@
 
 - (NSArray*)vcList{
     if (!_vcList) {
-        _vcList = @[@"VCUnPayOrderContaier",@"VCHandlingOrderContainer",@"VCPayOrderContaier"];
+        _vcList = @[@"VCUnPayOrderContaier",@"VCHandlingOrderContainer"];
     }
     return _vcList;
 }
@@ -102,7 +102,7 @@
         config.itemFont = [UIFont systemFontOfSize:14*RATIO_WIDHT750];
         config.selectedItemColor = APP_COLOR;
         config.normalItemColor = APP_BLACK_COLOR;
-        NSArray *datas = @[@"待付款",@"处理中",@"已支付"];
+        NSArray *datas = @[@"待付款",@"已支付"];
         
         _vTab = [YNPageScrollMenuView pagescrollMenuViewWithFrame:CGRectMake(0, NAV_STATUS_HEIGHT, DEVICEWIDTH, TabHeight) titles:datas configration:config delegate:self currentIndex:0];
     }

@@ -7,7 +7,7 @@
 //
 
 #import "VCHandlingOrderContainer.h"
-#import "CellHandlerOrderContainer.h"
+#import "CellPayedOrderContainer.h"
 #import "RequestBeanCreditOrder.h"
 
 @interface VCHandlingOrderContainer ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate>
@@ -64,14 +64,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [CellHandlerOrderContainer calHeight];
+    return [CellPayedOrderContainer calHeight];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString*identifier = @"CellHandlerOrderContainer";
-    CellHandlerOrderContainer *cell = (CellHandlerOrderContainer*)[tableView dequeueReusableCellWithIdentifier:identifier];
+    static NSString*identifier = @"CellPayedOrderContainer";
+    CellPayedOrderContainer *cell = (CellPayedOrderContainer*)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[CellHandlerOrderContainer alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[CellPayedOrderContainer alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     [cell updateData:[self.dataSource objectAtIndex:indexPath.row]];
     return cell;

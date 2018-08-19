@@ -90,7 +90,7 @@
     [self loadData:1];
     [self loadData:2];
     [self loadData:3];
-    [self loadData:4];
+    [self loadData:10];
 }
 
 - (void)loadData:(NSInteger)type{

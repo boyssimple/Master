@@ -112,6 +112,13 @@
         [self.lbAmount setAttributedText:noteStr];
     }
     
+    self.lbPayDate.text = [NSString stringWithFormat:@"支付时间：%@",[data jk_stringForKey:@"FD_PAY_SUCCESS_TIME"]];
+    NSInteger type = [data jk_integerForKey:@"FD_PAY_WAY"];
+    if(type == 1){
+        self.lbPayWay.text = @"信用付款";
+    }else{
+        self.lbPayWay.text = @"企账通支付";
+    }
     
 }
 

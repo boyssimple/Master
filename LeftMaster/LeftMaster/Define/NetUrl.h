@@ -12,11 +12,11 @@
 
 
 
-#if DEBUG
+//#if DEBUG
 #define Base_Url @"113.204.168.170:4322/"
-#else
-#define Base_Url @"masterzuo.cartechfin.com/"
-#endif
+//#else
+//#define Base_Url @"masterzuo.cartechfin.com/"
+//#endif
 
 
 //用户

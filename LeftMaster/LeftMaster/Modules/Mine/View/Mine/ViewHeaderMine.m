@@ -147,7 +147,7 @@
         [self.vUnSend update:count];
     }else if(index == 3){
         [self.vUnReceive update:count];
-    }else if(index == 4){
+    }else if(index == 10){
         [self.vUnPay update:count];
     }
 }
