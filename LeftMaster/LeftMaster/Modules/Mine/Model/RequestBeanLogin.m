@@ -27,10 +27,7 @@
 @implementation ResponseBeanLogin
 
 - (BOOL)checkSuccess{
-    if (self.success) {
-        return TRUE;
-    }
-    return FALSE;
+    return TRUE;
 }
 
 @end

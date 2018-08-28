@@ -199,13 +199,15 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
                         VCMain *vc = [[VCMain alloc]init];
                         [appDelegate restoreRootViewController:vc];
                     }
+                }else{
+                    [Utils showSuccessToast:response.msg with:weakself.view withTime:1.1];
                 }
             });
         }else{
             if(err.code == -1004){
                 [Utils showSuccessToast:@"未能连接到服务器" with:weakself.view withTime:1.1];
             }else{
-                [Utils showSuccessToast:err.message with:weakself.view withTime:1.1];
+                [Utils showSuccessToast:@"登录失败" with:weakself.view withTime:1.1];
             }
         }
         

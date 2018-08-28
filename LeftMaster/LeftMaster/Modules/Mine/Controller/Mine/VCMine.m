@@ -38,8 +38,27 @@
 - (void)initMain{
     [self.view addSubview:self.table];
     [self observeNotification:REFRESH_MINE_INFO];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithTitle:@"通知" style:UIBarButtonItemStylePlain target:self action:@selector(leftButtonClick)];
+    leftButton.tintColor = [UIColor blackColor];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonClick)];
+    rightButton.tintColor = [UIColor blackColor];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
+- (void)leftButtonClick{
+    VCNotice *vc = [[VCNotice alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)rightButtonClick{
+    
+    VCSetting *vc = [[VCSetting alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -127,15 +146,16 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(![AppUser share].isBoss){
-        if(section == 0 || section == 1 || section == 2 || section == 5){
+        if(section == 0 || section == 1){
             return 0;
         }
-    }else if(section == 5 && ![AppUser share].isSalesman){
+    }
+    if(section == 4 && ![AppUser share].isSalesman){
         return 0;
     }
         
@@ -153,19 +173,15 @@
         cell = [[CellMine alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     if(indexPath.section == 0){
-        [cell updateData:@"通知消息" with:@""];
-    }else if(indexPath.section == 1){
         [cell updateData:@"个人帐户" with:@""];
-    }else if(indexPath.section == 2){
+    }else if(indexPath.section == 1){
         [cell updateData:@"企业帐户" with:@""];
-    }else if(indexPath.section == 3){
+    }else if(indexPath.section == 2){
         [cell updateData:@"订单对账" with:@""];
-    }else if(indexPath.section == 4){
+    }else if(indexPath.section == 3){
         [cell updateData:@"联系客服" with:@"400-1696444"];
-    }else if(indexPath.section == 5){
+    }else if(indexPath.section == 4){
         [cell updateData:@"当前客户" with:[AppUser share].CUS_NAME];
-    }else if(indexPath.section == 6){
-        [cell updateData:@"设置" with:@""];
     }
     
     return cell;
@@ -179,8 +195,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if(section == 6){
-        return 60*RATIO_WIDHT320;
+    if(section == 4){
+        return 30*RATIO_WIDHT320;
     }
     return 0.00001f;
 }
@@ -202,11 +218,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 0){//通知消息
-        VCNotice *vc = [[VCNotice alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if(indexPath.section == 1){//个人帐户
+    if(indexPath.section == 0){//个人帐户
         
         VCUserAccount *vc = [[VCUserAccount alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -214,7 +226,7 @@
             vc.isRegister = TRUE;
         }
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(indexPath.section == 2){//企业帐户
+    }else if(indexPath.section == 1){//企业帐户
         if([AppUser share].eaUserId_corp && [AppUser share].eaUserId_corp.length > 0){
             VCEnterpriseList *vc = [[VCEnterpriseList alloc]init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -225,22 +237,18 @@
             alert.tag = 1000;
             [alert show];
         }
-    }else if(indexPath.section == 3){//订单对账
+    }else if(indexPath.section == 2){//订单对账
         VCAccountContainer *vc = [[VCAccountContainer alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(indexPath.section == 4){//联系客服
+    }else if(indexPath.section == 3){//联系客服
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"400-1696444"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-    }else if(indexPath.section == 5){//当前客户
+    }else if(indexPath.section == 4){//当前客户
         VCProxyCustmer*vc = [[VCProxyCustmer alloc]init];
         vc.type = 1;
         vc.hidesBottomBarWhenPushed = TRUE;
         [self.navigationController pushViewController:vc animated:TRUE];
-    }else if(indexPath.section == 6){//设置
-        VCSetting *vc = [[VCSetting alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

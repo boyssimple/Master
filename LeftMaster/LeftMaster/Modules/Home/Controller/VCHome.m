@@ -216,7 +216,10 @@ UIAlertViewDelegate,CommonDelegate>
                     NSInteger i = [data jk_integerForKey:@"records"];
                     NSMutableArray *images = [NSMutableArray arrayWithCapacity:i];
                     for (NSDictionary *data in rows) {
-                        [images addObject:[data jk_stringForKey:@"FILE_PATH"]];
+                        NSString *str = [data jk_stringForKey:@"FILE_PATH"];
+                        if(str){
+                            [images addObject:str];
+                        }
                     }
                     weakself.cycleScrollView.imageURLStringsGroup = images;
                 }

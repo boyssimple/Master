@@ -9,7 +9,6 @@
 #import "ViewCategory.h"
 
 @interface ViewCategory()
-@property(nonatomic,strong)UIButton *btnQR;
 @property(nonatomic,strong)UIView *vSearchBg;
 @property(nonatomic,strong)UIImageView *ivSearch;
 
@@ -24,12 +23,6 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         
-        _btnQR = [[UIButton alloc]initWithFrame:CGRectZero];
-        _btnQR.titleLabel.font = [UIFont systemFontOfSize:14*RATIO_WIDHT320];
-        _btnQR.tag = 101;
-        [_btnQR setImage:[UIImage imageNamed:@"classification-icon_Scan"] forState:UIControlStateNormal];
-        [_btnQR addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_btnQR];
         
         _vSearchBg = [[UIView alloc]initWithFrame:CGRectZero];
         _vSearchBg.backgroundColor = RGB3(247);
@@ -143,19 +136,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    CGRect r = self.btnQR.frame;
-    r.size.width = 43*RATIO_WIDHT320;
-    r.size.height = r.size.width;
-    r.origin.x = 0;
-    r.origin.y = (self.height - r.size.height)/2.0;
-    self.btnQR.frame = r;
-    
-    r = self.btnQR.imageView.frame;
-    r.size.width = 23*RATIO_WIDHT320;
-    r.size.height = r.size.width;
-    self.btnQR.imageView.frame = r;
-    
-    r = self.lbCount.frame;
+    CGRect r = self.lbCount.frame;
     r.size.width = 20*RATIO_WIDHT320;
     r.size.height = 10*RATIO_WIDHT320;
     r.origin.x = DEVICEWIDTH - r.size.width - 5*RATIO_WIDHT320;
@@ -170,9 +151,9 @@
     self.ivCart.frame = r;
     
     r = self.vSearchBg.frame;
-    r.size.width = self.ivCart.left - 5*RATIO_WIDHT320 - self.btnQR.right;
+    r.size.width = self.ivCart.left - 15*RATIO_WIDHT320;
     r.size.height = 30*RATIO_WIDHT320;
-    r.origin.x = self.btnQR.right;
+    r.origin.x = 10*RATIO_WIDHT320;
     r.origin.y = 5*RATIO_WIDHT320;
     self.vSearchBg.frame = r;
     

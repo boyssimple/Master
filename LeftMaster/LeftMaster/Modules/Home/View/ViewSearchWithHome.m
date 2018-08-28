@@ -9,7 +9,6 @@
 #import "ViewSearchWithHome.h"
 
 @interface ViewSearchWithHome()
-@property(nonatomic,strong)UIButton *btnQR;
 @property(nonatomic,strong)UIView *vSearchBg;
 @property(nonatomic,strong)UILabel *lbTips;
 @property(nonatomic,strong)UIImageView *ivSearch;
@@ -23,13 +22,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        
-        _btnQR = [[UIButton alloc]initWithFrame:CGRectZero];
-        _btnQR.titleLabel.font = [UIFont systemFontOfSize:14*RATIO_WIDHT320];
-        _btnQR.tag = 101;
-        [_btnQR setImage:[UIImage imageNamed:@"classification-icon_Scan"] forState:UIControlStateNormal];
-        [_btnQR addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_btnQR];
         
         _vSearchBg = [[UIView alloc]initWithFrame:CGRectZero];
         _vSearchBg.backgroundColor = [UIColor whiteColor];
@@ -79,23 +71,10 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    CGRect r = self.btnQR.frame;
-    r.size.width = 43*RATIO_WIDHT320;
-    r.size.height = r.size.width;
-    r.origin.x = 0;
-    r.origin.y = (self.height - r.size.height)/2.0;
-    self.btnQR.frame = r;
-    
-    r = self.btnQR.imageView.frame;
-    r.size.width = 23*RATIO_WIDHT320;
-    r.size.height = r.size.width;
-    self.btnQR.imageView.frame = r;
-    
-    
-    r = self.vSearchBg.frame;
-    r.size.width = DEVICEWIDTH - 10*RATIO_WIDHT320 - self.btnQR.right;
+    CGRect r = self.vSearchBg.frame;
+    r.size.width = DEVICEWIDTH - 20*RATIO_WIDHT320;
     r.size.height = 30;
-    r.origin.x = self.btnQR.right;
+    r.origin.x = 10*RATIO_WIDHT320;
     r.origin.y = (self.height - r.size.height)/2.0;
     self.vSearchBg.frame = r;
     

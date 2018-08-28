@@ -160,6 +160,7 @@
     self.lbCompany.text = [AppUser share].CUS_NAME;
     self.lbName.text = [AppUser share].SYSUSER_NAME;
     [_bossInfo updateData];
+    [self setNeedsLayout];
 }
 
 - (void)updateData:(NSDictionary *)data{
@@ -176,6 +177,7 @@
     
     self.lbCompany.text = [data jk_stringForKey:@"CUS_NAME"];
     self.lbName.text = [data jk_stringForKey:@"SYSUSER_NAME"];
+    [self setNeedsLayout];
 }
 
 - (void)gotoOrderList:(UIGestureRecognizer*)ges{
