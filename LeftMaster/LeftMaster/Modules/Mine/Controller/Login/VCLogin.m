@@ -342,7 +342,7 @@ static NSString* const CFBundleVersion = @"CFBundleVersion";
 - (UIImageView*)ivLogo{
     if (!_ivLogo) {
         _ivLogo = [[UIImageView alloc]initWithFrame:CGRectZero];
-        _ivLogo.image = [UIImage imageNamed:@"logo"];
+        _ivLogo.image = [UIImage imageNamed:@"logo2"];
     }
     return _ivLogo;
 }
